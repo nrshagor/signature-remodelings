@@ -1,0 +1,28 @@
+{
+  "name": "signature-remodelings",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "next dev -p 3003",
+    "build": "next build && node scripts/check-built-css.mjs",
+    "start": "next start -p 3204",
+    "start:staging": "next start -p 3104",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,10 @@
+# Browser support target (copied from solum-constructions). Next.js uses it for the
+# JavaScript and CSS it outputs. This is BELOW Next 16's official support (Chrome/Edge/
+# Firefox 111+, Safari 16.4+): test Safari 15.x on real devices (T3.7). Fallback rules
+# are enforced after every build by scripts/check-built-css.mjs.
+safari >= 15.4
+ios_saf >= 15.4
+chrome >= 109
+edge >= 109
+firefox >= 102
+samsung >= 17
