@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T2.5 GSAP scroll stories
-- **Next task: T2.6 About page** (paused for user review of the motion refresh)
+- Last completed task: T2.6 About page
+- **Next task: T2.7 FAQ page**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -108,6 +108,11 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-19 — T2.6 About page
+- `/about`: story hero, values (`Values` section, new heading [DRAFT, new] "What we stand for" added to 03-CONTENT), process with the GSAP step sequence (detail lines), closing CTA. Founder block not rendered until the client sends it.
+- Checks: lint, build, CSS check pass; desktop process animation ends with all steps visible; mobile and reduced motion static.
+- Files: `src/app/about/page.tsx`, `src/components/sections/Values.{tsx,module.css}`, `src/content/pages.ts`, docs 03, 06, PROGRESS.
 
 ### 2026-11-19 — Bundle check (report only), curtain 600 ms, standing rule
 - CLAUDE.md: new rule, ask before worktrees, junctions/symlinks, `git stash` or deleting/reinstalling `node_modules`.

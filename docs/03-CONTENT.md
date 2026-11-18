@@ -187,6 +187,7 @@ Remodeling first (client feedback 2026-11-18); home flipping moved to section 6.
 - Headline: A new company built on an old-fashioned standard.
 - Body: Signature Remodelings was founded to do remodeling the careful way: listen first, plan clearly, and finish every detail as if it were our own home. We focus on three things — interior remodels, exterior additions and home flips — so every project gets our full attention.
 - Founder block [NEEDS CLIENT]: name, photo, short background. Hidden until provided.
+- Values heading [DRAFT, new]: What we stand for
 - Values: Craftsmanship · Honesty · Respect for your home · Clear communication
 - Process: same 4 steps as Home section 5 (this is where the GSAP process animation lives), plus one line each:
   1. Consult — A visit to your home to understand goals, budget range and timing.

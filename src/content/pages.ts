@@ -159,6 +159,7 @@ export const about = {
   ],
   /** Hidden until the client provides name, photo and background. */
   founder: undefined as Founder | undefined,
+  valuesHeading: "What we stand for", // [DRAFT, new]
   values: ["Craftsmanship", "Honesty", "Respect for your home", "Clear communication"],
   processHeading: "How we work",
 };

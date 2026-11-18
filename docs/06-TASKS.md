@@ -119,9 +119,10 @@ Result: gsap 3.15.1 + @gsap/react 2.1.2 (exact). `ScrollStory` (pinned wipe ≥ 
 Update 2026-11-18 (user): pinned ScrollStory removed; project pages use the drag slider on all sizes. GSAP now only for the process animation.
 Update 2026-11-18 (user, motion refresh): GSAP now site-wide through `MotionEngine` (headings, hero parallax, Alba gallery pin), loaded on demand only on pages with targets and only from 768 px; never in First Load JS.
 
-### [ ] T2.6 About page
+### [x] T2.6 About page
 Needs: T2.5
 Copy + values + process with GSAP animation + CTA. Founder block hidden until data exists.
+Result: `/about` = PageHero (headline + story), Values (4 numbered cards, heading [DRAFT, new] "What we stand for"), `ProcessSteps animated` (GSAP sequence, checked: ends fully visible), CtaBand. No founder block (data undefined).
 
 ### [ ] T2.7 FAQ page
 Needs: T1.6
