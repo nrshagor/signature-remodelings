@@ -30,10 +30,14 @@ interface RevealProps {
   group?: boolean;
   /** Extra delay in ms before this element reveals (single elements only). */
   delay?: number;
+  /** Image mask-wipe from the bottom instead of the fade (globals.css → Mask reveal). */
+  mask?: boolean;
   as?: ElementType;
   className?: string;
   /** Pass-through for list semantics, e.g. role="list" on a <ul>. */
   role?: string;
+  style?: CSSProperties;
+  "aria-hidden"?: boolean;
 }
 
 /**
@@ -41,7 +45,17 @@ interface RevealProps {
  * pure CSS behind `html.js` (see globals.css → Reveal), so without JavaScript or
  * IntersectionObserver, and with reduced motion, content is simply visible.
  */
-export function Reveal({ children, group, delay, as: Tag = "div", className, role }: RevealProps) {
+export function Reveal({
+  children,
+  group,
+  delay,
+  mask,
+  as: Tag = "div",
+  className,
+  role,
+  style: styleProp,
+  "aria-hidden": ariaHidden,
+}: RevealProps) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -57,11 +71,22 @@ export function Reveal({ children, group, delay, as: Tag = "div", className, rol
   }, []);
 
   const style: CSSProperties | undefined =
-    delay && !group ? { transitionDelay: `${delay}ms` } : undefined;
-  const attrs = group ? { "data-reveal-group": "" } : { "data-reveal": "" };
+    delay && !group ? { ...styleProp, transitionDelay: `${delay}ms` } : styleProp;
+  const attrs = group
+    ? { "data-reveal-group": "" }
+    : mask
+      ? { "data-mask": "" }
+      : { "data-reveal": "" };
 
   return (
-    <Tag ref={ref} className={className} style={style} role={role} {...attrs}>
+    <Tag
+      ref={ref}
+      className={className}
+      style={style}
+      role={role}
+      aria-hidden={ariaHidden}
+      {...attrs}
+    >
       {children}
     </Tag>
   );

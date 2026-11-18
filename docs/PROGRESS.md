@@ -6,7 +6,7 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 
 - Phase: 0 — Setup
 - Last completed task: T2.5 GSAP scroll stories
-- **Next task: T2.6 About page** (paused for user review of T2.5)
+- **Next task: T2.6 About page** (paused for user review of the motion refresh)
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -69,6 +69,7 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 | 2026-11-18 | Colour palette: modern light blue replaces the warm brass palette (navy ink #0F1E2E, paper #F7FAFC, mist #EAF3FB replaces stone, accent #1F6FB2, accent-soft #BFE0F7, accent-light #8CC8F2). Primary buttons are accent blue with white text. Every pair checked against WCAG AA (table in 04-DESIGN) | User |
 | 2026-11-18 | Before/after: drag slider on all screen sizes; pinned GSAP scroll story deleted. GSAP only for the process animation. No fake or AI "before" images | User |
 | 2026-11-18 | Stock photos downloaded by Claude Code at the user's request (overrides the 05-IMAGES "user downloads" note). Unsplash License checked on unsplash.com/license: free commercial use, no attribution required; not allowed: selling unmodified copies, compiling into a competing service. Sources in `public/images/CREDITS.md` | User + license check |
+| 2026-11-18 | Motion refresh: GSAP + ScrollTrigger + SplitText allowed site-wide (dynamic import, client only). Policy in 02-TECH-SPEC → Animation policy, table in 04-DESIGN → Motion. Hero headline words are split on the server and animated with CSS (not SplitText), so the headline never waits for JavaScript. The services marquee moves only after the first scroll/tap and while on screen (an always-running animation cost about 2 s of main-thread work in Lighthouse). The curtain link transition is kept: prefetch, back/forward, Ctrl/Cmd/middle-click and focus were tested and unchanged | User + test |
 
 ## Missing images
 
@@ -107,6 +108,17 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — Modern shapes and site-wide motion
+- Docs first: 02-TECH-SPEC Animation policy rewritten (what may animate, guards, CSS vs GSAP, breakpoints, budget); 04-DESIGN Shape (22 px, organic, arch-top), components (card hover, glass labels, marquee) and a Motion table.
+- Shapes: `--radius-lg` 22 px, `--radius-card` 24 px, `--radius-organic`; `ImageFrame` gets `shape` (organic / arch, border-radius only), `mask` and `labels`. Arch on Why us and the first service-page photo; organic on the page-hero and For investors photos.
+- Cards: white project cards with inset image, glass city/type labels (`GlassLabel`, `-webkit-backdrop-filter` + solid fallback in `@supports`), round arrow button. Hover (`@media (hover: hover)`) on cards and bento tiles: lift 6 px, shadow layer fades in, image 1.05 over 700 ms, arrow circle slides right.
+- Motion: hero words rise one by one (CSS, ≥ 768 px), hero photo scale-in + desktop parallax; section h2 word reveal (SplitText, ≥ 768 px, reverted after playing); feature-image mask-wipe (clip-path with prefix, ≥ 768 px, fade fallback); card grids stagger (existing Reveal); services marquee on Home (CSS); Alba gallery pinned horizontal scroll ≥ 1024 px; page enter transition (`app/template.tsx`, client navigations only); blue curtain link transition (`TransitionLink` via Link `onNavigate`, `Curtain`).
+- Checks: lint, build, CSS check pass. Reduced motion: no GSAP download, marquee static, all content visible. Phones: GSAP not downloaded. Curtain test (headless Edge): Ctrl-click and middle-click open a new tab with no curtain; back/forward show no curtain; the route is prefetched; focus and scroll after navigation match a plain link.
+- First Load JS (gzip, all scripts in the HTML): Home 182.7 → 183.7 KB; /services and service pages 182.3 → 183.3; /projects 182.3 → 183.3; project pages 183.0 → 183.9; 404 181.8 → 182.8. GSAP + ScrollTrigger + SplitText are one on-demand chunk (44 KB gzip), loaded only on pages with targets at ≥ 768 px.
+- Lighthouse mobile, Home (this machine is slow: benchmark index 560–720, results vary a lot run to run): before 64 / 83; after 97 / 74 / 86 (LCP 1.0–3.3 s, TBT 160–750 ms, CLS 0.045 as before). Not reliably ≥ 90 here, before or after; **please confirm on a faster machine or PageSpeed Insights after deploy.**
+- Screenshots: `screenshots/after/home-1440.png`, `home-375.png`, `services-1440.png`, `projects-1440.png`.
+- Files: `src/styles/globals.css`, `src/app/{layout,template}.tsx`, `src/app/template.module.css`, `src/app/page.tsx`, `src/components/motion/{Reveal,MotionEngine,scrollMotion,Curtain,TransitionLink}*`, `src/components/ui/{Card,ImageFrame,GlassLabel,Heading,Button}*`, `src/components/sections/{Hero,Marquee,MarqueeStrip,ServiceBento,InvestorBand,WhyUs,ServiceDetail,PageHero,FeaturedProjects}*`, `src/components/project/ProjectGallery*`, `src/components/layout/{Header,MobileMenu,Footer}.tsx`, `src/content/pages.ts`, `src/lib/{projectCards,investorBand}.ts`, docs 02, 03, 04, 06, PROGRESS.
 
 ### 2026-11-18 — Blue palette, slider everywhere, stock photos
 - Colours (04-DESIGN tokens + contrast table first): navy/blue tokens in `globals.css`; `--color-stone` → `--color-mist` and Section tone `stone` → `mist` everywhere; new `--color-accent-soft`, `--color-on-ink`, `--color-on-ink-muted`, `--color-on-image`; every warm literal (brass, `#ece7e0`, `#d9d3cb`, `rgba(30,28,26,…)`, header/footer tints, theme colour) replaced with navy equivalents. Primary button = accent blue + white (5.28:1), on navy = accent-light + ink (9.36:1); links and eyebrows in accent (5.04 on paper, 4.71 on mist). All pairs pass AA.

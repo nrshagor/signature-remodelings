@@ -1,18 +1,40 @@
+/* White card, inset image (04-DESIGN → Project cards, Card hover). */
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background-color: var(--color-white);
+  isolation: isolate;
+}
+
+/* Hover shadow: drawn once, faded in with opacity (never animate box-shadow). */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: var(--shadow-hover);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.media {
+  border-radius: 16px;
 }
 
 .body {
-  padding-top: var(--space-5);
-}
-
-.meta {
-  margin-bottom: var(--space-2);
-  color: var(--color-muted);
-  font-size: var(--fs-small);
-  letter-spacing: 0.04em;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: var(--space-5) var(--space-4) var(--space-4);
 }
 
 .title {
@@ -25,6 +47,10 @@
   text-decoration: none;
 }
 
+.link:hover {
+  color: inherit;
+}
+
 /* Stretch the title link over the whole card. */
 .link::after {
   content: "";
@@ -33,6 +59,8 @@
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 2;
+  border-radius: var(--radius-card);
 }
 
 .link:focus-visible {
@@ -49,17 +77,76 @@
 }
 
 .more {
-  margin-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--space-5);
   color: var(--color-ink);
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 600;
+}
+
+/* Arrow in a 44px circle; the accent fill fades in on hover. */
+.circle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  margin-left: var(--space-4);
+  overflow: hidden;
+  border: 1px solid var(--color-accent-soft);
+  border-radius: 50%;
+  color: var(--color-accent);
+  isolation: isolate;
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  opacity: 0;
 }
 
 .arrow {
   display: inline-block;
-  transition: transform var(--dur-fast) ease;
+  font-size: 1.125rem;
+  line-height: 1;
 }
 
-.card:hover .arrow {
-  transform: translateX(4px);
+@media (hover: hover) {
+  .card,
+  .card::before,
+  .circle,
+  .circle::before {
+    transition:
+      transform var(--dur-slow) var(--ease-out),
+      opacity var(--dur-slow) var(--ease-out);
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+  }
+
+  .card:hover::before,
+  .card:hover .circle::before {
+    opacity: 1;
+  }
+
+  .card:hover .circle {
+    color: var(--color-white);
+  }
+
+  .card:hover .circle {
+    transform: translateX(6px);
+  }
 }

@@ -32,9 +32,15 @@ export function WhyUs({ heading, items, image }: WhyUsProps) {
             ))}
           </Reveal>
         </div>
-        <Reveal className={styles.media} delay={150}>
-          <ImageFrame image={image} ratio="4/5" sizes="(min-width: 900px) 40vw, 100vw" />
-        </Reveal>
+        <div className={styles.media}>
+          <ImageFrame
+            image={image}
+            ratio="4/5"
+            sizes="(min-width: 900px) 40vw, 100vw"
+            shape="arch"
+            mask
+          />
+        </div>
       </Container>
     </Section>
   );

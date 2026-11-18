@@ -117,6 +117,7 @@ Install `gsap` + `@gsap/react` (pre-approved; note license check in PROGRESS.md)
 Done when: GSAP is absent from the Home/Services/FAQ/Contact bundles (check build output); smooth on desktop; no pinning on mobile.
 Result: gsap 3.15.1 + @gsap/react 2.1.2 (exact). `ScrollStory` (pinned wipe ≥ 900 px, slider otherwise) and `ProcessSteps animated` (used on About in T2.6), both in on-demand chunks; GSAP not loaded on Home, Services, Projects index or pages without pairs; FAQ/Contact re-check when built.
 Update 2026-11-18 (user): pinned ScrollStory removed; project pages use the drag slider on all sizes. GSAP now only for the process animation.
+Update 2026-11-18 (user, motion refresh): GSAP now site-wide through `MotionEngine` (headings, hero parallax, Alba gallery pin), loaded on demand only on pages with targets and only from 768 px; never in First Load JS.
 
 ### [ ] T2.6 About page
 Needs: T2.5

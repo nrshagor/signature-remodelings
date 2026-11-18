@@ -9,8 +9,8 @@ import styles from "./FeaturedProjects.module.css";
 export interface FeaturedProjectItem {
   slug: string;
   title: string;
-  /** City and type, e.g. "Carrollton, TX · Exterior addition". City only, never an address. */
-  meta: string;
+  /** City and type, e.g. ["Carrollton, TX", "Exterior addition"]. City only, never an address. */
+  labels: string[];
   text: string;
   /** Company photo only. */
   image?: ImageAsset;
@@ -54,7 +54,7 @@ export function FeaturedProjects({
                 image={item.image}
                 ratio="3/2"
                 sizes="(min-width: 900px) 50vw, 100vw"
-                meta={item.meta}
+                labels={item.labels}
                 text={item.text}
                 linkLabel={linkLabel}
               />

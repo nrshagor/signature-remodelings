@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/motion/TransitionLink";
 import { useEffect, useRef, type RefObject } from "react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";

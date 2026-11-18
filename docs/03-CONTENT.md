@@ -68,6 +68,9 @@ Footer:
 - Primary button: Book a Consultation → `/contact`
 - Secondary button: See Our Work → `/projects`
 
+### 1b. Services marquee [DRAFT, new — user 2026-11-18]
+A moving strip under the hero: Kitchens · Bathrooms · Living Spaces · Balconies · Patios · Second Floors
+
 ### 2. Remodeling (bento: Interior + Exterior) [DRAFT]
 Remodeling first (client feedback 2026-11-18); home flipping moved to section 6.
 - Section eyebrow [DRAFT, new]: Remodeling

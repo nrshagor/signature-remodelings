@@ -8,21 +8,27 @@ interface ProjectGalleryProps {
   images: ImageAsset[];
 }
 
-/** Two-column photo grid; captions (e.g. "Design rendering") are always shown. */
+/**
+ * Photo grid (two columns from 640px); captions (e.g. "Design rendering") are always
+ * shown. From 1024px MotionEngine turns it into one row that scrolls sideways while the
+ * section is pinned (`[data-pin-gallery]`); without JavaScript it stays the grid.
+ */
 export function ProjectGallery({ images }: ProjectGalleryProps) {
   if (images.length === 0) return null;
   return (
-    <Reveal group as="ul" role="list" className={styles.grid}>
-      {images.map((image) => (
-        <li key={image.src} className={styles.item}>
-          <ImageFrame
-            image={image}
-            ratio="3/2"
-            sizes="(min-width: 1240px) 610px, (min-width: 640px) 50vw, 100vw"
-            showCaption
-          />
-        </li>
-      ))}
-    </Reveal>
+    <div className={styles.pin} data-pin-gallery="">
+      <Reveal group as="ul" role="list" className={styles.grid}>
+        {images.map((image) => (
+          <li key={image.src} className={styles.item}>
+            <ImageFrame
+              image={image}
+              ratio="3/2"
+              sizes="(min-width: 1240px) 610px, (min-width: 640px) 50vw, 100vw"
+              showCaption
+            />
+          </li>
+        ))}
+      </Reveal>
+    </div>
   );
 }

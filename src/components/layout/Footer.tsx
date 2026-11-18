@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/motion/TransitionLink";
 import { Container } from "@/components/ui/Container";
 import { Wordmark } from "@/components/ui/Wordmark";
 import { services } from "@/content/services";

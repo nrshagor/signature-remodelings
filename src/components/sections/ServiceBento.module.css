@@ -29,6 +29,22 @@
   min-height: 420px;
   border-radius: var(--radius-lg);
   color: var(--color-white);
+  isolation: isolate;
+}
+
+/* Hover shadow: drawn once, faded in with opacity (04-DESIGN → Card hover). */
+.tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: var(--shadow-hover);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .feature .tile {
@@ -79,12 +95,6 @@
 
 .image {
   object-fit: cover;
-  transition: transform var(--dur-base) var(--ease-out);
-}
-
-[data-zoom-parent]:hover .image,
-[data-zoom-parent]:focus-within .image {
-  transform: scale(1.04);
 }
 
 .body {
@@ -141,19 +151,76 @@
 }
 
 .more {
+  display: flex;
+  align-items: center;
   margin-top: var(--space-5);
   color: var(--color-white);
   font-size: 0.9375rem;
   font-weight: 600;
 }
 
-.arrow {
-  display: inline-block;
-  transition: transform var(--dur-fast) ease;
+/* Arrow in a 44px circle; the white fill fades in on hover. */
+.circle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  margin-left: var(--space-4);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  isolation: isolate;
 }
 
-.tile:hover .arrow {
-  transform: translateX(4px);
+.circle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 50%;
+  background-color: var(--color-white);
+  opacity: 0;
+}
+
+.arrow {
+  display: inline-block;
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+@media (hover: hover) {
+  .tile,
+  .tile::before,
+  .image,
+  .circle,
+  .circle::before {
+    transition:
+      transform var(--dur-slow) var(--ease-out),
+      opacity var(--dur-slow) var(--ease-out);
+  }
+
+  .tile:hover {
+    transform: translateY(-6px);
+  }
+
+  .tile:hover::before,
+  .tile:hover .circle::before {
+    opacity: 1;
+  }
+
+  .tile:hover .image {
+    transform: scale(1.05);
+  }
+
+  .tile:hover .circle {
+    color: var(--color-ink);
+    transform: translateX(6px);
+  }
 }
 
 /* ---------- Light list tile ---------- */

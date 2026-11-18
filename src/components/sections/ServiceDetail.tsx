@@ -57,13 +57,19 @@ export function ServiceDetail({
             </Reveal>
           </div>
           {images.length > 0 && (
-            <Reveal group className={styles.media}>
+            <div className={styles.media}>
               {images.map((image, i) => (
                 <div key={image?.src ?? i} className={styles.mediaItem}>
-                  <ImageFrame image={image} ratio="3/2" sizes="(min-width: 900px) 40vw, 100vw" />
+                  <ImageFrame
+                    image={image}
+                    ratio="3/2"
+                    sizes="(min-width: 900px) 40vw, 100vw"
+                    shape={i === 0 ? "arch" : "rounded"}
+                    mask
+                  />
                 </div>
               ))}
-            </Reveal>
+            </div>
           )}
         </Container>
       </Section>

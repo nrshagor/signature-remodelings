@@ -62,13 +62,19 @@
   --header-height: 72px;
 
   /* Shape and motion */
-  /* 12px: images, cards, tiles. 8px: buttons, inputs, small panels. (04-DESIGN → Shape) */
-  --radius-lg: 12px;
+  /* 22px: images, tiles, frames. 24px: white cards. Organic: one feature image per page.
+     8px: buttons, inputs, small panels. (04-DESIGN → Shape) */
+  --radius-lg: 22px;
+  --radius-card: 24px;
+  --radius-organic: 24px 24px 24px 96px;
   --radius: 8px;
   --control-height: 48px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 200ms;
   --dur-base: 600ms;
+  --dur-slow: 700ms;
+  /* Soft blue-tinted hover shadow (drawn once, faded in with opacity). */
+  --shadow-hover: 0 24px 48px -16px rgba(31, 111, 178, 0.32), 0 8px 16px -8px rgba(15, 30, 46, 0.12);
   --focus-ring: 2px solid var(--color-accent);
   --focus-offset: 3px;
 }
@@ -323,6 +329,63 @@ html.js:not([data-hydrated]) [data-reveal-group] > * {
   animation: reveal-failsafe 0.6s ease-out 3s forwards;
 }
 
+/* ---------- Mask reveal (feature images) ----------
+ * [data-mask] (Reveal mask): phones and browsers without clip-path get a plain fade.
+ * From 768px, where clip-path works, the image is wiped in from the bottom
+ * (inset 100% → 0) while the photo settles from 1.08 to 1. Same html.js guard and
+ * failsafe as the reveals above. */
+
+html.js [data-mask] {
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+html.js [data-mask][data-revealed] {
+  opacity: 1;
+}
+
+html.js:not([data-hydrated]) [data-mask] {
+  animation: reveal-failsafe 0.6s ease-out 3s forwards;
+}
+
+@media (min-width: 768px) {
+  @supports ((clip-path: inset(0 0 0 0)) or (-webkit-clip-path: inset(0 0 0 0))) {
+    html.js [data-mask] {
+      opacity: 1;
+      -webkit-clip-path: inset(100% 0 0 0);
+      clip-path: inset(100% 0 0 0);
+      transition:
+        -webkit-clip-path 1s var(--ease-out),
+        clip-path 1s var(--ease-out);
+    }
+
+    html.js [data-mask] img {
+      transform: scale(1.08);
+      transition: transform 1.4s var(--ease-out);
+    }
+
+    html.js [data-mask][data-revealed] {
+      -webkit-clip-path: inset(0 0 0 0);
+      clip-path: inset(0 0 0 0);
+    }
+
+    html.js [data-mask][data-revealed] img {
+      transform: none;
+    }
+
+    html.js:not([data-hydrated]) [data-mask] {
+      animation: mask-failsafe 0.6s ease-out 3s forwards;
+    }
+  }
+}
+
+@keyframes mask-failsafe {
+  to {
+    -webkit-clip-path: inset(0 0 0 0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -340,8 +403,12 @@ html.js:not([data-hydrated]) [data-reveal-group] > * {
   }
 
   html.js [data-reveal],
-  html.js [data-reveal-group] > * {
+  html.js [data-reveal-group] > *,
+  html.js [data-mask],
+  html.js [data-mask] img {
     opacity: 1;
     transform: none;
+    -webkit-clip-path: none;
+    clip-path: none;
   }
 }

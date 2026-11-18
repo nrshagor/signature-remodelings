@@ -1,0 +1,33 @@
+.list {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Solid fallback; frosted glass only where backdrop-filter works (04-DESIGN → Glass labels). */
+.label {
+  margin: 0 var(--space-2) var(--space-2) 0;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  background-color: rgba(247, 250, 252, 0.94);
+  color: var(--color-ink);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .label {
+    background-color: rgba(247, 250, 252, 0.72);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    backdrop-filter: blur(12px) saturate(140%);
+  }
+}

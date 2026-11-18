@@ -3,6 +3,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { Hero } from "@/components/sections/Hero";
 import { InvestorBand } from "@/components/sections/InvestorBand";
+import { Marquee } from "@/components/sections/Marquee";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { ServiceBento } from "@/components/sections/ServiceBento";
 import { WhyUs } from "@/components/sections/WhyUs";
@@ -34,6 +35,7 @@ export default function Home() {
         secondary={home.hero.secondary}
         image={available(stockImages.heroHome)}
       />
+      <Marquee items={home.marquee} label={home.services.listHeading} />
       <ServiceBento
         eyebrow={home.services.eyebrow}
         heading={home.services.heading}

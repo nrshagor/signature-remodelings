@@ -26,7 +26,7 @@ Then check https://nextjs.org/blog for any security release newer than 3 Nov 202
 | Styling | Plain CSS: `src/styles/globals.css` (tokens, reset, base) + CSS Modules per component. **No Tailwind.** |
 | Fonts | `next/font/google` (self-hosted at build, no runtime Google requests) |
 | Images | `next/image`, AVIF/WebP, local files in `public/images/` |
-| Animation | CSS transitions + `IntersectionObserver` for reveals; GSAP + ScrollTrigger only where listed below |
+| Animation | CSS transitions/keyframes + `IntersectionObserver` for reveals; GSAP + ScrollTrigger + SplitText site-wide via dynamic import (see Animation policy) |
 | Content | Typed TypeScript objects in `src/content/` (no CMS in v1) |
 | Forms | Route handler `src/app/api/contact/route.ts` (server-side validation, honeypot, rate limit) |
 | Rendering | Static (SSG) for all pages; only `/api/contact` is dynamic |
@@ -67,7 +67,7 @@ src/
     ui/       Button, Container, Section, Eyebrow, Heading, Card, ImageFrame
     sections/ Hero, ServiceBento, InvestorBand, WhyUs, FeaturedProjects, ProcessSteps, CtaBand, Faq
     project/  BeforeAfter, ProjectGallery, ProjectStory
-    motion/   Reveal (IntersectionObserver), ProcessAnimator + ProcessMotion (GSAP, on demand)
+    motion/   Reveal (IntersectionObserver), MotionEngine (GSAP, on demand), ProcessAnimator + ProcessMotion
     forms/    ContactForm
   content/
     site.ts       # brand, contact info, service area, nav, footer
@@ -99,15 +99,27 @@ public/
 
 ## Animation policy
 
-1. **Default:** `Reveal` component — adds a class when the element enters the viewport (`IntersectionObserver`, `threshold ~0.15`, run once). CSS handles the fade/slide (`opacity` + `transform`, 400–700 ms, ease-out).
-2. **No-JS and old-browser safe:** content is visible by default. The hidden start state applies only when `html.js` is set and `IntersectionObserver` exists. Never put `opacity: 0` in plain CSS without that guard.
-3. **Reduced motion:** `@media (prefers-reduced-motion: reduce)` disables transforms and long transitions.
-4. **GSAP + ScrollTrigger** only in:
-   - ~~project detail pages (pinned scroll story)~~ removed 2026-11-18 at the user's request: project pages use the drag slider on every screen size
-   - the process section (steps reveal in sequence on scroll)
-   Load GSAP with dynamic import inside client components so other pages don't ship it. Use `useGSAP` for cleanup and `gsap.matchMedia()` for reduced motion and mobile variants.
-5. **Page transitions:** only a light enter animation (fade/slide-up of main content). No exit animations, no router hacks, no View Transitions API.
-6. **No** Three.js, smooth-scroll hijacking, custom cursors or parallax on mobile.
+Updated 2026-11-18 (client wants a more modern, more animated site). GSAP + ScrollTrigger (+ SplitText, part of the `gsap` package) may be used site-wide; still pre-approved.
+
+1. **What may animate:** `transform` and `opacity` only, plus `clip-path` for image reveals. No animation that changes layout (no width/height/top/margin animation). Hover shadows fade a pre-drawn shadow layer's `opacity`; they never animate `box-shadow`.
+2. **No-JS and old-browser safe:** content is visible by default. Hidden start states apply only under `html.js` (set by the inline script only when `IntersectionObserver` exists) and are released by `[data-revealed]`, with the 3 s failsafe until `html[data-hydrated]`. Never put `opacity: 0` or a closed `clip-path` in plain CSS without that guard.
+3. **Reduced motion:** `prefers-reduced-motion: reduce` → everything static and fully visible: no reveals, no word splits, no marquee movement, no parallax, no pinning, no page transitions. GSAP is not even loaded.
+4. **CSS (no GSAP):**
+   - Reveals: `Reveal` (`IntersectionObserver`, once) — fade + 24px rise, 600 ms; card grids stagger 80 ms (`Reveal group`).
+   - Image mask-wipe (≥ 768px): `clip-path: inset(100% 0 0 0)` → `inset(0)` from the bottom, with the `-webkit-` prefix, inside `@supports`; browsers without `clip-path` and phones get the plain fade.
+   - Hero (Home): headline split into words on the server; words rise in turn on load (≥ 768px; phones get a single fade). The photo scales in slowly (1.12 → 1). Pure CSS, so the headline never waits for JavaScript (no flicker, no LCP cost).
+   - Services marquee (Home): CSS keyframes, paused on hover, static under reduced motion. With JavaScript it is paused until the first scroll/tap/key and while off screen (`MarqueeStrip` only toggles `data-run`), so an endless animation never runs during page load.
+   - Card hover (`@media (hover: hover)` only): lift, shadow fade, image zoom, arrow slide.
+   - Page enter (`app/template.tsx`): main content fades and rises 16px over 500 ms on every client navigation (skipped on the very first load, which has its own hero entrance and must not delay LCP).
+5. **GSAP (one engine, `components/motion/MotionEngine`):** mounted once in the root layout. After each navigation it looks for `[data-split]`, `[data-parallax]` and `[data-pin-gallery]` on the page; only if one exists, motion is allowed and the window is at least 768px wide does it `import()` GSAP, ScrollTrigger and SplitText as a separate chunk. Pages without those targets never download GSAP. `gsap.matchMedia()` handles breakpoints and reverts everything on navigation.
+   - Section headings (`h2`, ≥ 768px): SplitText line mask + word rise when they enter. Headings already on screen when the engine starts are left alone (no flicker).
+   - Hero parallax (≥ 1024px): the photo moves at ~30% of scroll speed, scrubbed.
+   - Alba gallery (≥ 1024px): horizontal pinned scroll; below 1024px it stays the normal grid.
+   - Process steps (`ProcessMotion`, loaded on demand by `ProcessAnimator`): steps and line draw in sequence.
+6. **Breakpoints:** parallax and pinning desktop only (≥ 1024px). Phones (< 768px): lighter fades only (no word splits, no mask wipes).
+7. **Page transitions:** enter animation only. An optional "curtain" link transition is allowed only if prefetch, back/forward, middle-click / Ctrl/Cmd-click and focus management keep working; otherwise it is dropped. No View Transitions API.
+8. **No** Three.js, smooth-scroll libraries, scroll hijacking or custom cursors.
+9. **Budget:** report First Load JS per route before/after each motion change; Lighthouse mobile Performance on Home must stay ≥ 90.
 
 ## Before/after slider
 

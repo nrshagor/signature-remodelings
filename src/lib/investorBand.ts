@@ -18,6 +18,6 @@ export function investorBandProps() {
     text: flipping?.cardSummary ?? "",
     link: home.investors.link,
     image,
-    imageLabel: image && alba ? `${alba.city} · ${alba.type}` : undefined,
+    imageLabels: image && alba ? [alba.city, alba.type] : undefined,
   };
 }

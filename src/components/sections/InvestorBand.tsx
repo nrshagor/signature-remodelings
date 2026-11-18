@@ -15,8 +15,8 @@ interface InvestorBandProps {
   link: NavLink;
   /** Company project photo (Alba flip); the band still works without it. */
   image?: ImageAsset;
-  /** City and type of the project in the photo, e.g. "Alba, TX · Home flipping". */
-  imageLabel?: string;
+  /** City and type of the project in the photo, shown as glass labels. City only. */
+  imageLabels?: string[];
   /**
    * "band": dark full section lower on Home. "compact": a smaller light block at the end
    * of /services.
@@ -31,25 +31,27 @@ export function InvestorBand({
   text,
   link,
   image,
-  imageLabel,
+  imageLabels,
   variant = "band",
 }: InvestorBandProps) {
   const dark = variant === "band";
   return (
     <Section tone={dark ? "ink" : "paper"} labelledBy="investors-heading" flushTop={!dark}>
       <Container>
-        <Reveal className={dark ? styles.band : `${styles.band} ${styles.compact}`}>
+        <div className={dark ? styles.band : `${styles.band} ${styles.compact}`}>
           {image && (
-            <figure className={styles.media}>
+            <div className={styles.media}>
               <ImageFrame
                 image={image}
                 ratio="3/2"
                 sizes={dark ? "(min-width: 900px) 55vw, 100vw" : "(min-width: 900px) 40vw, 100vw"}
+                shape="organic"
+                labels={imageLabels}
+                mask
               />
-              {imageLabel && <figcaption className={styles.label}>{imageLabel}</figcaption>}
-            </figure>
+            </div>
           )}
-          <div className={styles.text}>
+          <Reveal className={styles.text}>
             <Eyebrow onDark={dark}>{eyebrow}</Eyebrow>
             <Heading level={2} size={dark ? "h2" : "h3"} id="investors-heading">
               {heading}
@@ -60,8 +62,8 @@ export function InvestorBand({
                 {link.label}
               </Button>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </Container>
     </Section>
   );

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/motion/TransitionLink";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import styles from "./Button.module.css";
 

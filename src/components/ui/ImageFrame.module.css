@@ -16,6 +16,16 @@
   isolation: isolate;
 }
 
+/* Shapes use border-radius only, so older browsers render them (04-DESIGN → Shape). */
+.organic {
+  border-radius: var(--radius-organic);
+}
+
+.arch {
+  border-radius: 50% 50% var(--radius-lg) var(--radius-lg) / var(--arch-y, 40%)
+    var(--arch-y, 40%) var(--radius-lg) var(--radius-lg);
+}
+
 .r4x5 {
   padding-top: 125%;
 }
@@ -52,13 +62,15 @@
   object-fit: cover;
 }
 
-.zoom {
-  transition: transform var(--dur-base) var(--ease-out);
-}
+/* Card image zoom: pointer devices only (04-DESIGN → Card hover). */
+@media (hover: hover) {
+  .zoom {
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
 
-[data-zoom-parent]:hover .zoom,
-[data-zoom-parent]:focus-within .zoom {
-  transform: scale(1.04);
+  [data-zoom-parent]:hover .zoom {
+    transform: scale(1.05);
+  }
 }
 
 .figure {

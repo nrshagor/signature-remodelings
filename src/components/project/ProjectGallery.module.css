@@ -17,3 +17,27 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* Pinned sideways row (≥ 1024px, set by MotionEngine via [data-pinned]). */
+.pin[data-pinned] {
+  overflow: hidden;
+}
+
+.pin[data-pinned] .grid {
+  display: flex;
+  flex-wrap: nowrap;
+  grid-gap: 0;
+  gap: 0;
+  width: -webkit-max-content;
+  width: max-content;
+}
+
+.pin[data-pinned] .item {
+  flex: 0 0 auto;
+  width: min(40vw, 560px);
+  margin-right: var(--space-6);
+}
+
+.pin[data-pinned] .item:last-child {
+  margin-right: 0;
+}

@@ -40,6 +40,7 @@ export function PageHero({ eyebrow, headline, intro, badge, image, withImage }: 
               image={image}
               ratio="4/5"
               sizes="(min-width: 900px) 40vw, 100vw"
+              shape="organic"
               priority
             />
           </Reveal>

@@ -8,7 +8,7 @@ export function projectCardItem(project: Project, text = project.summary): Featu
   return {
     slug: project.slug,
     title: project.title,
-    meta: `${project.city} · ${project.type}`,
+    labels: [project.city, project.type],
     text,
     image: available(project.cardImage),
   };

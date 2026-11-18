@@ -11,13 +11,18 @@
   color: var(--color-white);
 }
 
-.media {
+.media,
+.zoom {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  animation: hero-zoom 12s ease-out both;
+}
+
+/* Slow scale-in on load (the parallax, desktop only, moves .media). */
+.zoom {
+  animation: hero-scale 2.4s var(--ease-out) both;
 }
 
 .image {
@@ -87,12 +92,57 @@
   }
 }
 
-@keyframes hero-zoom {
+@keyframes hero-scale {
   from {
-    transform: scale(1);
+    transform: scale(1.12);
   }
   to {
-    transform: scale(1.06);
+    transform: none;
+  }
+}
+
+/* Each word sits in a line mask (overflow hidden) and rises into it. The small padding
+   keeps descenders (g, p, y) inside the mask. */
+.word {
+  display: inline-block;
+  margin-bottom: -0.1em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.wordInner {
+  display: inline-block;
+}
+
+@keyframes word-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* From 768px the words rise one by one instead of the whole headline fading in. */
+@media (min-width: 768px) {
+  .headline {
+    animation: none;
+  }
+
+  .wordInner {
+    animation: word-rise 900ms var(--ease-out) both;
+    animation-delay: calc(150ms + var(--i, 0) * 70ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom,
+  .headline,
+  .wordInner,
+  .sub,
+  .actions {
+    animation: none;
   }
 }
 

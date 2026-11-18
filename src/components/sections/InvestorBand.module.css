@@ -12,17 +12,6 @@
   margin-left: 0;
 }
 
-.label {
-  margin-top: var(--space-3);
-  color: var(--color-muted);
-  font-size: var(--fs-small);
-  letter-spacing: 0.04em;
-}
-
-[data-tone="ink"] .label {
-  color: var(--color-on-ink-muted);
-}
-
 .copy {
   margin-top: var(--space-4);
 }

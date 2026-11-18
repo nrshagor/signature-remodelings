@@ -1,8 +1,20 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
+import { Reveal } from "@/components/motion/Reveal";
 import type { ImageAsset } from "@/content/types";
+import { GlassLabels } from "./GlassLabel";
 import styles from "./ImageFrame.module.css";
 
 export type Ratio = "4/5" | "3/2" | "16/10" | "16/9" | "1/1";
+
+/** "organic": one corner much rounder. "arch": round top (feature images). 04-DESIGN → Shape. */
+export type Shape = "rounded" | "organic" | "arch";
+
+const shapeClass: Record<Shape, string | undefined> = {
+  rounded: undefined,
+  organic: styles.organic,
+  arch: styles.arch,
+};
 
 const ratioClass: Record<Ratio, string> = {
   "4/5": styles.r4x5,
@@ -40,6 +52,11 @@ interface ImageFrameProps {
   zoomOnHover?: boolean;
   /** Show image.caption below the image. */
   showCaption?: boolean;
+  shape?: Shape;
+  /** Mask-wipe reveal from the bottom when the frame scrolls into view (feature images). */
+  mask?: boolean;
+  /** Glass labels over the image, e.g. city and type. */
+  labels?: string[];
   className?: string;
 }
 
@@ -57,15 +74,29 @@ export function ImageFrame({
   priority,
   zoomOnHover,
   showCaption,
+  shape = "rounded",
+  mask,
+  labels,
   className,
 }: ImageFrameProps) {
-  const box = (
-    <div
-      className={[styles.frame, ratioClass[ratio], !image && styles.empty, className]
-        .filter(Boolean)
-        .join(" ")}
-      aria-hidden={image ? undefined : true}
-    >
+  const classes = [
+    styles.frame,
+    ratioClass[ratio],
+    shapeClass[shape],
+    !image && styles.empty,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+  // Arch: a true half-circle top needs a vertical radius of half the width, i.e.
+  // 50% ÷ (height ÷ width) of the height.
+  const style =
+    shape === "arch"
+      ? ({ "--arch-y": `${(50 / ratioValue[ratio]).toFixed(2)}%` } as CSSProperties)
+      : undefined;
+  const hidden = !image && !labels?.length ? true : undefined;
+  const content = (
+    <>
       {image && (
         <Image
           src={image.src}
@@ -76,8 +107,20 @@ export function ImageFrame({
           className={[styles.img, zoomOnHover && styles.zoom].filter(Boolean).join(" ")}
         />
       )}
-    </div>
+      {labels && <GlassLabels items={labels} />}
+    </>
   );
+  // Never mask a priority (above the fold) image: it would delay the largest paint.
+  const box =
+    mask && image && !priority ? (
+      <Reveal mask className={classes} style={style} aria-hidden={hidden}>
+        {content}
+      </Reveal>
+    ) : (
+      <div className={classes} style={style} aria-hidden={hidden}>
+        {content}
+      </div>
+    );
 
   // The cap sits on a wrapper: padding-top % is relative to the parent's width, so the
   // ratio box itself must stay at 100% of its (capped) parent.

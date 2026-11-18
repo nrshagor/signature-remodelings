@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/motion/TransitionLink";
 import { Reveal } from "@/components/motion/Reveal";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
@@ -113,7 +113,10 @@ function ServiceTile({
         </Title>
         <p className={styles.text}>{tile.summary}</p>
         <p className={styles.more} aria-hidden="true">
-          {linkLabel} <span className={styles.arrow}>→</span>
+          {linkLabel}
+          <span className={styles.circle}>
+            <span className={styles.arrow}>→</span>
+          </span>
         </p>
       </div>
     </article>

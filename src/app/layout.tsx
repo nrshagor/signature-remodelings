@@ -4,6 +4,8 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { HydratedFlag } from "@/components/motion/HydratedFlag";
+import { Curtain } from "@/components/motion/Curtain";
+import { MotionEngine } from "@/components/motion/MotionEngine";
 import { seo } from "@/content/seo";
 import { site } from "@/content/site";
 import { robotsMeta } from "@/lib/seo";
@@ -59,12 +61,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body>
         <HydratedFlag />
+        <MotionEngine />
         <SkipLink />
         <Header />
         <main id="main" tabIndex={-1}>
           {children}
         </main>
         <Footer />
+        <Curtain />
       </body>
     </html>
   );

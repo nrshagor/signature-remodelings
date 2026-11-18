@@ -77,10 +77,13 @@ Line height: display 1.02, headings 1.1–1.2, body 1.65. Max text width ~65ch.
 
 ## Shape
 
-- `--radius-lg` **12px**: images, cards, tiles, before/after frames, project gallery.
-- `--radius` **8px**: buttons, inputs, small panels.
-- Pills (999px): chips and badges only.
-- Full-bleed media (home hero, CTA band) has no radius. Same values everywhere.
+Updated 2026-11-18 (more modern shapes). All shapes use `border-radius` (not `clip-path`), so older browsers render them.
+
+- `--radius-lg` **22px**: cards, tiles, image frames, before/after frames, project gallery.
+- `--radius-organic` **24px 24px 24px 96px**: one corner much rounder. Used once per page at most, on a single feature image (For investors photo, page-hero photo).
+- **Arch-top** image frame: top corners fully round (`50%` horizontally, vertical radius derived from the frame ratio so it is a true half-circle), bottom corners 22px. Feature images only (Why us photo, service-page photos).
+- `--radius` **8px**: buttons, inputs, small panels. Pills (999px): chips, badges, glass labels.
+- Full-bleed media (home hero, CTA band) has no radius.
 
 ## Components
 
@@ -88,9 +91,12 @@ Line height: display 1.02, headings 1.1–1.2, body 1.65. Max text width ~65ch.
 - **Buttons:** primary = ink background, white text; secondary = outlined; on dark = accent-light / white outline. 8px radius, 600 weight, height 48px (52px in the hero). Clear focus ring (2px accent, offset 3px).
 - **Eyebrow:** small uppercase label with a short accent line before it.
 - **Hero (Home):** full-bleed, full-height image with dark overlay; large left-aligned headline (`--fs-display`), sub and two buttons at the lower left.
-- **Service bento (Home, /services):** remodeling only. Desktop 12-column grid: Interior as a large tall tile (7 columns, 2 rows), Exterior as a wide tile (5 columns), and a light tile listing what we remodel (5 columns). Image tiles: photo fill, bottom gradient, white title + one line + "Explore →", the whole tile is one link, image scales 1.04 on hover. A missing photo shows an ink tile with the same text. Tablet: Interior full width, the other two side by side. Mobile: stacked.
+- **Service bento (Home, /services):** remodeling only. Tiles use the card hover above. Desktop 12-column grid: Interior as a large tall tile (7 columns, 2 rows), Exterior as a wide tile (5 columns), and a light tile listing what we remodel (5 columns). Image tiles: photo fill, bottom gradient, white title + one line + "Explore →", the whole tile is one link, image scales 1.04 on hover. A missing photo shows an ink tile with the same text. Tablet: Interior full width, the other two side by side. Mobile: stacked.
 - **For investors band (Home) / flipping block (/services):** home flipping as the secondary offer, lower on the page: an Alba kitchen photo (company's own; not the cover, to avoid repeating it on Home) with its city label, eyebrow "For investors", the flipping headline and line, and a link to the flipping page. /services uses a compact version after the bento.
-- **Project cards:** wide image (3:2), rounded, city + type as meta, title. Carrollton first, Alba second.
+- **Project cards:** white card, 24px radius, 10px inset image (3:2, 16px radius), title, one line, and a round arrow button. City and type sit on the image as **glass labels**. Carrollton first, Alba second.
+- **Card hover** (pointer devices only, `@media (hover: hover)`; project cards and service tiles): card lifts `translateY(-6px)`, a soft blue-tinted shadow fades in (opacity of a pre-drawn shadow layer), the image scales to 1.05 over 700 ms, and the arrow (in a 44px circle) slides right while the circle fills with accent. Touch devices get no hover state.
+- **Glass labels** (city/type chips on images): pill, light frosted glass: `rgba(247, 250, 252, 0.72)` with `backdrop-filter: blur(12px) saturate(140%)` (always with the `-webkit-` prefix), only inside `@supports`; without it a solid `rgba(247, 250, 252, 0.94)`. Ink text (≥ 8:1 over any photo).
+- **Services marquee (Home, under the hero):** one line "Kitchens · Bathrooms · Living Spaces · Balconies · Patios · Second Floors" in the heading font, large, moving slowly right to left once the visitor first scrolls or taps (and only while on screen); paused on hover; static and wrapping under reduced motion.
 - **Before/after:** full-width, 16:10, thin white divider line with a round handle, "Before"/"After" chips.
 - **Process steps:** large numerals (01–04) in the heading font, thin connecting line.
 - **CTA band:** dark ink background with a darkened image, white heading, accent button.
@@ -99,11 +105,24 @@ Line height: display 1.02, headings 1.1–1.2, body 1.65. Max text width ~65ch.
 
 ## Motion (see also 02-TECH-SPEC → Animation policy)
 
-- Reveal: fade + 24px slide-up, 600 ms, `cubic-bezier(0.22, 1, 0.36, 1)`, stagger 80 ms in grids.
-- Hero: slow Ken Burns zoom on the image (CSS, 1.0 → 1.06 over 12 s), headline reveal on load.
-- Before/after: the drag slider on every screen size (no pinned scroll story; removed 2026-11-18).
-- Process (GSAP): steps and connecting line draw in sequence on scroll.
-- Respect `prefers-reduced-motion` everywhere.
+Easing: `cubic-bezier(0.22, 1, 0.36, 1)` (CSS `--ease-out`), GSAP `power3.out`. Only transform, opacity and (for image reveals) clip-path animate.
+
+| Where | What | Sizes | Tech |
+| --- | --- | --- | --- |
+| Every page (client navigation) | Main content fades in and rises 16px, 500 ms | all | CSS, `app/template.tsx` |
+| Hero headline (Home) | Words rise one after another from a line mask on load, 70 ms apart | ≥ 768px (phones: single fade) | CSS, words split on the server |
+| Hero photo (Home) | Slow scale-in 1.12 → 1 over 2.4 s; parallax ~30% while scrolling | scale all; parallax ≥ 1024px | CSS + GSAP ScrollTrigger |
+| Section headings (h2) | Lines masked, words rise when the heading enters | ≥ 768px | GSAP SplitText |
+| Feature images | Mask-wipe from the bottom (clip-path inset 100% → 0) with a slight image settle (1.08 → 1), 1 s | ≥ 768px (phones / no clip-path: fade) | CSS + IntersectionObserver |
+| Card grids | Staggered rise, 80 ms apart | all | CSS `Reveal group` |
+| Card hover | Lift 6px, shadow fade, image 1.05 over 700 ms, arrow slides | pointer devices | CSS |
+| Services marquee (Home) | Continuous slow scroll, paused on hover | all | CSS |
+| Alba gallery | Horizontal pinned scroll | ≥ 1024px (below: grid) | GSAP ScrollTrigger |
+| Process steps | Steps and connecting line in sequence | all | GSAP |
+| Before/after | Drag slider (no scroll animation) | all | — |
+
+- Reduced motion: everything static and fully visible.
+- Nothing moves until it is on screen, and nothing animates twice.
 
 ## Imagery
 

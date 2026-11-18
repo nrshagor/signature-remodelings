@@ -21,6 +21,8 @@ export const home = {
     primary: consultation,
     secondary: { label: "See Our Work", href: "/projects" },
   },
+  // Moving strip under the hero (user, 2026-11-18). [DRAFT, new]
+  marquee: ["Kitchens", "Bathrooms", "Living Spaces", "Balconies", "Patios", "Second Floors"],
   // Remodeling first: Interior + Exterior only; home flipping is the investors band below.
   services: {
     eyebrow: "Remodeling", // [DRAFT, new]
