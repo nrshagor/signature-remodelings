@@ -5,37 +5,21 @@ import { Hero } from "@/components/sections/Hero";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { ServiceCards } from "@/components/sections/ServiceCards";
 import { WhyUs } from "@/components/sections/WhyUs";
-import { serviceCardImages, stockImages } from "@/content/images";
+import { stockImages } from "@/content/images";
 import { closingCta, home, processSteps } from "@/content/pages";
 import { getProject } from "@/content/projects";
 import { seo } from "@/content/seo";
-import { services } from "@/content/services";
 import { available } from "@/lib/images";
+import { projectCardItem } from "@/lib/projectCards";
 import { pageMetadata } from "@/lib/seo";
+import { serviceCardItems } from "@/lib/serviceCards";
 
 export const metadata: Metadata = pageMetadata(seo.home, "/");
 
 export default function Home() {
-  const serviceItems = services.map((s) => ({
-    slug: s.slug,
-    title: s.title,
-    summary: s.cardSummary,
-    image: available(s.cardImage ?? serviceCardImages[s.slug]),
-  }));
-
   const featuredItems = home.featured.items.flatMap((item) => {
     const project = getProject(item.slug);
-    if (!project) return [];
-    return [
-      {
-        slug: project.slug,
-        title: project.title,
-        meta: `${project.city} · ${project.type}`,
-        text: item.text,
-        // Company photos only; stock images are never used for projects.
-        image: available(project.cardImage),
-      },
-    ];
+    return project ? [projectCardItem(project, item.text)] : [];
   });
 
   return (
@@ -51,7 +35,7 @@ export default function Home() {
         eyebrow={home.services.eyebrow}
         heading={home.services.heading}
         linkLabel={home.services.linkLabel}
-        items={serviceItems}
+        items={serviceCardItems()}
       />
       <WhyUs
         heading={home.whyUs.heading}

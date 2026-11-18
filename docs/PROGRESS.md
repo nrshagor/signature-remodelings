@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T2.1 Home page (waiting for the user's browser review)
-- **Next task: T2.2 Services index + 3 service pages** (after the user's Home review)
+- Last completed task: T2.2 Services index + 3 service pages
+- **Next task: T2.3 Before/after slider**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -99,6 +99,15 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T2.2 Services index + 3 service pages
+- Context: the user's message after the Home review still had template text for the image list, header test and Home review. No images or `public/images/CREDITS.md` exist in the repo, so there was nothing to fix; continued as instructed.
+- Done:
+  - `/services`: PageHero (h1 + intro), cards (card titles are h2 under the page h1), closing CTA.
+  - `/services/[slug]`: `generateStaticParams` + `dynamicParams = false`; `generateMetadata` from `seo.ts`. Sections: PageHero 7/5 with the service image slot, the "What we remodel / build / How it works" list (numbered for Home Flipping) beside the detail image slots (interior: bath + living, exterior: patio, flipping: staged), "Who it's for", the featured project card (exterior → Carrollton, flipping → Alba), and the service CTA band.
+  - New: `PageHero`, `ServiceDetail`; `lib/serviceCards.ts` and `lib/projectCards.ts` (shared card data); `ServiceCards`/`FeaturedProjects` take an optional heading and render nothing with no items. Labels added to `pages.ts` (`servicePage`, `projectPage`, `beforeAfter`) and stock slots to `images.ts`.
+- Checks: lint, build and CSS check pass. Built pages have the right `<title>` and canonical. With `next start`, `/services/nope` → 404 and `/services/interior-remodeling` → 200. The flipping page has no profit/ROI claims ("positioned to sell" only).
+- Files: src/app/services/page.tsx, src/app/services/[slug]/page.tsx, src/components/sections/{PageHero,ServiceDetail}.tsx + css, ServiceCards.tsx, FeaturedProjects.tsx, src/lib/{serviceCards,projectCards}.ts, src/content/{images,pages}.ts, src/app/page.tsx
 
 ### 2026-11-18 — T2.1 Home page
 - Done: Home built from content (no hard-coded copy), with six section components in `src/components/sections/`:

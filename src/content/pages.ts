@@ -103,10 +103,39 @@ export const servicesIndex = {
   intro: "We focus on three kinds of work, so every project gets our full attention.",
 };
 
+/** Labels on the service detail pages. */
+export const servicePage = {
+  whoForHeading: "Who it's for",
+  featuredHeading: "Featured project",
+  featuredLinkLabel: "View project",
+};
+
 export const projectsIndex = {
   headline: "Our work",
   intro:
     "Every project starts with an existing home and a clear goal. Here's what we've built.",
+  linkLabel: "View project",
+};
+
+/** Labels on the project detail pages (docs/03-CONTENT.md → Projects). */
+export const projectPage = {
+  facts: { city: "City", type: "Type", status: "Status" },
+  progressLabels: { completed: "Completed", "in-progress": "In progress" },
+  goalHeading: "The goal",
+  startingPointHeading: "Starting point",
+  workHeading: "The work",
+  resultHeading: "The result",
+  beforeAfterHeading: "Before and after",
+  galleryHeading: "Gallery",
+  /** Gallery title while the project is in progress (renderings and drawings). */
+  galleryHeadingInProgress: "Design rendering",
+};
+
+/** Before/after slider labels. */
+export const beforeAfter = {
+  before: "Before",
+  after: "After",
+  sliderLabel: "Before and after comparison",
 };
 
 export interface Founder {

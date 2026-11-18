@@ -16,30 +16,33 @@ export interface ServiceCardItem {
 
 interface ServiceCardsProps {
   eyebrow?: string;
-  heading: string;
+  /** Section heading (h2). Leave out under a page h1 (/services): card titles become h2. */
+  heading?: string;
   linkLabel: string;
   items: ServiceCardItem[];
-  /** Heading level of the section title (2 on Home). */
-  level?: 1 | 2;
+  /** Remove top padding when the section follows a page hero. */
+  flushTop?: boolean;
 }
 
 /** Three service cards (4:5 images) linking to the service pages. */
-export function ServiceCards({ eyebrow, heading, linkLabel, items, level = 2 }: ServiceCardsProps) {
+export function ServiceCards({ eyebrow, heading, linkLabel, items, flushTop }: ServiceCardsProps) {
   return (
-    <Section labelledBy="services-heading">
+    <Section labelledBy={heading ? "services-heading" : undefined} flushTop={flushTop}>
       <Container>
-        <Reveal className={styles.head}>
-          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-          <Heading level={level} size="h2" id="services-heading">
-            {heading}
-          </Heading>
-        </Reveal>
+        {heading && (
+          <Reveal className={styles.head}>
+            {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+            <Heading level={2} id="services-heading">
+              {heading}
+            </Heading>
+          </Reveal>
+        )}
         <Reveal group as="ul" role="list" className={styles.grid}>
           {items.map((item) => (
             <li key={item.slug} className={styles.item}>
               <Card
                 title={item.title}
-                level={level === 1 ? 2 : 3}
+                level={heading ? 3 : 2}
                 href={`/services/${item.slug}`}
                 image={item.image}
                 ratio="4/5"

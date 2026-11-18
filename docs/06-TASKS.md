@@ -96,7 +96,8 @@ Needs: T1.6, T1.5 · Read: 03-CONTENT → Home, 04-DESIGN, 05-IMAGES
 Sections 1–6 as specified. Hero image `priority`. Process section can be static here (GSAP version is on About).
 Done when: matches content exactly; responsive at 360, 768, 1280, 1600 px.
 
-### [ ] T2.2 Services index + 3 service pages
+### [x] T2.2 Services index + 3 service pages
+Result: `/services` + 3 SSG pages (`dynamicParams = false` → unknown slug 404, verified on `next start`); per-page title/description/canonical.
 Needs: T2.1
 `/services` and `/services/[slug]` with `generateStaticParams` and per-page metadata. Unknown slug → 404.
 

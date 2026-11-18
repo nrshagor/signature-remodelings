@@ -30,6 +30,30 @@ export const stockImages = {
     height: 2000,
     alt: "Home interior under renovation with fresh drywall and new windows",
   },
+  serviceInteriorBath: {
+    src: "/images/stock/service-interior-bath.jpg",
+    width: 1600,
+    height: 1200,
+    alt: "Remodeled bathroom with a walk-in glass shower and stone tile",
+  },
+  serviceInteriorLiving: {
+    src: "/images/stock/service-interior-living.jpg",
+    width: 1600,
+    height: 1200,
+    alt: "Open living room with built-in shelving and wide-plank floors",
+  },
+  serviceExteriorPatio: {
+    src: "/images/stock/service-exterior-patio.jpg",
+    width: 1600,
+    height: 1200,
+    alt: "Covered backyard patio with outdoor seating",
+  },
+  serviceFlippingStaged: {
+    src: "/images/stock/service-flipping-staged.jpg",
+    width: 1600,
+    height: 1200,
+    alt: "Freshly remodeled, staged living room ready for sale",
+  },
   processPlans: {
     src: "/images/stock/process-plans.jpg",
     width: 1600,
@@ -44,9 +68,16 @@ export const stockImages = {
   },
 } satisfies Record<string, ImageAsset>;
 
-/** Card image per service (Home and /services). */
+/** Card image per service (Home and /services); also the service page hero. */
 export const serviceCardImages = {
   "interior-remodeling": stockImages.serviceInterior,
   "exterior-additions": stockImages.serviceExterior,
   "home-flipping": stockImages.serviceFlipping,
+} as const;
+
+/** Supporting images beside the "what we do" list on each service page. */
+export const serviceDetailImages = {
+  "interior-remodeling": [stockImages.serviceInteriorBath, stockImages.serviceInteriorLiving],
+  "exterior-additions": [stockImages.serviceExteriorPatio],
+  "home-flipping": [stockImages.serviceFlippingStaged],
 } as const;
