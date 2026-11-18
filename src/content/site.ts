@@ -72,6 +72,5 @@ export const site: Site = {
   ],
   hasPrivacyPolicy: false,
   // "/" is added in T2.1 once the home hero exists.
-  // TEMPORARY (T1.3 header test, remove after testing): dev-only overlay test page.
-  overlayRoutes: process.env.NODE_ENV === "production" ? [] : ["/dev-header/overlay"],
+  overlayRoutes: [],
 };

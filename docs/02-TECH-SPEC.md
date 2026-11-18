@@ -75,6 +75,8 @@ src/
     projects.ts
     faq.ts
     seo.ts
+    pages.ts      # page copy: Home, services/projects index, About, Contact, 404, closing CTA
+    types.ts      # shared content types (ImageAsset, NavLink, CallToAction, ContentStatus)
   lib/
     seo.ts        # metadata helpers, JSON-LD builders
     validate.ts   # contact form validation (hand-written)

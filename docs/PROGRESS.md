@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T1.3 Header and mobile menu (waiting for the user's browser test)
-- **Next task: T1.4 Footer** (after the user's header test; then remove the `/dev-header` test pages)
+- Last completed task: T1.3 Header and mobile menu (user-tested; test pages removed)
+- **Next task: T1.4 Footer**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -88,6 +88,10 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T1.3 follow-up
+- Done: user ran the header checklist and reported no specific problems (the results line in the message was left as the template text). Removed `src/app/dev-header/**` and the dev-only overlay route in `site.ts`. Added `pages.ts` and `types.ts` to the folder structure in 02-TECH-SPEC.
+- Files: src/app/dev-header/** (deleted), src/content/site.ts, docs/02-TECH-SPEC.md
 
 ### 2026-11-18 — T1.3 Header and mobile menu
 - Done: `SkipLink` (first focusable element; visible on focus). `Header` (client): always `position: fixed` with a constant height, plus a spacer on solid routes, so nothing shifts on scroll. Routes in `site.overlayRoutes` start transparent (white text over a soft dark shade) and turn solid after 8px of scroll (rAF-throttled passive listener); the solid header gains a bottom border once scrolled. Desktop nav ≥ 900px with an underline on hover and `aria-current="page"` (also for sub-pages). `MobileMenu` (< 900px): full-screen `role="dialog"` with `aria-modal`, its own close button, focus trap, Esc to close, focus back to the menu button, body-pinning scroll lock (works on iOS 15) with scroll restore. It closes on navigation (state is tied to the path it was opened on), on a same-page link click, and when the viewport reaches 900px. Header + SkipLink are wired into `layout.tsx` now so they can be tested; the rest of the layout is T1.6.
