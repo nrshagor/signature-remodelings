@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T2.2 Services index + 3 service pages
-- **Next task: T2.3 Before/after slider**
+- Last completed task: T2.3 Before/after slider
+- **Next task: T2.4 Projects index + project pages**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -99,6 +99,12 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T2.3 Before/after slider
+- Done: `components/project/BeforeAfter.tsx` (client). A 16:10 padding-ratio frame: the after image underneath, the before image on top clipped with `clip-path: inset(0 calc(100% - var(--position)) 0 0)` (with `-webkit-` prefix), "Before"/"After" chips, a white divider with a round 48px handle and chevrons. An invisible native `<input type="range">` covers the image (z-index above), with `aria-label` and `aria-valuetext` ("20% before, 80% after"); `touch-action: pan-y` keeps vertical page scrolling on touch; 48px thumb hit area; the focus ring shows on the handle (`:focus-visible ~ .divider .handle`). The server render and the no-JS view are two captioned figures side by side (stacked on mobile); `useSyncExternalStore` switches to the slider after hydration without a mismatch. Labels from `pages.ts → beforeAfter`.
+- Checks: temporary dev page with generated test images (deleted). The server HTML is the fallback. In headless Edge (the in-app preview pane was hidden, which stalls React) the slider replaces the fallback after hydration with no console errors: a mouse click at 75% → 76, a drag to 30% → 29, 5× ArrowRight → 34, End → 100, the clip path and divider follow, the focus ring shows. Lint + build pass.
+- Not verified: iOS Safari touch dragging (in the review checklist and T3.7).
+- Files: src/components/project/BeforeAfter.tsx, BeforeAfter.module.css
 
 ### 2026-11-18 — T2.2 Services index + 3 service pages
 - Context: the user's message after the Home review still had template text for the image list, header test and Home review. No images or `public/images/CREDITS.md` exist in the repo, so there was nothing to fix; continued as instructed.

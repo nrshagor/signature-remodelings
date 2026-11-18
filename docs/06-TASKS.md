@@ -101,7 +101,8 @@ Result: `/services` + 3 SSG pages (`dynamicParams = false` → unknown slug 404,
 Needs: T2.1
 `/services` and `/services/[slug]` with `generateStaticParams` and per-page metadata. Unknown slug → 404.
 
-### [ ] T2.3 Before/after slider
+### [x] T2.3 Before/after slider
+Result: `BeforeAfter` on a native range input; mouse click/drag, arrows/End and the focus ring verified in headless Edge; the no-JS/server render is a side-by-side fallback.
 Needs: T1.2 · Read: 02-TECH-SPEC → Before/after slider
 Native range input based; keyboard, touch, mouse; no-JS fallback; labels.
 
