@@ -106,9 +106,10 @@ Result: `BeforeAfter` on a native range input; mouse click/drag, arrows/End and 
 Needs: T1.2 · Read: 02-TECH-SPEC → Before/after slider
 Native range input based; keyboard, touch, mouse; no-JS fallback; labels.
 
-### [ ] T2.4 Projects index + project pages
+### [x] T2.4 Projects index + project pages
 Needs: T2.3
 `/projects` and `/projects/[slug]`. Sections: summary, goal (if any), the work, gallery, slider (only if before/after pairs exist), rendering with caption, CTA. Handle "in progress" status.
+Result: both routes built (SSG, unknown slug 404). Empty blocks, pairs and gallery images are hidden; "In progress" badge + "Design rendering" gallery heading when progress is in-progress.
 
 ### [ ] T2.5 GSAP scroll stories
 Needs: T2.4 · Read: 02-TECH-SPEC → Animation policy

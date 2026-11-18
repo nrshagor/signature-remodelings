@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T2.3 Before/after slider
-- **Next task: T2.4 Projects index + project pages**
+- Last completed task: T2.4 Projects index + project pages
+- **Next task: T2.5 GSAP scroll stories** (paused for user review of T2.2–T2.4)
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -99,6 +99,12 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T2.4 Projects index + project pages
+- Done: `/projects` (PageHero + FeaturedProjects cards, card titles as h2 when no section heading) and `/projects/[slug]` (`generateStaticParams`, `dynamicParams = false`). Project page: PageHero (eyebrow "City · Type", "In progress" badge when set, card image if the file exists), facts list (city, type, status only when known — never an address), story blocks (goal, starting point, the work, result; each only if it has content), before/after section only for pairs where both photos exist (one slider each), gallery of existing images with captions (heading "Design rendering" while in progress), closing CTA. New components `project/ProjectSections` and `project/ProjectGallery`; global utilities `.section-heading` and `.stack-item`.
+- Checks: with temporary test data and generated images (both reverted), headless Edge showed h1, The work, Before and after, Design rendering, badge, status fact, slider and caption on Carrollton; Alba shows only The result; no horizontal overflow at 375px; no street-address patterns; unknown slug → 404. Lint + build pass.
+- Files: `src/app/projects/page.tsx`, `src/app/projects/[slug]/page.tsx`, `src/components/project/ProjectSections.*`, `src/components/project/ProjectGallery.*`, `src/styles/globals.css`, docs.
+- User action needed: review checklist (services, projects, slider). Project pages stay mostly empty until the client sends photos and project facts.
 
 ### 2026-11-18 — T2.3 Before/after slider
 - Done: `components/project/BeforeAfter.tsx` (client). A 16:10 padding-ratio frame: the after image underneath, the before image on top clipped with `clip-path: inset(0 calc(100% - var(--position)) 0 0)` (with `-webkit-` prefix), "Before"/"After" chips, a white divider with a round 48px handle and chevrons. An invisible native `<input type="range">` covers the image (z-index above), with `aria-label` and `aria-valuetext` ("20% before, 80% after"); `touch-action: pan-y` keeps vertical page scrolling on touch; 48px thumb hit area; the focus ring shows on the handle (`:focus-visible ~ .divider .handle`). The server render and the no-JS view are two captioned figures side by side (stacked on mobile); `useSyncExternalStore` switches to the slider after hydration without a mismatch. Labels from `pages.ts → beforeAfter`.

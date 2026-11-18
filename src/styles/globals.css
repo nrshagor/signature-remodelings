@@ -224,6 +224,16 @@ a:hover {
 
 /* ---------- Utilities ---------- */
 
+/* Space below a section's heading. */
+.section-heading {
+  margin-bottom: var(--space-7);
+}
+
+/* Vertical rhythm between stacked blocks (e.g. several before/after sliders). */
+.stack-item + .stack-item {
+  margin-top: var(--space-8);
+}
+
 .visually-hidden {
   position: absolute !important;
   width: 1px;
