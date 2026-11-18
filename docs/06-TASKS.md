@@ -53,7 +53,8 @@ Done when: clean `git status`, first commit made (no push).
 
 ## Phase 1 — Design system, layout, content layer
 
-### [ ] T1.1 Content layer
+### [x] T1.1 Content layer
+Result: site, services, projects, faq, seo + `types.ts` and `pages.ts` (page copy). Grep clean; SEO lengths within limits.
 Needs: T0.4 · Read: 03-CONTENT, 02-TECH-SPEC → Content rules
 - Types + data in `src/content/` (`site.ts`, `services.ts`, `projects.ts`, `faq.ts`, `seo.ts`) from 03-CONTENT.
 - [NEEDS CLIENT] fields → optional, `undefined`. Add `status` where useful.

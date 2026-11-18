@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T0.5 Git init and first commit
-- **Next task: T1.1 Content layer**
+- Last completed task: T1.1 Content layer
+- **Next task: T1.2 UI primitives**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -88,6 +88,11 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T1.1 Content layer
+- Done: typed content in `src/content/`: `site.ts` (brand, nav, CTA, footer links, contact fields all `undefined`, `hasPrivacyPolicy: false`, URL from `NEXT_PUBLIC_SITE_URL`), `services.ts`, `projects.ts` (city only; gallery/pairs empty until photos arrive), `faq.ts` (NEEDS CLIENT questions have no answer; `visibleFaqs()` returns only answered ones), `seo.ts`. Also `types.ts` (shared types) and `pages.ts` (Home, services/projects index, About, Contact, 404 copy and the shared closing CTA) — the spec lists no file for page copy, so I added this one.
+- Checks: `tsc` OK; `grep -rniI "tbd|lorem|xxx|placeholder" src` clean; every SEO title ≤ 60 and description ≤ 160 characters; lint + build pass.
+- Files: src/content/{types,site,services,projects,faq,seo,pages}.ts
 
 ### 2026-11-18 — T0.5 Git init and first commit
 - Done: `git init -b main`; `.gitattributes` `* text=auto eol=lf` (same as Solum); `.gitignore` ignores `.claude/settings.local.json` (`.claude/launch.json` is committed); removed the redundant `src/styles/.gitkeep`. First commit made with the user's git identity; message checked clean. Strict git rules added to CLAUDE.md (no push/remotes, no tool mentions or co-author lines in messages, never override the author, verify each message). CLAUDE.md, AGENTS.md, `.claude/launch.json` and `docs/` stay in git (private repo; docs are the project record).
