@@ -9,8 +9,9 @@ let cover: ((fromPath: string) => void) | null = null;
 let reset: (() => void) | null = null;
 let stuckTimer = 0;
 
-/** Time for the panel to cover the screen before navigating. */
-const COVER_MS = 380;
+/** Time for the panel to cover the screen before navigating. Cover 260 ms + leave 340 ms
+ * (Curtain.module.css) = 600 ms of animation in total. */
+const COVER_MS = 260;
 /** If the new page never arrives (error, same page), uncover anyway. */
 const STUCK_MS = 4000;
 

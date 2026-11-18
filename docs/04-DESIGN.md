@@ -119,6 +119,7 @@ Easing: `cubic-bezier(0.22, 1, 0.36, 1)` (CSS `--ease-out`), GSAP `power3.out`. 
 | Services marquee (Home) | Continuous slow scroll, paused on hover | all | CSS |
 | Alba gallery | Horizontal pinned scroll | ≥ 1024px (below: grid) | GSAP ScrollTrigger |
 | Process steps | Steps and connecting line in sequence | all | GSAP |
+| Link curtain | Blue panel covers (260 ms), route changes, panel leaves (340 ms): 600 ms of animation in total | all (not on back/forward, modifier or middle clicks) | CSS, `TransitionLink` + `Curtain` |
 | Before/after | Drag slider (no scroll animation) | all | — |
 
 - Reduced motion: everything static and fully visible.

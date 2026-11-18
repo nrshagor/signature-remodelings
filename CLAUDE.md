@@ -44,6 +44,7 @@ If two docs disagree, follow this order: the user's latest message > `PROGRESS.m
 - **No new dependencies without asking.** The pre-approved list is in `02-TECH-SPEC.md`. Anything else: ask the user first, explain why, and give the no-dependency alternative.
 - **Reuse before you build.** If the user says a pattern already exists in the other HBS repos (`solum-constructions`, `quality-concrete-solution`, `hera-builders`), ask him to point you to it or paste it, and follow it.
 - **Ports:** dev `3003`, staging `3104`, production `3204` (pending user confirmation — see PROGRESS.md).
+- **Ask before touching the environment.** Never create git worktrees, junctions or symlinks, never use `git stash`, and never delete or reinstall `node_modules` (`npm ci`, `rm -rf node_modules`, etc.) without asking the user first. Explain the plan and wait for his OK.
 - **Repo files only.** Do not plan, write or run server commands (Nginx, PM2, certbot, DNS, SSH). Server work happens in a separate chat. If something needs the server, write it in `PROGRESS.md` under "For the server chat".
 - **Language:** all code, comments, commit messages and site copy in English.
 

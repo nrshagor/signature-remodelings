@@ -109,6 +109,38 @@ After adding files with these exact names, run a new build: pages are static and
 - User action needed:
 -->
 
+### 2026-11-19 — Bundle check (report only), curtain 600 ms, standing rule
+- CLAUDE.md: new rule, ask before worktrees, junctions/symlinks, `git stash` or deleting/reinstalling `node_modules`.
+- Curtain shortened: cover 260 ms + leave 340 ms = 600 ms of animation (the panel stays up only if the next page takes longer to arrive).
+- Bundle check with the built-in analyzer (`next analyze -o`, then `next analyze export --route /`; nothing installed). **No reductions applied yet; proposals below for the user's OK.**
+
+**What "183 KB" really is.** The earlier figure counted every `<script>` in the HTML, including `polyfill-nomodule` (38.5 KB gz), which only browsers without ES modules download. Modern browsers (all of our targets) load **≈ 145 KB gz** on every route (Home 144.7, /services 144.1, /projects 144.1, project page 144.7, 404 143.6). Routes differ by < 1.5 KB, so the cost is all shared.
+
+**Biggest client modules, Home first load (gzip):**
+
+| Module | KB gz | Can we cut it? |
+| --- | --- | --- |
+| `react-dom` (client) | 64.0 | No: required for hydration |
+| Next.js App Router runtime (segment cache, router reducer, app-router, layout-router, RSC client `react-server-dom-turbopack`, Turbopack runtime) | ≈ 68 | No: framework core |
+| `react` + `scheduler` | 8.6 | No |
+| `next/image` + `next/link` client code | 6.7 | Only by dropping next/image (not worth it: we would lose responsive srcset/AVIF) |
+| **Our own client components, all together** | **≈ 6.5** | Partly, see below |
+| GSAP + ScrollTrigger + SplitText | 48 (lazy) | Already out of first load; ≥ 768 px and only on pages that use it |
+
+**Our own client code in first load (gzip):** MobileMenu 1.05 · Header 0.79 · `content/site.ts` pulled into the client by Header/MobileMenu 0.46 · Reveal 0.45 · MotionEngine 0.42 · Curtain 0.40 · ProcessAnimator 0.39 · MarqueeStrip 0.36 · Button 0.29 · TransitionLink 0.28 · Wordmark 0.26 · template 0.17 · useMediaQuery 0.16 · Container 0.15 · HydratedFlag 0.14 · navUtils 0.12 · CSS-module class maps ≈ 0.7.
+
+**Proposed reductions (need your OK; total ≈ 3–4 KB gz, about 2–3%):**
+1. Lazy-load `MobileMenu` on first open of the menu button (`import()`), ≈ 1.2 KB. Small first-tap delay (preload on pointerdown/focus).
+2. Pass only `nav` / `cta` from the server layout to Header as props instead of importing `content/site.ts` into the client, ≈ 0.4 KB.
+3. Make `Wordmark`, `Container` and `Button` server-only where possible: Header imports them, which pulls them into the client; render the brand and CTA in the server layout and pass them to Header as `children`/slots, ≈ 0.6 KB.
+4. Load `ProcessAnimator` only on pages that use it (currently in the shared client graph via the About-only `animated` option), ≈ 0.4 KB.
+5. Merge `HydratedFlag` into `MotionEngine` (one component), ≈ 0.1 KB.
+6. Optional: drop the curtain (`Curtain` + `TransitionLink`, ≈ 0.7 KB). Not recommended for size alone.
+
+Not worth doing: removing React/Next runtime (impossible without leaving Next.js), replacing `next/image`, or turning Reveal into an inline script (saves < 0.5 KB, loses the shared observer).
+
+**Recommendation:** the real number (≈ 145 KB) is normal for a Next.js App Router site; ≈ 138 KB is the floor here. Apply 1–4 if you want the last few KB; Lighthouse TBT on this machine is dominated by React hydration, not by our code.
+
 ### 2026-11-18 — Modern shapes and site-wide motion
 - Docs first: 02-TECH-SPEC Animation policy rewritten (what may animate, guards, CSS vs GSAP, breakpoints, budget); 04-DESIGN Shape (22 px, organic, arch-top), components (card hover, glass labels, marquee) and a Motion table.
 - Shapes: `--radius-lg` 22 px, `--radius-card` 24 px, `--radius-organic`; `ImageFrame` gets `shape` (organic / arch, border-radius only), `mask` and `labels`. Arch on Why us and the first service-page photo; organic on the page-hero and For investors photos.
