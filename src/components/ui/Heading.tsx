@@ -16,7 +16,7 @@ interface HeadingProps {
 
 const defaultSize: Record<Level, Size> = { 1: "display", 2: "h2", 3: "h3", 4: "h4" };
 
-/** Serif heading. Level and visual size are separate, so the outline stays correct. */
+/** Heading in the heading font. Level and visual size are separate, so the outline stays correct. */
 export function Heading({ children, level, size, id, className }: HeadingProps) {
   const Tag = `h${level}` as const;
   const classes = [styles.heading, styles[size ?? defaultSize[level]], className]

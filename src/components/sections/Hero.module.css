@@ -2,10 +2,10 @@
   position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: 560px;
+  min-height: 600px;
   height: 100vh;
   height: 100svh;
-  max-height: 1000px;
+  max-height: 1080px;
   overflow: hidden;
   background-color: var(--color-ink);
   color: var(--color-white);
@@ -42,21 +42,24 @@
 
 .content {
   position: relative;
-  padding-top: calc(var(--header-height) + var(--space-7));
+  padding-top: calc(var(--header-height) + var(--space-8));
   padding-bottom: var(--space-8);
 }
 
+/* Large, left-aligned display headline. */
 .headline {
-  max-width: 16ch;
+  max-width: 15ch;
   color: var(--color-white);
   font-size: var(--fs-display);
-  line-height: 1.08;
+  font-weight: 700;
+  line-height: var(--lh-display);
+  letter-spacing: -0.035em;
   animation: hero-enter 900ms var(--ease-out) 150ms both;
 }
 
 .sub {
-  max-width: 46ch;
-  margin-top: var(--space-5);
+  max-width: 44ch;
+  margin-top: var(--space-6);
   color: #ece7e0;
   font-size: 1.125rem;
   animation: hero-enter 900ms var(--ease-out) 300ms both;
@@ -65,7 +68,7 @@
 .actions {
   display: flex;
   flex-wrap: wrap;
-  margin-top: var(--space-6);
+  margin-top: var(--space-7);
   animation: hero-enter 900ms var(--ease-out) 450ms both;
 }
 
@@ -101,7 +104,7 @@
 
 @media (min-width: 900px) {
   .content {
-    padding-bottom: var(--space-9);
+    padding-bottom: 7.5rem;
   }
 
   .sub {

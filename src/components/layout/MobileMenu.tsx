@@ -130,7 +130,7 @@ export function MobileMenu({ id, open, onClose, returnFocusRef, pathname }: Mobi
                 <Link
                   href={link.href}
                   className={styles.link}
-                  aria-current={isActive(pathname, link.href) ? "page" : undefined}
+                  aria-current={isActive(pathname, link.href, site.nav) ? "page" : undefined}
                   onClick={onClose}
                 >
                   {link.label}

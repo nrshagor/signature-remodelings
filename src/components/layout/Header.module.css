@@ -21,6 +21,17 @@
   border-bottom-color: var(--color-line);
 }
 
+/* Frosted glass after scrolling. Browsers without backdrop-filter keep the solid paper
+   background above. */
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .solid.scrolled {
+    border-bottom-color: rgba(221, 214, 204, 0.7);
+    background-color: rgba(250, 248, 245, 0.78);
+    -webkit-backdrop-filter: saturate(1.6) blur(18px);
+    backdrop-filter: saturate(1.6) blur(18px);
+  }
+}
+
 /* Over the hero: white text on a soft dark shade for legibility. */
 .transparent {
   background-color: transparent;

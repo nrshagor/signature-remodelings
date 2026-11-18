@@ -21,10 +21,17 @@ export const home = {
     primary: consultation,
     secondary: { label: "See Our Work", href: "/projects" },
   },
+  // Remodeling first: Interior + Exterior only; home flipping is the investors band below.
   services: {
-    eyebrow: "Our services",
-    heading: "Three ways we transform a home.",
+    eyebrow: "Remodeling", // [DRAFT, new]
+    heading: "Remodeling, inside and out.", // [DRAFT, new]
     linkLabel: "Explore",
+    listHeading: "What we remodel",
+  },
+  // Heading and text come from the Home Flipping service (services.ts).
+  investors: {
+    eyebrow: "For investors", // [DRAFT, new]
+    link: { label: "Explore home flipping", href: "/services/home-flipping" }, // [DRAFT, new]
   },
   // Every promise needs client approval before launch.
   whyUs: {

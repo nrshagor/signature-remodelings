@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
@@ -9,12 +9,12 @@ import { site } from "@/content/site";
 import { robotsMeta } from "@/lib/seo";
 import "@/styles/globals.css";
 
-// Headings: serif, only the weight in use. Body/UI: Inter variable font (400–600).
-const serif = Cormorant_Garamond({
+// Headings: Plus Jakarta Sans, only the weights in use. Body/UI: Inter variable font (400–600).
+const heading = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["600"],
+  weight: ["600", "700"],
   display: "swap",
-  variable: "--font-serif-face",
+  variable: "--font-heading-face",
 });
 
 const sans = Inter({
@@ -53,7 +53,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // suppressHydrationWarning: the inline script changes <html> classes before hydration.
-    <html lang="en" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${heading.variable} ${sans.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: jsFlagScript }} />
       </head>

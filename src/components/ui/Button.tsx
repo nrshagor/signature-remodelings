@@ -11,6 +11,8 @@ interface CommonProps {
   onDark?: boolean;
   /** Full width on small screens. */
   block?: boolean;
+  /** 52px tall (hero). */
+  large?: boolean;
   className?: string;
 }
 
@@ -20,8 +22,15 @@ type NativeButtonProps = CommonProps &
 
 export type ButtonProps = LinkButtonProps | NativeButtonProps;
 
-function classesFor({ variant = "primary", onDark, block, className }: CommonProps) {
-  return [styles.button, styles[variant], onDark && styles.onDark, block && styles.block, className]
+function classesFor({ variant = "primary", onDark, block, large, className }: CommonProps) {
+  return [
+    styles.button,
+    styles[variant],
+    onDark && styles.onDark,
+    block && styles.block,
+    large && styles.large,
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 }
@@ -53,6 +62,7 @@ export function Button(props: ButtonProps) {
     variant: _variant,
     onDark: _onDark,
     block: _block,
+    large: _large,
     className: _className,
     type = "button",
     ...rest

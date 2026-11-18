@@ -23,18 +23,20 @@
   --color-overlay: rgba(30, 28, 26, 0.45);
 
   /* Font families: set by next/font in layout.tsx, with system fallbacks. */
-  --font-serif: var(--font-serif-face, Georgia), "Times New Roman", serif;
+  --font-heading: var(--font-heading-face, system-ui), -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
   --font-sans: var(--font-sans-face, system-ui), -apple-system, "Segoe UI", Roboto, Arial,
     sans-serif;
 
   /* Type scale */
-  --fs-display: clamp(2.5rem, 5vw + 1rem, 4.5rem);
-  --fs-h2: clamp(2rem, 3vw + 1rem, 3rem);
+  --fs-display: clamp(2.75rem, 6vw + 1rem, 6rem);
+  --fs-h2: clamp(2rem, 3vw + 1rem, 3.25rem);
   --fs-h3: clamp(1.375rem, 1vw + 1rem, 1.75rem);
   --fs-body: 1.0625rem;
   --fs-small: 0.875rem;
   --fs-eyebrow: 0.8125rem;
-  --lh-heading: 1.15;
+  --lh-display: 1.02;
+  --lh-heading: 1.12;
   --lh-body: 1.65;
   --measure: 65ch;
 
@@ -52,11 +54,13 @@
   /* Layout */
   --container-max: 1240px;
   --gutter: 20px;
-  --section-pad: 72px;
+  --section-pad: 80px;
   --header-height: 72px;
 
   /* Shape and motion */
-  --radius: 2px;
+  /* 12px: images, cards, tiles. 8px: buttons, inputs, small panels. (04-DESIGN → Shape) */
+  --radius-lg: 12px;
+  --radius: 8px;
   --control-height: 48px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 200ms;
@@ -74,7 +78,7 @@
 @media (min-width: 900px) {
   :root {
     --gutter: 48px;
-    --section-pad: 120px;
+    --section-pad: 144px;
     --header-height: 88px;
   }
 }
@@ -159,7 +163,7 @@ h2,
 h3,
 h4 {
   color: var(--color-ink);
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-weight: 600;
   line-height: var(--lh-heading);
   letter-spacing: -0.01em;
@@ -167,14 +171,19 @@ h4 {
 
 h1 {
   font-size: var(--fs-display);
+  font-weight: 700;
+  line-height: var(--lh-display);
+  letter-spacing: -0.035em;
 }
 
 h2 {
   font-size: var(--fs-h2);
+  letter-spacing: -0.025em;
 }
 
 h3 {
   font-size: var(--fs-h3);
+  letter-spacing: -0.015em;
 }
 
 h4 {

@@ -76,4 +76,4 @@ If the company has no "before" photos of its own, the project page shows an "aft
 
 ## Favicon
 
-Until a logo exists: a simple "S" monogram in the serif font on `--color-ink`. Generate `src/app/icon.png` (512×512) and `apple-icon.png` (180×180).
+Until a logo exists: a simple "S" monogram in the heading font (Plus Jakarta Sans) on `--color-ink`. Generate `src/app/icon.png` (512×512) and `apple-icon.png` (180×180).

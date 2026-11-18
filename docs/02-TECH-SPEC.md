@@ -65,7 +65,7 @@ src/
   components/
     layout/   Header, Footer, MobileMenu, SkipLink
     ui/       Button, Container, Section, Eyebrow, Heading, Card, ImageFrame
-    sections/ Hero, ServiceCards, WhyUs, FeaturedProjects, ProcessSteps, CtaBand, Faq
+    sections/ Hero, ServiceBento, InvestorBand, WhyUs, FeaturedProjects, ProcessSteps, CtaBand, Faq
     project/  BeforeAfter, ProjectGallery, ProjectStory
     motion/   Reveal (IntersectionObserver), ScrollStory (GSAP, client-only)
     forms/    ContactForm

@@ -34,7 +34,7 @@ Tone of voice: calm, confident, premium. Short sentences. Talk about the homeown
 
 ### Navigation
 
-Main menu: Services · Projects · About · FAQ · button **Book a Consultation** (→ `/contact`)
+Main menu (remodeling first, client feedback 2026-11-18): Remodeling (→ `/services`) · Home Flipping (→ `/services/home-flipping`) · Projects · About · FAQ · button **Book a Consultation** (→ `/contact`). "Remodeling" is highlighted on `/services` and the interior/exterior pages; "Home Flipping" only on its own page.
 
 Footer:
 - Brand name + one-line description: "Interior remodeling, exterior additions and home flipping in Texas." [DRAFT]
@@ -68,12 +68,13 @@ Footer:
 - Primary button: Book a Consultation → `/contact`
 - Secondary button: See Our Work → `/projects`
 
-### 2. What we do (3 cards) [DRAFT]
-- Section eyebrow: Our services
-- Heading: Three ways we transform a home.
-- **Interior Remodeling** — Kitchens, bathrooms and living spaces redesigned for the way you live today. → Explore
-- **Exterior & Additions** — Balconies, patios and second-floor rooms that give you more space without leaving the home you love. → Explore
-- **Home Flipping** — We take dated houses and turn them into polished, market-ready homes for investors. → Explore
+### 2. Remodeling (bento: Interior + Exterior) [DRAFT]
+Remodeling first (client feedback 2026-11-18); home flipping moved to section 6.
+- Section eyebrow [DRAFT, new]: Remodeling
+- Heading [DRAFT, new]: Remodeling, inside and out.
+- **Interior Remodeling** (large tile) — Kitchens, bathrooms and living spaces redesigned for the way you live today. → Explore
+- **Exterior & Additions** (tile) — Balconies, patios and second-floor rooms that give you more space without leaving the home you love. → Explore
+- List tile "What we remodel": the item titles from both service pages (Kitchens, Bathrooms, Living spaces, Balconies, Covered and open patios, Second-floor room additions, Exterior updates that refresh the look of the home).
 
 ### 3. Why Signature [DRAFT — every promise needs client OK before launch]
 - Heading: Built around your home, not a template.
@@ -94,7 +95,14 @@ Footer:
 3. **Build** — Our team remodels with care for your home.
 4. **Reveal** — A final walkthrough to make sure it's right.
 
-### 6. Closing CTA [DRAFT]
+### 6. For investors band [DRAFT]
+- Eyebrow [DRAFT, new]: For investors
+- Heading: From dated to market-ready. (Home Flipping page headline)
+- Text: We take dated houses and turn them into polished, market-ready homes for investors. (Home Flipping card line)
+- Image: Alba cover photo (`projects/alba-home-flip/after-1.jpg`), label "Alba, TX · Home flipping"
+- Link [DRAFT, new]: Explore home flipping → `/services/home-flipping`
+
+### 7. Closing CTA [DRAFT]
 - Heading: Ready to see what your home could become?
 - Text: Tell us about your project. We'll walk you through ideas, options and next steps.
 - Button: Book a Consultation
@@ -104,7 +112,8 @@ Footer:
 ## Services index (`/services`) [DRAFT]
 - Headline: Remodeling services
 - Intro: We focus on three kinds of work, so every project gets our full attention.
-- Then the 3 service cards (same text as Home section 2), each linking to its page.
+- Then the remodeling bento (Interior + Exterior, same as Home section 2, without its heading).
+- Then a compact home-flipping block (same text and link as Home section 6).
 - Closing CTA (same as Home section 6).
 
 ## Interior Remodeling (`/services/interior-remodeling`) [DRAFT]

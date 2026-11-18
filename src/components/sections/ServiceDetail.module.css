@@ -28,7 +28,7 @@
   top: var(--space-5);
   left: 0;
   color: var(--color-accent-dark);
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 1.75rem;
   font-weight: 600;
   line-height: 1;
@@ -37,7 +37,7 @@
 .itemTitle {
   display: block;
   color: var(--color-ink);
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.25;
@@ -81,7 +81,7 @@
 .who {
   max-width: 30ch;
   color: var(--color-ink);
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: var(--fs-h3);
   font-weight: 600;
   line-height: 1.3;

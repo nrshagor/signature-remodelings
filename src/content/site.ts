@@ -58,7 +58,9 @@ export const site: Site = {
   logo: undefined,
   socials: [],
   nav: [
-    { label: "Services", href: "/services" },
+    // Remodeling first, home flipping second (client feedback 2026-11-18).
+    { label: "Remodeling", href: "/services" },
+    { label: "Home Flipping", href: "/services/home-flipping" },
     { label: "Projects", href: "/projects" },
     { label: "About", href: "/about" },
     { label: "FAQ", href: "/faq" },

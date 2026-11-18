@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Local tool settings (launch.json is shared)
 .claude/settings.local.json
+
+# Local before/after screenshots
+/screenshots/

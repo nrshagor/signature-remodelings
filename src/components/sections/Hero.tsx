@@ -39,11 +39,11 @@ export function Hero({ headline, sub, primary, secondary, image }: HeroProps) {
         </h1>
         <p className={styles.sub}>{sub}</p>
         <div className={styles.actions}>
-          <Button href={primary.href} onDark block>
+          <Button href={primary.href} onDark block large>
             {primary.label}
           </Button>
           {secondary && (
-            <Button href={secondary.href} variant="secondary" onDark block>
+            <Button href={secondary.href} variant="secondary" onDark block large>
               {secondary.label}
             </Button>
           )}

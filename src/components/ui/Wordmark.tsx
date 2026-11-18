@@ -10,7 +10,7 @@ interface WordmarkProps {
 
 /**
  * Brand mark. Until the client sends a logo (site.logo), a text wordmark: the first word
- * of the brand name in uppercase sans, the rest in the serif below it.
+ * of the brand name in uppercase sans, the rest in the heading font below it.
  */
 export function Wordmark({ onDark, className }: WordmarkProps) {
   const classes = [styles.wordmark, onDark && styles.onDark, className].filter(Boolean).join(" ");

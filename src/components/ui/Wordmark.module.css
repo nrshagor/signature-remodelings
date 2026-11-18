@@ -20,7 +20,7 @@
 
 .bottom {
   margin-top: 0.25rem;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 1.0625rem;
   font-weight: 600;
   letter-spacing: 0.02em;

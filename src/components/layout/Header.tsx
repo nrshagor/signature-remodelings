@@ -72,14 +72,14 @@ export function Header() {
                   <Link
                     href={link.href}
                     className={styles.link}
-                    aria-current={isActive(pathname, link.href) ? "page" : undefined}
+                    aria-current={isActive(pathname, link.href, site.nav) ? "page" : undefined}
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <Button href={site.cta.href} variant="secondary" onDark={transparent}>
+            <Button href={site.cta.href} onDark={transparent}>
               {site.cta.label}
             </Button>
           </nav>
