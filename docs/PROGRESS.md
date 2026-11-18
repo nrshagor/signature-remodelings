@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T2.4 Projects index + project pages
-- **Next task: T2.5 GSAP scroll stories** (paused for user review of T2.2–T2.4)
+- Last completed task: T2.5 GSAP scroll stories
+- **Next task: T2.6 About page** (paused for user review of T2.5)
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -64,6 +64,7 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 | 2026-11-18 | `html.js` is added only when `IntersectionObserver` exists. Reveal targets have a 3 s CSS failsafe until `html[data-hydrated]` is set (Solum pattern; flag set in T1.5) | Spec + Solum |
 | 2026-11-18 | T0.1: Keep npm single-app repo (spec), not the pnpm/turbo monorepo used by the other sites. Keep `SITE_INDEXABLE` (spec) — same noindex/robots pattern as Solum's `NEXT_PUBLIC_SITE_ENV=staging` | Spec |
 | 2026-11-18 | Alba flip photos: client confirmed permission to use them on the site (12 photos used, no "before" photos, no slider) | User (client confirmation) |
+| 2026-11-18 | GSAP license checked: gsap 3.15.1 and @gsap/react 2.1.2 ship under GreenSock's Standard "no charge" license (gsap.com/standard-license), free for commercial use; this site is not a competing visual animation tool, so it qualifies. Versions pinned exactly | T2.5 license check |
 
 ## Missing images
 
@@ -102,6 +103,14 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T2.5 GSAP scroll stories
+- Done: installed `gsap` 3.15.1 and `@gsap/react` 2.1.2 (pre-approved, pinned exactly; license in Decisions). `lib/useMediaQuery.ts` (`useSyncExternalStore` + `matchMedia`, false on the server; `SCROLL_MOTION_QUERY` = ≥ 900 px and no reduced motion).
+  - `project/ScrollStory` replaces the slider on project pages. Desktop with motion: it `import()`s `project/PinnedStory` (own chunk with GSAP + ScrollTrigger), which pins below the fixed header for one viewport of scroll and scrubs `--position` 100% → 0% (before photo wipes away, white divider), while the step caption cross-fades "Before" → "After". `useGSAP` + `gsap.matchMedia()` clean up on unmount or when the query stops matching. Frame capped at the photos' natural size and to fit the viewport height. Mobile, reduced motion, or before the chunk loads: the plain slider (no-JS: side by side). The pair wrapper no longer uses `Reveal` (a transform on an ancestor breaks pinning).
+  - `ProcessSteps` gets `animated` (for About, T2.6): `motion/ProcessAnimator` renders the list as normal and, when motion is allowed, `import()`s `motion/ProcessMotion` (renders nothing) which, once the list is 80% into view, fades each step up in turn and draws its connecting line via the `--line` custom property (scaleY on mobile, scaleX on desktop). Plays once. Home keeps the CSS reveal.
+- Checks (production build, headless Edge, temporary pair + dev page, both removed): desktop 1440×900 — pinned at top 88 px through the whole range, `--position` 100/75/50/25/0% at 0/¼/½/¾/1 viewport, caption switches mid-way, unpins after, no errors, no overflow. Reduced motion and 375 px — slider, no pin spacer, GSAP chunk never downloaded. Process — steps and lines animate in on desktop and mobile; with reduced motion nothing is hidden. GSAP code not loaded on `/`, `/services`, `/services/home-flipping`, `/projects`, `/projects/alba-home-flip` (checked by fetching every loaded script). Lint + build pass.
+- Files: `package.json`, `package-lock.json`, `src/lib/useMediaQuery.ts`, `src/components/project/{ScrollStory,PinnedStory}.*`, `src/components/motion/{ProcessAnimator,ProcessMotion}.tsx`, `src/components/sections/ProcessSteps.*`, `src/app/projects/[slug]/page.tsx`, docs.
+- Notes: no project has a before/after pair yet (Alba has no "before" photos; Carrollton has no photos), so the pinned story is not visible on any live page until a pair is added. FAQ/Contact bundle check repeats when those pages exist (T2.7/T2.8).
 
 ### 2026-11-18 — Alba project photos (content update, between T2.4 and T2.5)
 - Done: client photos wired into `/projects/alba-home-flip`. The client files had listing-style names (`21109811_*.jpg`, `genMid.21109811_*.jpg`) and were renamed to `after-1.jpg` (front exterior, cover + card) and `gallery-1` … `gallery-11` by what each shows. No "before" photos, so no slider. Descriptive alt text per photo. "The work" added as [DRAFT]. `ImageFrame` now caps each photo's frame at the widest size where `object-fit: cover` stays at or below natural size (`min(width, height ÷ frame ratio)`), via a wrapper so the padding-ratio box keeps working; gallery `sizes` tightened.

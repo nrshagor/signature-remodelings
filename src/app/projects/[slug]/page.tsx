@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/motion/Reveal";
-import { BeforeAfter } from "@/components/project/BeforeAfter";
 import { ProjectGallery } from "@/components/project/ProjectGallery";
 import {
   ProjectSections,
   type ProjectFact,
   type ProjectTextBlock,
 } from "@/components/project/ProjectSections";
+import { ScrollStory } from "@/components/project/ScrollStory";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
@@ -90,10 +90,11 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
                 {projectPage.beforeAfterHeading}
               </Heading>
             </Reveal>
+            {/* No Reveal wrapper here: a transform on an ancestor would break pinning. */}
             {pairs.map((pair) => (
-              <Reveal key={pair.before.src} className="stack-item">
-                <BeforeAfter before={pair.before} after={pair.after} labels={beforeAfter} />
-              </Reveal>
+              <div key={pair.before.src} className="stack-item">
+                <ScrollStory before={pair.before} after={pair.after} labels={beforeAfter} />
+              </div>
             ))}
           </Container>
         </Section>

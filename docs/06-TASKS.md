@@ -111,10 +111,11 @@ Needs: T2.3
 `/projects` and `/projects/[slug]`. Sections: summary, goal (if any), the work, gallery, slider (only if before/after pairs exist), rendering with caption, CTA. Handle "in progress" status.
 Result: both routes built (SSG, unknown slug 404). Empty blocks, pairs and gallery images are hidden; "In progress" badge + "Design rendering" gallery heading when progress is in-progress.
 
-### [ ] T2.5 GSAP scroll stories
+### [x] T2.5 GSAP scroll stories
 Needs: T2.4 · Read: 02-TECH-SPEC → Animation policy
 Install `gsap` + `@gsap/react` (pre-approved; note license check in PROGRESS.md). `ScrollStory` on project pages (desktop only, pinned before → after) and process animation component. Dynamic import; `gsap.matchMedia()` for reduced motion and mobile.
 Done when: GSAP is absent from the Home/Services/FAQ/Contact bundles (check build output); smooth on desktop; no pinning on mobile.
+Result: gsap 3.15.1 + @gsap/react 2.1.2 (exact). `ScrollStory` (pinned wipe ≥ 900 px, slider otherwise) and `ProcessSteps animated` (used on About in T2.6), both in on-demand chunks; GSAP not loaded on Home, Services, Projects index or pages without pairs; FAQ/Contact re-check when built.
 
 ### [ ] T2.6 About page
 Needs: T2.5

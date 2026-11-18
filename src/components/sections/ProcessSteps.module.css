@@ -23,6 +23,9 @@
   left: 1.25rem;
   width: 1px;
   background-color: var(--color-line);
+  /* --line: 0 → 1 is drawn by the GSAP process sequence; 1 (full) otherwise. */
+  transform: scaleY(var(--line, 1));
+  transform-origin: top;
 }
 
 .step:last-child {
@@ -75,6 +78,8 @@
     left: 3.5rem;
     width: auto;
     height: 1px;
+    transform: scaleX(var(--line, 1));
+    transform-origin: left;
   }
 
   .step:last-child::before {
