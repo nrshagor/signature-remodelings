@@ -60,7 +60,8 @@ Needs: T0.4 · Read: 03-CONTENT, 02-TECH-SPEC → Content rules
 - [NEEDS CLIENT] fields → optional, `undefined`. Add `status` where useful.
 Done when: types compile; no placeholder strings anywhere (`grep -ri "tbd\|lorem\|xxx\|placeholder" src` is clean).
 
-### [ ] T1.2 UI primitives
+### [x] T1.2 UI primitives
+Result: 8 primitives in `src/components/ui/`, checked on a temporary /dev-ui page (deleted).
 Needs: T1.1 · Read: 04-DESIGN → Components
 Container, Section, Eyebrow, Heading, Button (link + button variants), Card, ImageFrame (handles missing image gracefully), Wordmark.
 Done when: a temporary `/dev-ui` page shows all primitives (delete the page at the end of the task or exclude it from build).

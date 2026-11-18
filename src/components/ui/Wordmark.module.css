@@ -1,0 +1,32 @@
+.wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--color-ink);
+  line-height: 1;
+}
+
+.onDark {
+  color: var(--color-white);
+}
+
+.top {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.bottom {
+  margin-top: 0.25rem;
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.logo {
+  width: auto;
+  height: 40px;
+}

@@ -1,0 +1,25 @@
+.eyebrow {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  color: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 28px;
+  height: 1px;
+  margin-right: var(--space-3);
+  background-color: var(--color-accent);
+}
+
+.onDark {
+  color: var(--color-accent-light);
+}

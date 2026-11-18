@@ -1,0 +1,36 @@
+.section {
+  padding-top: var(--section-pad);
+  padding-bottom: var(--section-pad);
+}
+
+.flushTop {
+  padding-top: 0;
+}
+
+.paper {
+  background-color: var(--color-paper);
+}
+
+.stone {
+  background-color: var(--color-stone);
+}
+
+.ink {
+  background-color: var(--color-ink);
+  color: #d9d3cb;
+}
+
+.ink h1,
+.ink h2,
+.ink h3,
+.ink h4 {
+  color: var(--color-white);
+}
+
+.ink a:not([data-button]) {
+  color: var(--color-accent-light);
+}
+
+.ink a:not([data-button]):hover {
+  color: var(--color-white);
+}

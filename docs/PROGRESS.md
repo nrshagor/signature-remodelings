@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T1.1 Content layer
-- **Next task: T1.2 UI primitives**
+- Last completed task: T1.2 UI primitives
+- **Next task: T1.3 Header and mobile menu**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -88,6 +88,11 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T1.2 UI primitives
+- Done: `Container` (with a narrow variant), `Section` (paper/stone/ink tones; ink recolours headings and links), `Eyebrow` (accent line), `Heading` (semantic level separate from visual size), `Button` (`next/link` for internal hrefs, `<a>` for tel:/mailto:, `<button>` otherwise; primary/secondary × light/dark; 48px), `Card` (title link stretched over the card, so each card has one link; image zooms on hover), `ImageFrame` (padding-top ratio box, so no `aspect-ratio` needed; `next/image fill` with required `sizes`; a missing image shows an empty decorative stone panel, `aria-hidden`, no text; optional caption), `Wordmark` (text mark from `site.name`, swaps to `site.logo` when set).
+- Checks: temporary `/dev-ui` page in dev. Buttons 48px with the right colours on light and dark, card frame 4:5, eyebrow line, wordmark "SIGNATURE / Remodelings", ink links in accent-light, no horizontal overflow. Page deleted. Lint + build pass.
+- Files: src/components/ui/{Container,Section,Eyebrow,Heading,Button,Card,ImageFrame,Wordmark}.tsx + .module.css
 
 ### 2026-11-18 — T1.1 Content layer
 - Done: typed content in `src/content/`: `site.ts` (brand, nav, CTA, footer links, contact fields all `undefined`, `hasPrivacyPolicy: false`, URL from `NEXT_PUBLIC_SITE_URL`), `services.ts`, `projects.ts` (city only; gallery/pairs empty until photos arrive), `faq.ts` (NEEDS CLIENT questions have no answer; `visibleFaqs()` returns only answered ones), `seo.ts`. Also `types.ts` (shared types) and `pages.ts` (Home, services/projects index, About, Contact, 404 copy and the shared closing CTA) — the spec lists no file for page copy, so I added this one.

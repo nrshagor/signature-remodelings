@@ -1,0 +1,61 @@
+.frame {
+  position: relative;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  background-color: var(--color-stone);
+}
+
+.r4x5 {
+  padding-top: 125%;
+}
+
+.r3x2 {
+  padding-top: 66.6667%;
+}
+
+.r16x10 {
+  padding-top: 62.5%;
+}
+
+.r16x9 {
+  padding-top: 56.25%;
+}
+
+.r1x1 {
+  padding-top: 100%;
+}
+
+/* Missing image: a quiet panel with a thin inner line, so it reads as intentional. */
+.empty::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  border: 1px solid var(--color-line);
+}
+
+.img {
+  object-fit: cover;
+}
+
+.zoom {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+[data-zoom-parent]:hover .zoom,
+[data-zoom-parent]:focus-within .zoom {
+  transform: scale(1.04);
+}
+
+.figure {
+  margin: 0;
+}
+
+.caption {
+  margin-top: var(--space-2);
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+}
