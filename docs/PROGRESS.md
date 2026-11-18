@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T1.6 Root layout and metadata base
-- **Next task: T2.1 Home page**
+- Last completed task: T2.1 Home page (waiting for the user's browser review)
+- **Next task: T2.2 Services index + 3 service pages** (after the user's Home review)
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -66,6 +66,16 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 
 (Claude Code lists image slots from 05-IMAGES.md that are still missing.)
 
+All slots are missing as of 2026-11-18. Used by the Home page so far (until added, they render as neutral panels or ink backgrounds):
+- `public/images/stock/hero-home.jpg` (2400×1350): Home hero
+- `public/images/stock/service-interior.jpg`, `service-exterior.jpg`, `service-flipping.jpg` (1600×2000): service cards
+- `public/images/stock/process-plans.jpg` (1600×1200): Why us
+- `public/images/stock/cta-band.jpg` (2400×1000): closing CTA
+- Project card photos (company's own, pending from client): `projects/carrollton-balcony-addition/…`, `projects/alba-home-flip/…`
+- Also still missing: `public/images/CREDITS.md` (create when the first stock image is added).
+
+After adding files with these exact names, run a new build: pages are static and check for images at build time.
+
 ## For the server chat
 
 (Things the server needs — filled in T5.4 or whenever something comes up. Claude Code does not run server commands.)
@@ -89,6 +99,21 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T2.1 Home page
+- Done: Home built from content (no hard-coded copy), with six section components in `src/components/sections/`:
+  - `Hero`: full height (100vh with a 100svh override, min 560px, max 1000px), transparent header over it (`overlayRoutes: ["/"]`), dark overlay + gradient, CSS-only headline/sub/button entrance (no JS needed), 12 s Ken Burns zoom 1 → 1.06, image `priority` + `sizes="100vw"`.
+  - `ServiceCards`: eyebrow + h2 + three 4:5 cards.
+  - `WhyUs`: stone band, 2×2 promises with an accent rule, image 7/5 split on desktop.
+  - `FeaturedProjects`: two 3:2 cards with "City · Type" meta; company photos only.
+  - `ProcessSteps`: static 01–04 serif numerals with a thin line, vertical on mobile and horizontal on desktop.
+  - `CtaBand`: ink band, darkened decorative photo with `alt=""`, centred heading and accent button.
+  - All sections below the hero use `Reveal` (single or group stagger).
+- Images: `src/content/images.ts` lists the stock slots (05-IMAGES names and alt text). `src/lib/images.ts → available()` checks at build time that the file exists in `public/`; a missing photo means no `<img>` at all, just a neutral panel (or an ink background for the hero and CTA). Project card copy for Home was added to `pages.ts` (`home.featured.items`).
+- Checks: one h1 and a logical h2/h3 order; transparent header and no spacer on `/`; 10 reveal targets, no inline opacity in the built HTML, so it is fully visible without JS. Temporary generated test images (deleted afterwards) confirmed the photo path: the hero `<img>` isn't lazy and is preloaded; the card image is lazy with `sizes`; the CTA image has `alt=""`; the optimizer returns AVIF. Lint, build and the CSS check pass.
+- Not verified here: visual layout and the scroll reveal/header colour change. The preview pane was hidden (0×0 viewport, no rendering) → part of the user's review checklist.
+- Files: src/app/page.tsx, src/components/sections/{Hero,ServiceCards,WhyUs,FeaturedProjects,ProcessSteps,CtaBand}.tsx + .module.css, src/content/{images,pages,site}.ts, src/lib/images.ts
+- User action needed: review Home on desktop and mobile (checklist in chat). Add stock images when ready (see "Missing images").
 
 ### 2026-11-18 — T1.6 Root layout and metadata base
 - Done: `layout.tsx` renders HydratedFlag, SkipLink, Header, `<main id="main" tabIndex={-1}>` and Footer; pages now return only their sections. Base metadata: `metadataBase` from `site.url`, the home SEO title/description as defaults, `title.template: "%s"` (SEO titles are already complete), Open Graph site name/locale, `robots` from `SITE_INDEXABLE`, viewport `themeColor`. `src/lib/seo.ts` has `isIndexable`, `robotsMeta` and `pageMetadata(page, path)` (absolute title, description, canonical, OG, Twitter; pattern adapted from Solum). Home uses `pageMetadata(seo.home, "/")`. Programmatic focus targets (`tabindex="-1"`) show no outline.

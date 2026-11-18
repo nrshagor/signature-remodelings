@@ -1,0 +1,43 @@
+.band {
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--section-pad);
+  padding-bottom: var(--section-pad);
+  background-color: var(--color-ink);
+  color: #ece7e0;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.shade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(30, 28, 26, 0.72);
+}
+
+.content {
+  position: relative;
+  text-align: center;
+}
+
+.heading {
+  max-width: 20ch;
+  margin-right: auto;
+  margin-left: auto;
+  color: var(--color-white);
+  font-size: var(--fs-h2);
+}
+
+.text {
+  max-width: 52ch;
+  margin: var(--space-5) auto 0;
+}
+
+.action {
+  margin-top: var(--space-6);
+}

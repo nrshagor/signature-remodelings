@@ -1,0 +1,89 @@
+.head {
+  margin-bottom: var(--space-7);
+}
+
+.steps {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Mobile: a vertical line down the left, through the numerals. */
+.step {
+  position: relative;
+  padding: 0 0 var(--space-7) var(--space-8);
+}
+
+.step::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0;
+  left: 1.25rem;
+  width: 1px;
+  background-color: var(--color-line);
+}
+
+.step:last-child {
+  padding-bottom: 0;
+}
+
+.step:last-child::before {
+  display: none;
+}
+
+.number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 2.5rem;
+  background-color: var(--color-stone);
+  color: var(--color-accent-dark);
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.text {
+  margin-top: var(--space-2);
+}
+
+/* Desktop: four columns with a horizontal line under the numerals. */
+@media (min-width: 900px) {
+  .steps {
+    display: flex;
+  }
+
+  .step {
+    flex: 1 1 0;
+    padding: var(--space-8) var(--space-6) 0 0;
+  }
+
+  .step::before {
+    top: 1.25rem;
+    right: 0;
+    bottom: auto;
+    left: 3.5rem;
+    width: auto;
+    height: 1px;
+  }
+
+  .step:last-child::before {
+    display: block;
+    right: var(--space-6);
+  }
+
+  .number {
+    font-size: 2.5rem;
+    text-align: left;
+  }
+}

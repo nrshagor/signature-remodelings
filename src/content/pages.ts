@@ -51,6 +51,16 @@ export const home = {
   featured: {
     heading: "Recent work",
     linkLabel: "View project",
+    items: [
+      {
+        slug: "carrollton-balcony-addition",
+        text: "An existing home gains a new balcony, adding outdoor living space and a stronger front elevation.",
+      },
+      {
+        slug: "alba-home-flip",
+        text: "A dated house remodeled inside and out, ready for today's buyers.",
+      },
+    ],
   },
   process: {
     heading: "How we work",

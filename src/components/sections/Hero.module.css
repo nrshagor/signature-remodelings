@@ -1,0 +1,110 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 560px;
+  height: 100vh;
+  height: 100svh;
+  max-height: 1000px;
+  overflow: hidden;
+  background-color: var(--color-ink);
+  color: var(--color-white);
+}
+
+.media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  animation: hero-zoom 12s ease-out both;
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* Dark overlay plus a stronger gradient behind the text. */
+.shade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-overlay);
+  background-image: linear-gradient(
+    to top,
+    rgba(30, 28, 26, 0.7) 0%,
+    rgba(30, 28, 26, 0.2) 55%,
+    rgba(30, 28, 26, 0) 100%
+  );
+}
+
+.content {
+  position: relative;
+  padding-top: calc(var(--header-height) + var(--space-7));
+  padding-bottom: var(--space-8);
+}
+
+.headline {
+  max-width: 16ch;
+  color: var(--color-white);
+  font-size: var(--fs-display);
+  line-height: 1.08;
+  animation: hero-enter 900ms var(--ease-out) 150ms both;
+}
+
+.sub {
+  max-width: 46ch;
+  margin-top: var(--space-5);
+  color: #ece7e0;
+  font-size: 1.125rem;
+  animation: hero-enter 900ms var(--ease-out) 300ms both;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+  animation: hero-enter 900ms var(--ease-out) 450ms both;
+}
+
+.actions > * {
+  margin: 0 var(--space-4) var(--space-4) 0;
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@media (max-width: 639px) {
+  .actions > * {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .content {
+    padding-bottom: var(--space-9);
+  }
+
+  .sub {
+    font-size: 1.25rem;
+  }
+}

@@ -71,6 +71,5 @@ export const site: Site = {
     { label: "Contact", href: "/contact" },
   ],
   hasPrivacyPolicy: false,
-  // "/" is added in T2.1 once the home hero exists.
-  overlayRoutes: [],
+  overlayRoutes: ["/"],
 };

@@ -90,7 +90,8 @@ Needs: T1.3, T1.4
 
 ## Phase 2 — Pages
 
-### [ ] T2.1 Home page
+### [x] T2.1 Home page
+Result: 6 sections from content; images resolve at build time (missing → neutral panel / ink). Visual review at 360–1600 px is with the user (checklist in chat).
 Needs: T1.6, T1.5 · Read: 03-CONTENT → Home, 04-DESIGN, 05-IMAGES
 Sections 1–6 as specified. Hero image `priority`. Process section can be static here (GSAP version is on About).
 Done when: matches content exactly; responsive at 360, 768, 1280, 1600 px.
