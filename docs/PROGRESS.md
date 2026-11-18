@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T2.6 About page
-- **Next task: T2.7 FAQ page**
+- Last completed task: T2.7 FAQ page
+- **Next task: T2.8 Contact page and form**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -108,6 +108,11 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-19 — T2.7 FAQ page
+- `/faq`: hero (headline + intro [DRAFT, new], added to 03-CONTENT), `FaqList` accordion (native `<details>`, icon rotates via transform, works without JS), closing CTA. Only answered questions render; FAQ JSON-LD only for confirmed answers (none yet, so none output).
+- Checks: lint, build, CSS check pass.
+- Files: `src/app/faq/page.tsx`, `src/components/faq/FaqList.{tsx,module.css}`, `src/content/{faq,pages}.ts`, docs 03, 06, PROGRESS.
 
 ### 2026-11-19 — T2.6 About page
 - `/about`: story hero, values (`Values` section, new heading [DRAFT, new] "What we stand for" added to 03-CONTENT), process with the GSAP step sequence (detail lines), closing CTA. Founder block not rendered until the client sends it.

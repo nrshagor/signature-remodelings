@@ -44,3 +44,18 @@ export type AnsweredFaq = FaqItem & { answer: string; status: ContentStatus };
 export function visibleFaqs(): AnsweredFaq[] {
   return faqs.filter((f): f is AnsweredFaq => Boolean(f.answer && f.status));
 }
+
+/** schema.org FAQPage for confirmed answers only; undefined when none are confirmed. */
+export function faqJsonLd() {
+  const confirmed = faqs.filter((f) => f.answer && f.status === "confirmed");
+  if (confirmed.length === 0) return undefined;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: confirmed.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  };
+}

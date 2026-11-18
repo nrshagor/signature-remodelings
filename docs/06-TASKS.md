@@ -124,9 +124,10 @@ Needs: T2.5
 Copy + values + process with GSAP animation + CTA. Founder block hidden until data exists.
 Result: `/about` = PageHero (headline + story), Values (4 numbered cards, heading [DRAFT, new] "What we stand for"), `ProcessSteps animated` (GSAP sequence, checked: ends fully visible), CtaBand. No founder block (data undefined).
 
-### [ ] T2.7 FAQ page
+### [x] T2.7 FAQ page
 Needs: T1.6
 `<details>` accordion; hide [NEEDS CLIENT] questions; FAQ JSON-LD only for confirmed answers (none yet → no schema).
+Result: `/faq` shows the 4 answered (draft) questions in a native `<details>` accordion with a +/− icon; the 4 [NEEDS CLIENT] questions are hidden; `faqJsonLd()` returns nothing until an answer is confirmed (checked: no JSON-LD in the HTML).
 
 ### [ ] T2.8 Contact page and form (UI + validation)
 Needs: T1.6 · Read: 03-CONTENT → Contact, 02-TECH-SPEC → Contact form

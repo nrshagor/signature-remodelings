@@ -197,6 +197,10 @@ Remodeling first (client feedback 2026-11-18); home flipping moved to section 6.
 - Closing CTA (same as Home section 6).
 
 ## FAQ (`/faq`)
+- Headline [DRAFT, new]: Questions, answered.
+- Intro [DRAFT, new]: Straight answers about how we work. Don't see your question? Ask us directly.
+- Closing CTA (same as Home).
+
 Show only questions whose answer is [DRAFT] or [CONFIRMED]. Questions with [NEEDS CLIENT] answers stay hidden until answered. FAQ JSON-LD only for [CONFIRMED] answers.
 
 | # | Question | Answer | Status |

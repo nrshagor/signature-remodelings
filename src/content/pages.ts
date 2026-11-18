@@ -164,6 +164,11 @@ export const about = {
   processHeading: "How we work",
 };
 
+export const faqPage = {
+  headline: "Questions, answered.", // [DRAFT, new]
+  intro: "Straight answers about how we work. Don't see your question? Ask us directly.", // [DRAFT, new]
+};
+
 export const contact = {
   headline: "Let's talk about your home.",
   text: "Share a few details and we'll get back to you to schedule a consultation.",
