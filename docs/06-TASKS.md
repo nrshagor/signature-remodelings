@@ -83,7 +83,8 @@ Needs: T0.4 · Read: 02-TECH-SPEC → Animation policy
 `Reveal` client component (IntersectionObserver, once, stagger support). Content visible without JS and in browsers without IO.
 Done when: works, and with JS disabled all content is visible.
 
-### [ ] T1.6 Root layout and metadata base
+### [x] T1.6 Root layout and metadata base
+Result: layout owns `<main id="main">`; `lib/seo.ts` (`isIndexable`, `pageMetadata`); noindex by default, index only with `SITE_INDEXABLE=true` (both verified in built HTML).
 Needs: T1.3, T1.4
 `layout.tsx` with header, footer, `<main id="main">`, base metadata from `seo.ts`, `SITE_INDEXABLE` robots handling.
 

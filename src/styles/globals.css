@@ -216,6 +216,12 @@ a:hover {
   outline-offset: var(--focus-offset);
 }
 
+/* Programmatic focus targets (e.g. <main tabindex="-1"> after the skip link). */
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
 /* ---------- Utilities ---------- */
 
 .visually-hidden {

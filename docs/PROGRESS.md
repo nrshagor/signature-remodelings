@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T1.5 Reveal animation
-- **Next task: T1.6 Root layout and metadata base**
+- Last completed task: T1.6 Root layout and metadata base
+- **Next task: T2.1 Home page**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -77,6 +77,7 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 
 **Notes:**
 - `output: 'standalone'`: run `node .next/standalone/server.js` (with `PORT` / `HOSTNAME=127.0.0.1`), like the other HBS sites' PM2 config. Copy `.next/static` and `public/` into the standalone folder at deploy time.
+- `SITE_INDEXABLE` and `NEXT_PUBLIC_SITE_URL` are read at **build time** (static pages). Build staging with `SITE_INDEXABLE=false` and production with `SITE_INDEXABLE=true` (only at launch), each with its own `NEXT_PUBLIC_SITE_URL`. Changing them needs a rebuild, not just a restart.
 - The app sends the security headers itself (X-Content-Type-Options, Referrer-Policy, X-Frame-Options, CSP frame-ancestors, Permissions-Policy). Nginx must not add them again.
 
 ## Log
@@ -88,6 +89,12 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T1.6 Root layout and metadata base
+- Done: `layout.tsx` renders HydratedFlag, SkipLink, Header, `<main id="main" tabIndex={-1}>` and Footer; pages now return only their sections. Base metadata: `metadataBase` from `site.url`, the home SEO title/description as defaults, `title.template: "%s"` (SEO titles are already complete), Open Graph site name/locale, `robots` from `SITE_INDEXABLE`, viewport `themeColor`. `src/lib/seo.ts` has `isIndexable`, `robotsMeta` and `pageMetadata(page, path)` (absolute title, description, canonical, OG, Twitter; pattern adapted from Solum). Home uses `pageMetadata(seo.home, "/")`. Programmatic focus targets (`tabindex="-1"`) show no outline.
+- Checks: built `index.html` without the env var has `noindex, nofollow`, the canonical and og:url `https://signatureremodelings.com` and the right `<title>`. With `SITE_INDEXABLE=true` it has `index, follow`. Lint + build pass.
+- Files: src/app/layout.tsx, src/app/page.tsx, src/lib/seo.ts, src/styles/globals.css
+- Notes: `SITE_INDEXABLE` and `NEXT_PUBLIC_SITE_URL` are read at build time, so staging and production need their own builds (see "For the server chat").
 
 ### 2026-11-18 — T1.5 Reveal animation
 - Done: `components/motion/Reveal.tsx` (client) uses one shared IntersectionObserver (threshold 0, bottom margin −12%, so tall blocks still trigger) and sets `data-revealed` once, then stops observing. Without IO it reveals at once. `group` mode staggers direct children 80 ms apart through CSS `nth-child` delays. Optional `delay`, `as` and `role` props. `HydratedFlag.tsx` sets `html[data-hydrated]`, which turns off the 3 s CSS failsafe; it's rendered in the root layout. globals.css reveal rules updated for groups and reduced motion.
