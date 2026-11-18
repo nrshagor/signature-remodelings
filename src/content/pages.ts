@@ -222,7 +222,18 @@ export const contact = {
 };
 
 export const notFound = {
+  title: "Page not found — Signature Remodelings", // [DRAFT, new]
+  label: "404",
   heading: "This page has moved or doesn't exist.",
   primary: { label: "Back to home", href: "/" },
   secondary: { label: "See our projects", href: "/projects" },
+};
+
+/** Shown when a page fails to render (app/error.tsx). [DRAFT, new] */
+export const errorPage = {
+  label: "Error",
+  heading: "Something went wrong on our side.",
+  text: "Please try again. If it keeps happening, come back in a little while.",
+  retry: "Try again",
+  home: { label: "Back to home", href: "/" },
 };

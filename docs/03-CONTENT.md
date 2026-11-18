@@ -240,8 +240,15 @@ Show only questions whose answer is [DRAFT] or [CONFIRMED]. Questions with [NEED
 Simple policy covering: what the contact form collects, why, who receives it, how long it's kept, no selling of data, contact for questions, effective date. Needs the company's legal name and contact email. This is not legal advice — the client should review it. Hidden from nav/footer until the page exists.
 
 ## 404 page [DRAFT]
+- Label: 404 · Browser title [DRAFT, new]: Page not found — Signature Remodelings
 - Heading: This page has moved or doesn't exist.
 - Buttons: Back to home · See our projects
+
+## Error page [DRAFT, new]
+- Label: Error
+- Heading: Something went wrong on our side.
+- Text: Please try again. If it keeps happening, come back in a little while.
+- Buttons: Try again · Back to home
 
 ---
 

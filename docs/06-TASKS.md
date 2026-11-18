@@ -139,9 +139,10 @@ Result: `/contact` with `ContactForm` (server action `submitContact`, `lib/valid
 BLOCKED: user decision — SMTP (`nodemailer`, needs approval) or email API via `fetch`; plus recipient email.
 Implement the chosen adapter, env vars, plain-text + simple HTML email with escaped user input.
 
-### [ ] T2.10 404 and error pages
+### [x] T2.10 404 and error pages
 Needs: T1.6
 `not-found.tsx` with copy from 03-CONTENT; `error.tsx` with retry.
+Result: `app/not-found.tsx` and `app/error.tsx` share a `StatusPage` section. Unknown URLs and unknown service/project slugs return 404 with noindex and their own title (checked). The error page (Try again + Back to home, copy [DRAFT, new]) is type-checked and built but was not triggered in a browser (no route throws).
 
 ### [ ] T2.11 Privacy policy page
 BLOCKED: company legal name + contact email.

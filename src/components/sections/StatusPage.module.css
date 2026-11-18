@@ -1,0 +1,32 @@
+.page {
+  display: flex;
+  align-items: center;
+  min-height: 70vh;
+  padding: var(--space-9) 0;
+}
+
+.inner {
+  width: 100%;
+}
+
+.heading {
+  max-width: 16ch;
+  margin-top: var(--space-4);
+  font-size: clamp(2.25rem, 4vw + 1rem, 4.5rem);
+}
+
+.text {
+  max-width: 52ch;
+  margin-top: var(--space-5);
+  font-size: 1.125rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-7);
+}
+
+.actions > * {
+  margin: 0 var(--space-4) var(--space-4) 0;
+}

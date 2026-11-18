@@ -5,7 +5,7 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T2.8 Contact page and form
+- Last completed task: T2.10 404 and error pages
 - **Next task: T2.10 404 and error pages**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
@@ -97,6 +97,7 @@ After adding files with these exact names, run a new build: pages are static and
 **Notes:**
 - `output: 'standalone'`: run `node .next/standalone/server.js` (with `PORT` / `HOSTNAME=127.0.0.1`), like the other HBS sites' PM2 config. Copy `.next/static` and `public/` into the standalone folder at deploy time.
 - `SITE_INDEXABLE` and `NEXT_PUBLIC_SITE_URL` are read at **build time** (static pages). Build staging with `SITE_INDEXABLE=false` and production with `SITE_INDEXABLE=true` (only at launch), each with its own `NEXT_PUBLIC_SITE_URL`. Changing them needs a rebuild, not just a restart.
+- Contact form rate limit reads the visitor IP from `X-Forwarded-For`: Nginx must set it (`proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;`), otherwise every visitor shares one limit.
 - The app sends the security headers itself (X-Content-Type-Options, Referrer-Policy, X-Frame-Options, CSP frame-ancestors, Permissions-Policy). Nginx must not add them again.
 
 ## Log
@@ -108,6 +109,12 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-19 — T2.10 404 and error pages
+- `src/app/not-found.tsx`: "404" label, heading and two buttons from 03-CONTENT, browser title [DRAFT, new], noindex. Checked: `/missing-page`, `/services/nope`, `/projects/nope` → 404.
+- `src/app/error.tsx`: client error boundary with "Try again" (reset) and "Back to home"; copy [DRAFT, new] added to 03-CONTENT. Builds and type-checks; not triggered in a browser because no page throws.
+- Shared layout: `src/components/sections/StatusPage.{tsx,module.css}`.
+- Checks: lint, build, CSS check pass.
 
 ### 2026-11-19 — T2.8 Contact page and form (UI + validation)
 - `/contact`: hero, form (name, phone, email, city/ZIP, project type, timeline, message; budget hidden until ranges exist), consent line. Side panel renders only confirmed contact details (none yet, so hidden).
