@@ -50,7 +50,7 @@ No "before" photos exist, so the page has no before/after slider. The files are 
 | File name | Size (px) | What | Where |
 | --- | --- | --- | --- |
 | `after-1.jpg` | 1024×682 | Front exterior with covered porch | Cover: page hero + project card |
-| `gallery-1.jpg` | 665×441 | Kitchen, peninsula view | Gallery |
+| `gallery-1.jpg` | 665×441 | Kitchen, peninsula view | Gallery + "For investors" band (Home, /services) |
 | `gallery-2.jpg` | 1024×682 | Open-plan kitchen / living | Gallery |
 | `gallery-3.jpg` | 1024×682 | Living room | Gallery |
 | `gallery-4.jpg` | 1024×682 | Room with staircase | Gallery |

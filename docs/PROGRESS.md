@@ -63,7 +63,7 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 | 2026-11-18 | Contrast fixes to 04-DESIGN tokens: `--color-muted` #7A746D → **#6F6962** (was 4.36:1 on paper, 3.86 on stone; now 5.12 / 4.53). Added `--color-accent-light` **#B08C5C** for accent on ink (5.46:1; #9C7A4D was 4.29). `--color-accent` #9C7A4D (3.73 on paper) only for large text, borders, focus ring, details; links use `--color-accent-dark` (5.44) | WCAG AA check |
 | 2026-11-18 | `html.js` is added only when `IntersectionObserver` exists. Reveal targets have a 3 s CSS failsafe until `html[data-hydrated]` is set (Solum pattern; flag set in T1.5) | Spec + Solum |
 | 2026-11-18 | T0.1: Keep npm single-app repo (spec), not the pnpm/turbo monorepo used by the other sites. Keep `SITE_INDEXABLE` (spec) — same noindex/robots pattern as Solum's `NEXT_PUBLIC_SITE_ENV=staging` | Spec |
-| 2026-11-18 | Alba flip photos: client confirmed permission to use them on the site (12 photos used, no "before" photos, no slider) | User (client confirmation) |
+| 2026-11-18 | Alba flip photos: client confirmed permission to use them on the site. **Settled** — not an open item (12 photos used, no "before" photos, no slider; unused laundry photo deleted) | User (client confirmation) |
 | 2026-11-18 | Client feedback: look as modern as possible; remodeling first, home flipping second. Heading font Cormorant Garamond → **Plus Jakarta Sans** 600/700 (rounder geometric forms contrast with Inter; Manrope too close to Inter). Radius 12px images/cards/tiles, 8px buttons/inputs. Frosted header after scroll (backdrop-filter inside `@supports`, solid fallback). Nav: Remodeling · Home Flipping · Projects · About · FAQ. Home: Interior + Exterior bento, flipping as a "For investors" band (Alba cover photo). Palette unchanged | Client (via user) |
 | 2026-11-18 | GSAP license checked: gsap 3.15.1 and @gsap/react 2.1.2 ship under GreenSock's Standard "no charge" license (gsap.com/standard-license), free for commercial use; this site is not a competing visual animation tool, so it qualifies. Versions pinned exactly | T2.5 license check |
 
@@ -104,6 +104,12 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — Investors band photo, cleanup
+- Done: the "For investors" band (Home + compact block on /services) uses the Alba kitchen photo (`gallery-1.jpg`) instead of the cover, so the front photo is not repeated on Home. A photo capped at its natural width now stays on the band's left edge (aligned with the container). Unused laundry photo `21109811_15_0.jpg` deleted (it was never committed). Alba photo permission marked settled in Decisions.
+- Stock photos: none in `public/images/stock/` yet and no `public/images/CREDITS.md`, so the stock-slot crop/contrast check is still to do; hero, bento tiles, Why-us and CTA keep their no-photo look.
+- Checks: lint, build, CSS check pass. Headless Edge: band photo loads, left edge 100 px = container edge at 1440. After screenshots retaken (`screenshots/after/`: home-1440, home-375, services-1440).
+- Files: `src/lib/investorBand.ts`, `src/components/sections/InvestorBand.module.css`, docs 03, 04, 05, PROGRESS.
 
 ### 2026-11-18 — Modern refresh + remodeling first (client feedback, between T2.5 and T2.6)
 - Design (docs/04-DESIGN.md updated first): headings in Plus Jakarta Sans 600/700 (h1 700), tighter tracking (h1 -0.035em, h2 -0.025em, h3 -0.015em), bigger display size (`--fs-display` up to 6rem, line-height 1.02); `--font-serif*` renamed `--font-heading*`. Section padding 80/144px. `--radius-lg` 12px on every image frame (ImageFrame, slider, pinned story), `--radius` 8px on buttons. Buttons 600 weight, `large` size (52px) in the hero, header CTA now a filled button. Header after scroll: frosted glass (`rgba(250,248,245,.78)` + `saturate(1.6) blur(18px)`, `-webkit-` prefixed, inside `@supports`; solid paper otherwise). Hero: bigger left-aligned headline, more space.

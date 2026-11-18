@@ -65,7 +65,7 @@ Line height: display 1.02, headings 1.1–1.2, body 1.65. Max text width ~65ch.
 - **Eyebrow:** small uppercase label with a short accent line before it.
 - **Hero (Home):** full-bleed, full-height image with dark overlay; large left-aligned headline (`--fs-display`), sub and two buttons at the lower left.
 - **Service bento (Home, /services):** remodeling only. Desktop 12-column grid: Interior as a large tall tile (7 columns, 2 rows), Exterior as a wide tile (5 columns), and a light tile listing what we remodel (5 columns). Image tiles: photo fill, bottom gradient, white title + one line + "Explore →", the whole tile is one link, image scales 1.04 on hover. A missing photo shows an ink tile with the same text. Tablet: Interior full width, the other two side by side. Mobile: stacked.
-- **For investors band (Home) / flipping block (/services):** home flipping as the secondary offer, lower on the page: the Alba cover photo (company's own) with its city label, eyebrow "For investors", the flipping headline and line, and a link to the flipping page. /services uses a compact version after the bento.
+- **For investors band (Home) / flipping block (/services):** home flipping as the secondary offer, lower on the page: an Alba kitchen photo (company's own; not the cover, to avoid repeating it on Home) with its city label, eyebrow "For investors", the flipping headline and line, and a link to the flipping page. /services uses a compact version after the bento.
 - **Project cards:** wide image (3:2), rounded, city + type as meta, title. Carrollton first, Alba second.
 - **Before/after:** full-width, 16:10, thin white divider line with a round handle, "Before"/"After" chips.
 - **Process steps:** large numerals (01–04) in the heading font, thin connecting line.

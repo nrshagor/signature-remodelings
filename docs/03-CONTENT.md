@@ -99,7 +99,7 @@ Remodeling first (client feedback 2026-11-18); home flipping moved to section 6.
 - Eyebrow [DRAFT, new]: For investors
 - Heading: From dated to market-ready. (Home Flipping page headline)
 - Text: We take dated houses and turn them into polished, market-ready homes for investors. (Home Flipping card line)
-- Image: Alba cover photo (`projects/alba-home-flip/after-1.jpg`), label "Alba, TX · Home flipping"
+- Image: Alba kitchen photo (`projects/alba-home-flip/gallery-1.jpg`; not the cover, which is already on the Recent work card), label "Alba, TX · Home flipping"
 - Link [DRAFT, new]: Explore home flipping → `/services/home-flipping`
 
 ### 7. Closing CTA [DRAFT]

@@ -7,6 +7,11 @@
   margin: 0 0 var(--space-6);
 }
 
+/* When a small photo is capped at its natural width, keep it on the left edge. */
+.media > div {
+  margin-left: 0;
+}
+
 .label {
   margin-top: var(--space-3);
   color: var(--color-muted);
