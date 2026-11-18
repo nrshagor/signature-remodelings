@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T1.3 Header and mobile menu (user-tested; test pages removed)
-- **Next task: T1.4 Footer**
+- Last completed task: T1.4 Footer
+- **Next task: T1.5 Reveal animation**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -88,6 +88,12 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T1.4 Footer
+- Done: `Footer` (server component, ink background). Wordmark + one-line description; columns Services (3 links from `services.ts`), Company (`site.companyLinks`), and Contact (phone/email/address/hours/service-area line, only those that exist; the column is hidden if none do). Bottom row: `© {build year} {legalName ?? name}`, plus Privacy Policy only when `site.hasPrivacyPolicy`. Wired into `layout.tsx`.
+- Checks: footer text on ink is 9.6:1 and links 13.3:1; built HTML shows no empty labels; lint + build pass.
+- Files: src/components/layout/Footer.tsx, Footer.module.css, src/app/layout.tsx
+- Notes: the © year is set at build time (static site), so it updates on the next deploy.
 
 ### 2026-11-18 — T1.3 follow-up
 - Done: user ran the header checklist and reported no specific problems (the results line in the message was left as the template text). Removed `src/app/dev-header/**` and the dev-only overlay route in `site.ts`. Added `pages.ts` and `types.ts` to the folder structure in 02-TECH-SPEC.

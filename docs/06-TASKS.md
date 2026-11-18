@@ -72,7 +72,8 @@ Needs: T1.2
 Transparent-over-hero variant + solid variant; sticky; mobile full-screen menu with focus trap, Esc, scroll lock; skip link; active link state.
 Done when: keyboard-only navigation works; no layout shift on scroll.
 
-### [ ] T1.4 Footer
+### [x] T1.4 Footer
+Result: ink footer; Contact column shows only existing fields (now just the service-area line); privacy link hidden while `hasPrivacyPolicy` is false.
 Needs: T1.2
 Shows only fields that exist in `site.ts`. Privacy link only when the page exists.
 
