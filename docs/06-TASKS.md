@@ -66,7 +66,8 @@ Needs: T1.1 · Read: 04-DESIGN → Components
 Container, Section, Eyebrow, Heading, Button (link + button variants), Card, ImageFrame (handles missing image gracefully), Wordmark.
 Done when: a temporary `/dev-ui` page shows all primitives (delete the page at the end of the task or exclude it from build).
 
-### [ ] T1.3 Header and mobile menu
+### [x] T1.3 Header and mobile menu
+Result: fixed header (solid + transparent overlay), mobile dialog menu, skip link. Temporary dev-only test pages `/dev-header` and `/dev-header/overlay` (404 in production) stay until the user has tested, then they are removed.
 Needs: T1.2
 Transparent-over-hero variant + solid variant; sticky; mobile full-screen menu with focus trap, Esc, scroll lock; skip link; active link state.
 Done when: keyboard-only navigation works; no layout shift on scroll.

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Header } from "@/components/layout/Header";
+import { SkipLink } from "@/components/layout/SkipLink";
 import "@/styles/globals.css";
 
 // Headings: serif, only the weight in use. Body/UI: Inter variable font (400–600).
@@ -35,7 +37,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: jsFlagScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <SkipLink />
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

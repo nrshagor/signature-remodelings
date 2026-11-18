@@ -33,6 +33,8 @@ export interface Site {
   companyLinks: NavLink[];
   /** True once /privacy-policy exists (T2.11); until then it is hidden everywhere. */
   hasPrivacyPolicy: boolean;
+  /** Routes whose page starts with a full-bleed hero: the header is transparent there. */
+  overlayRoutes: string[];
 }
 
 const fallbackUrl = "https://signatureremodelings.com";
@@ -69,4 +71,7 @@ export const site: Site = {
     { label: "Contact", href: "/contact" },
   ],
   hasPrivacyPolicy: false,
+  // "/" is added in T2.1 once the home hero exists.
+  // TEMPORARY (T1.3 header test, remove after testing): dev-only overlay test page.
+  overlayRoutes: process.env.NODE_ENV === "production" ? [] : ["/dev-header/overlay"],
 };

@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T1.2 UI primitives
-- **Next task: T1.3 Header and mobile menu**
+- Last completed task: T1.3 Header and mobile menu (waiting for the user's browser test)
+- **Next task: T1.4 Footer** (after the user's header test; then remove the `/dev-header` test pages)
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -88,6 +88,13 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T1.3 Header and mobile menu
+- Done: `SkipLink` (first focusable element; visible on focus). `Header` (client): always `position: fixed` with a constant height, plus a spacer on solid routes, so nothing shifts on scroll. Routes in `site.overlayRoutes` start transparent (white text over a soft dark shade) and turn solid after 8px of scroll (rAF-throttled passive listener); the solid header gains a bottom border once scrolled. Desktop nav ≥ 900px with an underline on hover and `aria-current="page"` (also for sub-pages). `MobileMenu` (< 900px): full-screen `role="dialog"` with `aria-modal`, its own close button, focus trap, Esc to close, focus back to the menu button, body-pinning scroll lock (works on iOS 15) with scroll restore. It closes on navigation (state is tied to the path it was opened on), on a same-page link click, and when the viewport reaches 900px. Header + SkipLink are wired into `layout.tsx` now so they can be tested; the rest of the layout is T1.6.
+- Checks (dev, 375px, script-driven): menu opens with focus on "Close menu"; Tab from the last item wraps to the first, Shift+Tab from the first wraps to the last; Esc closes, focus returns to the menu button, the scroll position (600px) is restored and the body styles are cleared; tapping "Projects" navigates, closes the menu and lands at the top with Projects marked current; no horizontal overflow; the skip link is the first focusable element. Scroll-driven colour changes could not be checked because the preview pane was hidden (no animation frames) → part of the user's test. Lint + build pass; the dev test pages build as 404 in production.
+- Files: src/components/layout/{SkipLink,Header,MobileMenu}.tsx + .module.css, src/components/layout/navUtils.ts, src/content/site.ts (`overlayRoutes`), src/app/layout.tsx, TEMPORARY src/app/dev-header/**
+- Notes: without JavaScript the mobile menu button does nothing. All pages stay reachable through the footer links (T1.4).
+- User action needed: run the header test checklist (in chat).
 
 ### 2026-11-18 — T1.2 UI primitives
 - Done: `Container` (with a narrow variant), `Section` (paper/stone/ink tones; ink recolours headings and links), `Eyebrow` (accent line), `Heading` (semantic level separate from visual size), `Button` (`next/link` for internal hrefs, `<a>` for tel:/mailto:, `<button>` otherwise; primary/secondary × light/dark; 48px), `Card` (title link stretched over the card, so each card has one link; image zooms on hover), `ImageFrame` (padding-top ratio box, so no `aspect-ratio` needed; `next/image fill` with required `sizes`; a missing image shows an empty decorative stone panel, `aria-hidden`, no text; optional caption), `Wordmark` (text mark from `site.name`, swaps to `site.logo` when set).

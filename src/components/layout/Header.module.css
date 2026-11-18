@@ -1,0 +1,153 @@
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 50;
+  height: var(--header-height);
+  border-bottom: 1px solid transparent;
+  color: var(--color-ink);
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    color 300ms ease;
+}
+
+.solid {
+  background-color: var(--color-paper);
+}
+
+.solid.scrolled {
+  border-bottom-color: var(--color-line);
+}
+
+/* Over the hero: white text on a soft dark shade for legibility. */
+.transparent {
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, rgba(30, 28, 26, 0.45), rgba(30, 28, 26, 0));
+  color: var(--color-white);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.brand {
+  display: inline-flex;
+  padding: var(--space-2) 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav {
+  display: none;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  margin: 0 var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item + .item {
+  margin-left: var(--space-6);
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  padding: var(--space-2) 0;
+  color: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: inherit;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  left: 0;
+  height: 1px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-fast) ease;
+}
+
+.transparent .link::after {
+  background-color: var(--color-white);
+}
+
+.link:hover::after,
+.link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-right: -12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+/* Three lines drawn with one span and its pseudo-elements. */
+.bars,
+.bars::before,
+.bars::after {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background-color: currentColor;
+}
+
+.bars {
+  position: relative;
+}
+
+.bars::before,
+.bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.bars::before {
+  top: -7px;
+}
+
+.bars::after {
+  top: 7px;
+}
+
+.spacer {
+  height: var(--header-height);
+}
+
+@media (min-width: 900px) {
+  .nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .toggle {
+    display: none;
+  }
+}
