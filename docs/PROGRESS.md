@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T2.7 FAQ page
-- **Next task: T2.8 Contact page and form**
+- Last completed task: T2.8 Contact page and form
+- **Next task: T2.10 404 and error pages**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -108,6 +108,15 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-19 — T2.8 Contact page and form (UI + validation)
+- `/contact`: hero, form (name, phone, email, city/ZIP, project type, timeline, message; budget hidden until ranges exist), consent line. Side panel renders only confirmed contact details (none yet, so hidden).
+- Server action `src/app/contact/actions.ts`: reads and validates with `src/lib/validate.ts` (same rules in the browser), honeypot, ≥ 3 s fill time, in-memory rate limit (5 per 10 min per IP from `x-forwarded-for`), then `sendLead()` (`src/lib/leads.ts`), which returns `not-configured` and logs one line without any visitor data.
+- **No silent failure:** until T2.9, every submit (and every spam hit) shows "Online requests are opening soon. Your message was not sent yet." [DRAFT]. Nothing typed is lost (with or without JavaScript). Errors use `aria-invalid` + `aria-describedby`; the result gets focus.
+- Tests (headless Edge, production build): valid → opening-soon notice; < 3 s → same; honeypot → same; phone "123" → field error + focus on phone; JavaScript off: bad phone → server field error with values kept, valid → opening-soon notice.
+- Checks: lint, build, CSS check pass.
+- Files: `src/app/contact/{page.tsx,page.module.css,actions.ts}`, `src/components/forms/ContactForm.{tsx,module.css}`, `src/lib/{validate,leads}.ts`, `src/content/pages.ts`, docs 03, 06, PROGRESS.
+- For the server chat (later): Nginx must pass `X-Forwarded-For` to the app so the rate limit sees real visitor IPs.
 
 ### 2026-11-19 — T2.7 FAQ page
 - `/faq`: hero (headline + intro [DRAFT, new], added to 03-CONTENT), `FaqList` accordion (native `<details>`, icon rotates via transform, works without JS), closing CTA. Only answered questions render; FAQ JSON-LD only for confirmed answers (none yet, so none output).

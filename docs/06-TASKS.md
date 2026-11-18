@@ -129,10 +129,11 @@ Needs: T1.6
 `<details>` accordion; hide [NEEDS CLIENT] questions; FAQ JSON-LD only for confirmed answers (none yet → no schema).
 Result: `/faq` shows the 4 answered (draft) questions in a native `<details>` accordion with a +/− icon; the 4 [NEEDS CLIENT] questions are hidden; `faqJsonLd()` returns nothing until an answer is confirmed (checked: no JSON-LD in the HTML).
 
-### [ ] T2.8 Contact page and form (UI + validation)
+### [x] T2.8 Contact page and form (UI + validation)
 Needs: T1.6 · Read: 03-CONTENT → Contact, 02-TECH-SPEC → Contact form
 Form, client + server validation, honeypot, time check, rate limit, success/error states. `sendLead()` adapter interface with a not-configured branch that returns a clear server error and logs; the UI shows the error message from 03-CONTENT.
 Done when: valid/invalid/spam submissions behave correctly in dev.
+Result: `/contact` with `ContactForm` (server action `submitContact`, `lib/validate.ts` shared client/server, honeypot `company`, 3 s time check, 5 per 10 min per IP rate limit, `sendLead()` returns not-configured). Until T2.9 every valid submit shows "Online requests are opening soon. Your message was not sent yet." [DRAFT]. Tested in headless Edge: valid, too fast, honeypot, bad phone, and with JavaScript off (bad phone + valid); values kept every time.
 
 ### [ ] T2.9 Contact delivery
 BLOCKED: user decision — SMTP (`nodemailer`, needs approval) or email API via `fetch`; plus recipient email.

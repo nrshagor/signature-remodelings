@@ -230,6 +230,10 @@ Show only questions whose answer is [DRAFT] or [CONFIRMED]. Questions with [NEED
 - Button: Request a Consultation
 - Success: "Thank you — we've received your request and will contact you soon."
 - Error: "Something went wrong and your message wasn't sent. Please try again in a moment." (+ phone/email if available)
+- Not available yet [DRAFT] (shown on every submit until contact delivery exists, T2.9; no contact details): "Online requests are opening soon. Your message was not sent yet."
+- Fields to fix [DRAFT, new] (banner above the form): "Please check the highlighted fields."
+- Field errors [DRAFT, new]: name "Please enter your full name." · phone "Please enter a phone number with at least 10 digits." · email "Please enter a valid email address." · city/ZIP "Please enter the city or ZIP code of the property." · project type "Please choose a project type." · budget "Please choose a budget range from the list." · timeline "Please choose a timeline from the list." · message "Please write between 20 and 2,000 characters."
+- Button while sending: "Sending…"
 - Side panel: phone, email, hours, service area — only fields that exist.
 
 ## Privacy Policy (`/privacy-policy`) [NEEDS CLIENT]

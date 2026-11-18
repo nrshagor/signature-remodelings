@@ -176,6 +176,43 @@ export const contact = {
   consent: "By sending this form you agree to be contacted about your project.",
   success: "Thank you — we've received your request and will contact you soon.",
   error: "Something went wrong and your message wasn't sent. Please try again in a moment.",
+  /** Shown until contact delivery exists (T2.9). [DRAFT] */
+  unavailable: "Online requests are opening soon. Your message was not sent yet.",
+  /** Above the form when fields need fixing. [DRAFT, new] */
+  invalid: "Please check the highlighted fields.",
+  /** Field labels (03-CONTENT → Contact). */
+  labels: {
+    name: "Full name",
+    phone: "Phone",
+    email: "Email",
+    location: "Property city or ZIP",
+    projectType: "Project type",
+    budget: "Budget range",
+    timeline: "Timeline",
+    message: "Message",
+    optional: "optional",
+    choose: "Choose one",
+  },
+  /** Field error messages. [DRAFT, new] */
+  errors: {
+    name: "Please enter your full name.",
+    phone: "Please enter a phone number with at least 10 digits.",
+    email: "Please enter a valid email address.",
+    location: "Please enter the city or ZIP code of the property.",
+    projectType: "Please choose a project type.",
+    budget: "Please choose a budget range from the list.",
+    timeline: "Please choose a timeline from the list.",
+    message: "Please write between 20 and 2,000 characters.",
+  },
+  sendingLabel: "Sending…",
+  /** Side panel labels; the panel shows only details the client has confirmed. */
+  panel: {
+    label: "Contact details",
+    phone: "Phone",
+    email: "Email",
+    hours: "Hours",
+    serviceArea: "Service area",
+  },
   projectTypes: ["Interior remodeling", "Exterior & additions", "Home flipping", "Other"],
   /** Hidden until the client provides ranges. */
   budgetRanges: undefined as string[] | undefined,
