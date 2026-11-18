@@ -164,9 +164,9 @@ Footer:
 - Type: Home flipping · City: Alba, TX
 - Summary [DRAFT]: An older house remodeled into a bright, move-in-ready home.
 - Starting point [NEEDS CLIENT]: condition before (from the company, not Zillow).
-- The work [NEEDS CLIENT]: rooms and items changed (from renovated photos).
+- The work [DRAFT] (client to confirm): Inside, the house was refreshed from end to end: new wood-look flooring, a white-cabinet kitchen with stone-look countertops, tile backsplash and stainless appliances, updated bathrooms with new vanities and a tiled shower, new ceiling fans and fresh paint throughout. Outside, the front porch and exterior were cleaned up for a stronger first impression.
 - The result [DRAFT]: A home ready for today's buyers. Sale outcome only with written client permission.
-- Gallery: Before/After pairs from the same angle (best for the slider).
+- Gallery [CONFIRMED photos, client permission]: cover `after-1.jpg` (front exterior) + 11 "after" photos (`gallery-1` … `gallery-11`). No "before" photos exist, so no before/after slider.
 - **Do not** use Zillow photos or show the street address.
 
 ---

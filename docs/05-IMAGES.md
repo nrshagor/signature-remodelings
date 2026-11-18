@@ -43,14 +43,26 @@ Look for: Texas/US suburban homes (brick, stone, wide lots), not European apartm
 | `after-1.jpg` … | Finished balcony | When work is done; same angle as `before-1.jpg` for the slider |
 | `rendering-video.mp4` + `rendering-video-poster.jpg` | Optional rendering video | ≤ 10 MB, H.264, muted autoplay loop; caption "Design rendering" |
 
-### `projects/alba-home-flip/`
+### `projects/alba-home-flip/` (received from client, permission confirmed)
 
-| File name | What |
-| --- | --- |
-| `before-1.jpg`, `after-1.jpg` | Pair 1, same angle (exterior front) |
-| `before-2.jpg`, `after-2.jpg` | Pair 2 (kitchen) |
-| `before-3.jpg`, `after-3.jpg` | Pair 3 (living / bath) |
-| `gallery-1.jpg` … `gallery-8.jpg` | Extra after photos |
+No "before" photos exist, so the page has no before/after slider. The files are small (1024×682 and 665×441): the frame is capped at each photo's natural size, so they are never upscaled. Higher-resolution originals requested (PROGRESS.md → Open questions).
+
+| File name | Size (px) | What | Where |
+| --- | --- | --- | --- |
+| `after-1.jpg` | 1024×682 | Front exterior with covered porch | Cover: page hero + project card |
+| `gallery-1.jpg` | 665×441 | Kitchen, peninsula view | Gallery |
+| `gallery-2.jpg` | 1024×682 | Open-plan kitchen / living | Gallery |
+| `gallery-3.jpg` | 1024×682 | Living room | Gallery |
+| `gallery-4.jpg` | 1024×682 | Room with staircase | Gallery |
+| `gallery-5.jpg` | 665×441 | Kitchen, wide view | Gallery |
+| `gallery-6.jpg` | 1024×682 | Sink and backsplash detail | Gallery |
+| `gallery-7.jpg` | 665×441 | Bathroom vanity | Gallery |
+| `gallery-8.jpg` | 1024×682 | Tiled shower | Gallery |
+| `gallery-9.jpg` | 665×441 | Vanity faucet detail | Gallery |
+| `gallery-10.jpg` | 665×441 | Rear / side exterior | Gallery |
+| `gallery-11.jpg` | 665×441 | Yard | Gallery |
+
+Alt text for each photo is in `src/content/projects.ts`.
 
 Before/after pairs must have the same aspect ratio; crop to 16:10 (e.g. 2000×1250).
 

@@ -18,7 +18,7 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
           <ImageFrame
             image={image}
             ratio="3/2"
-            sizes="(min-width: 640px) 50vw, 100vw"
+            sizes="(min-width: 1240px) 610px, (min-width: 640px) 50vw, 100vw"
             showCaption
           />
         </li>

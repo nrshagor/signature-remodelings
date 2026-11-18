@@ -31,6 +31,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 - [ ] Alba flip: what was changed? Can a sale result be shown?
 - [ ] Attachments: balcony drawing, renovated photos, any "before" photos they own
 - [ ] Approval of tagline and all [DRAFT] copy before launch
+- [ ] Alba photos: higher-resolution originals (current files are 1024 px and 665 px wide)
+- [ ] Carrollton: a company-owned "before" photo of the house (no Google Maps / Street View / Zillow images)
 - [ ] Privacy policy: company legal name and contact email
 
 ## Decisions
@@ -61,6 +63,7 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 | 2026-11-18 | Contrast fixes to 04-DESIGN tokens: `--color-muted` #7A746D → **#6F6962** (was 4.36:1 on paper, 3.86 on stone; now 5.12 / 4.53). Added `--color-accent-light` **#B08C5C** for accent on ink (5.46:1; #9C7A4D was 4.29). `--color-accent` #9C7A4D (3.73 on paper) only for large text, borders, focus ring, details; links use `--color-accent-dark` (5.44) | WCAG AA check |
 | 2026-11-18 | `html.js` is added only when `IntersectionObserver` exists. Reveal targets have a 3 s CSS failsafe until `html[data-hydrated]` is set (Solum pattern; flag set in T1.5) | Spec + Solum |
 | 2026-11-18 | T0.1: Keep npm single-app repo (spec), not the pnpm/turbo monorepo used by the other sites. Keep `SITE_INDEXABLE` (spec) — same noindex/robots pattern as Solum's `NEXT_PUBLIC_SITE_ENV=staging` | Spec |
+| 2026-11-18 | Alba flip photos: client confirmed permission to use them on the site (12 photos used, no "before" photos, no slider) | User (client confirmation) |
 
 ## Missing images
 
@@ -99,6 +102,12 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — Alba project photos (content update, between T2.4 and T2.5)
+- Done: client photos wired into `/projects/alba-home-flip`. The client files had listing-style names (`21109811_*.jpg`, `genMid.21109811_*.jpg`) and were renamed to `after-1.jpg` (front exterior, cover + card) and `gallery-1` … `gallery-11` by what each shows. No "before" photos, so no slider. Descriptive alt text per photo. "The work" added as [DRAFT]. `ImageFrame` now caps each photo's frame at the widest size where `object-fit: cover` stays at or below natural size (`min(width, height ÷ frame ratio)`), via a wrapper so the padding-ratio box keeps working; gallery `sizes` tightened.
+- Checks: headless Edge at 1440, 1024, 800 and 375 px: 12 images, none scaled above 1.0 (the 800 px hero hits the cap at exactly 1.0), no horizontal overflow, no slider. Lint + build pass.
+- Not used: `21109811_15_0.jpg` (laundry room) was in the folder but not in the list; left uncommitted pending the user's call.
+- Files: `src/content/projects.ts`, `src/components/ui/ImageFrame.*`, `src/components/project/ProjectGallery.tsx`, `public/images/projects/alba-home-flip/*`, docs 03, 05, PROGRESS.
 
 ### 2026-11-18 — T2.4 Projects index + project pages
 - Done: `/projects` (PageHero + FeaturedProjects cards, card titles as h2 when no section heading) and `/projects/[slug]` (`generateStaticParams`, `dynamicParams = false`). Project page: PageHero (eyebrow "City · Type", "In progress" badge when set, card image if the file exists), facts list (city, type, status only when known — never an address), story blocks (goal, starting point, the work, result; each only if it has content), before/after section only for pairs where both photos exist (one slider each), gallery of existing images with captions (heading "Design rendering" while in progress), closing CTA. New components `project/ProjectSections` and `project/ProjectGallery`; global utilities `.section-heading` and `.stack-item`.

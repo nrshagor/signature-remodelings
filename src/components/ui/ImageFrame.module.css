@@ -1,3 +1,10 @@
+/* Natural-size cap (max-width set inline per photo). */
+.cap {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .frame {
   position: relative;
   width: 100%;
