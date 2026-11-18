@@ -4,10 +4,10 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 
 ## Current status
 
-- Phase: 0 — Setup
+- Phase: 2 — Pages built (T2.9 contact delivery and T2.11 privacy policy BLOCKED)
 - Last completed task: T2.10 404 and error pages
-- **Next task: T2.10 404 and error pages**
-- Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
+- **Next task: T3.1 Per-page metadata and OG** (paused: user tests the motion refresh and the new pages)
+- Site state: **ready for a preview deploy** (see the log entry "Ready for preview deploy"). Lint, build and CSS check pass. Git on `main`, local only (never pushed by Claude Code).
 
 ## Open questions
 
@@ -97,7 +97,7 @@ After adding files with these exact names, run a new build: pages are static and
 **Notes:**
 - `output: 'standalone'`: run `node .next/standalone/server.js` (with `PORT` / `HOSTNAME=127.0.0.1`), like the other HBS sites' PM2 config. Copy `.next/static` and `public/` into the standalone folder at deploy time.
 - `SITE_INDEXABLE` and `NEXT_PUBLIC_SITE_URL` are read at **build time** (static pages). Build staging with `SITE_INDEXABLE=false` and production with `SITE_INDEXABLE=true` (only at launch), each with its own `NEXT_PUBLIC_SITE_URL`. Changing them needs a rebuild, not just a restart.
-- Contact form rate limit reads the visitor IP from `X-Forwarded-For`: Nginx must set it (`proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;`), otherwise every visitor shares one limit.
+- Contact form rate limit reads the visitor IP from `X-Forwarded-For`: the proxy must pass the real client IP in that header, otherwise every visitor shares one limit.
 - The app sends the security headers itself (X-Content-Type-Options, Referrer-Policy, X-Frame-Options, CSP frame-ancestors, Permissions-Policy). Nginx must not add them again.
 
 ## Log
@@ -109,6 +109,13 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-19 — Ready for preview deploy
+- **Pages (all static, 200):** Home, /services, 3 service pages, /projects, 2 project pages, /about, /faq, /contact; unknown URLs → 404 page (noindex). Error boundary in place.
+- **Checks on the production build:** lint, build, CSS check pass. Sweep at 375 px: every route has one h1, no console errors, no horizontal scroll.
+- **Contact form:** validates and catches spam, but **sends nothing** until T2.9. Every submit shows "Online requests are opening soon. Your message was not sent yet." [DRAFT], so there is no silent failure. Fine for a preview, **not for launch**.
+- **Preview settings:** build with `SITE_INDEXABLE=false` (noindex + robots disallow) and the preview `NEXT_PUBLIC_SITE_URL`. Run from `output: 'standalone'` (see "For the server chat").
+- **Still open before launch:** T2.9 delivery decision, T2.11 privacy policy (legal name + email), client facts (Open questions), all [DRAFT] copy approval, Phase 3 (metadata/OG, sitemap/robots, JSON-LD, images, a11y, performance, cross-browser), and the bundle reductions above (waiting for the user's OK). Lighthouse mobile needs confirming on a faster machine or PageSpeed Insights after the preview deploy.
 
 ### 2026-11-19 — T2.10 404 and error pages
 - `src/app/not-found.tsx`: "404" label, heading and two buttons from 03-CONTENT, browser title [DRAFT, new], noindex. Checked: `/missing-page`, `/services/nope`, `/projects/nope` → 404.
