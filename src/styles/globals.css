@@ -7,20 +7,24 @@
 /* ---------- Tokens ---------- */
 
 :root {
-  /* Colours (docs/04-DESIGN.md). Contrast on --color-paper: ink 16.0, ink-soft 8.8,
-     muted 5.1 (4.5 on stone), accent-dark 5.4. --color-accent is 3.7: large text,
-     borders, focus rings and details only. On ink use --color-accent-light (5.5). */
-  --color-ink: #1e1c1a;
-  --color-ink-soft: #4a4642;
-  --color-muted: #6f6962;
-  --color-paper: #faf8f5;
-  --color-stone: #efeae3;
-  --color-line: #ddd6cc;
-  --color-accent: #9c7a4d;
-  --color-accent-dark: #7d6139;
-  --color-accent-light: #b08c5c;
+  /* Colours: light-blue palette (docs/04-DESIGN.md, contrast table there). On paper: ink
+     16.1, ink-soft 8.5, muted 5.5, accent 5.0; white on accent 5.3. On navy (ink): white
+     16.9, on-ink 11.4, on-ink-muted 8.3, accent-light 9.4. */
+  --color-ink: #0f1e2e;
+  --color-ink-soft: #3b4b5c;
+  --color-muted: #56677a;
+  --color-paper: #f7fafc;
+  --color-mist: #eaf3fb;
+  --color-line: #d6e3ef;
+  --color-accent: #1f6fb2;
+  --color-accent-dark: #185a91;
+  --color-accent-soft: #bfe0f7;
+  --color-accent-light: #8cc8f2;
   --color-white: #ffffff;
-  --color-overlay: rgba(30, 28, 26, 0.45);
+  --color-on-ink: #c9d6e3;
+  --color-on-ink-muted: #a9b8c8;
+  --color-on-image: #dce6f0;
+  --color-overlay: rgba(15, 30, 46, 0.45);
 
   /* Font families: set by next/font in layout.tsx, with system fallbacks. */
   --font-heading: var(--font-heading-face, system-ui), -apple-system, "Segoe UI", Roboto, Arial,
@@ -199,18 +203,18 @@ small {
 }
 
 a {
-  color: var(--color-accent-dark);
+  color: var(--color-accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
   transition: color var(--dur-fast) ease;
 }
 
 a:hover {
-  color: var(--color-ink);
+  color: var(--color-accent-dark);
 }
 
 ::selection {
-  background-color: var(--color-stone);
+  background-color: var(--color-accent-soft);
   color: var(--color-ink);
 }
 

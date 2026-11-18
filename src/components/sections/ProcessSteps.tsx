@@ -31,7 +31,7 @@ export function ProcessSteps({ heading, steps, variant = "short", animated }: Pr
   ));
 
   return (
-    <Section tone="stone" labelledBy="process-heading">
+    <Section tone="mist" labelledBy="process-heading">
       <Container>
         <Reveal className={styles.head}>
           <Heading level={2} id="process-heading">

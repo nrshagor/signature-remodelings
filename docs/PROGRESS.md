@@ -66,6 +66,9 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 | 2026-11-18 | Alba flip photos: client confirmed permission to use them on the site. **Settled** — not an open item (12 photos used, no "before" photos, no slider; unused laundry photo deleted) | User (client confirmation) |
 | 2026-11-18 | Client feedback: look as modern as possible; remodeling first, home flipping second. Heading font Cormorant Garamond → **Plus Jakarta Sans** 600/700 (rounder geometric forms contrast with Inter; Manrope too close to Inter). Radius 12px images/cards/tiles, 8px buttons/inputs. Frosted header after scroll (backdrop-filter inside `@supports`, solid fallback). Nav: Remodeling · Home Flipping · Projects · About · FAQ. Home: Interior + Exterior bento, flipping as a "For investors" band (Alba cover photo). Palette unchanged | Client (via user) |
 | 2026-11-18 | GSAP license checked: gsap 3.15.1 and @gsap/react 2.1.2 ship under GreenSock's Standard "no charge" license (gsap.com/standard-license), free for commercial use; this site is not a competing visual animation tool, so it qualifies. Versions pinned exactly | T2.5 license check |
+| 2026-11-18 | Colour palette: modern light blue replaces the warm brass palette (navy ink #0F1E2E, paper #F7FAFC, mist #EAF3FB replaces stone, accent #1F6FB2, accent-soft #BFE0F7, accent-light #8CC8F2). Primary buttons are accent blue with white text. Every pair checked against WCAG AA (table in 04-DESIGN) | User |
+| 2026-11-18 | Before/after: drag slider on all screen sizes; pinned GSAP scroll story deleted. GSAP only for the process animation. No fake or AI "before" images | User |
+| 2026-11-18 | Stock photos downloaded by Claude Code at the user's request (overrides the 05-IMAGES "user downloads" note). Unsplash License checked on unsplash.com/license: free commercial use, no attribution required; not allowed: selling unmodified copies, compiling into a competing service. Sources in `public/images/CREDITS.md` | User + license check |
 
 ## Missing images
 
@@ -104,6 +107,14 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — Blue palette, slider everywhere, stock photos
+- Colours (04-DESIGN tokens + contrast table first): navy/blue tokens in `globals.css`; `--color-stone` → `--color-mist` and Section tone `stone` → `mist` everywhere; new `--color-accent-soft`, `--color-on-ink`, `--color-on-ink-muted`, `--color-on-image`; every warm literal (brass, `#ece7e0`, `#d9d3cb`, `rgba(30,28,26,…)`, header/footer tints, theme colour) replaced with navy equivalents. Primary button = accent blue + white (5.28:1), on navy = accent-light + ink (9.36:1); links and eyebrows in accent (5.04 on paper, 4.71 on mist). All pairs pass AA.
+- Slider: project pages render `BeforeAfter` (drag line, Before left, After right) on all sizes; `ScrollStory`, `PinnedStory` (+css) and `SCROLL_MOTION_QUERY` deleted. GSAP remains only in `ProcessMotion`. No pair exists yet, so no slider shows (expected).
+- Stock photos (Unsplash only, each looked at before use; landscape, 2400 px wide, JPG q80): `hero-home`, `service-interior`, `service-exterior`, `service-flipping`, `process-plans`, `cta-band` in `public/images/stock/`; sizes and alt text in `src/content/images.ts`; `public/images/CREDITS.md` created. One candidate interior photo was rejected (decor letters and appliance branding). Notes: `process-plans` shows handwritten plan notes on the blueprint and `service-flipping` a small taped paper label; neither is readable as copy.
+- Image check (production build, headless Edge): hero headline and text readable on the navy overlay; bento tile gradient strengthened to at least 0.6 navy wherever text sits (white text ≥ 4.5:1 even over a white patch of photo), which fixed weak contrast on the Exterior tile; service-page 4:5 crops keep the house/kitchen centred; CTA band overlay 0.72.
+- Checks: lint, build, CSS check pass. Screenshots retaken: `screenshots/after/home-1440.png`, `home-375.png`, `services-1440.png`.
+- Files: `src/styles/globals.css`, `src/app/layout.tsx`, `src/app/projects/[slug]/page.tsx`, most `*.module.css` under `src/components`, `Section.tsx` (tone), `src/content/images.ts`, `src/lib/useMediaQuery.ts`, deleted `src/components/project/{ScrollStory,PinnedStory}*`, `public/images/stock/*.jpg`, `public/images/CREDITS.md`, docs 02, 04, 05, 06, PROGRESS.
 
 ### 2026-11-18 — Investors band photo, cleanup
 - Done: the "For investors" band (Home + compact block on /services) uses the Alba kitchen photo (`gallery-1.jpg`) instead of the cover, so the front photo is not repeated on Home. A photo capped at its natural width now stays on the band's left edge (aligned with the container). Unused laundry photo `21109811_15_0.jpg` deleted (it was never committed). Alba photo permission marked settled in Decisions.

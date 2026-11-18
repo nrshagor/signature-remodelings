@@ -1,6 +1,6 @@
 # 05 — Images
 
-The user downloads images and puts them in the folders below with **exactly these file names**. Claude Code does not download images. If a file is missing, the component must still render cleanly (neutral `--color-stone` block, no broken-image icon, no placeholder text) and the slot is listed in PROGRESS.md under "Missing images".
+Images go in the folders below with **exactly these file names**. Stock photos may be downloaded by Claude Code when the user asks (2026-11-18: the six main slots), from Unsplash or Pexels only, after looking at each photo. If a file is missing, the component must still render cleanly (neutral `--color-mist` block, no broken-image icon, no placeholder text) and the slot is listed in PROGRESS.md under "Missing images".
 
 ## Rules
 
@@ -16,20 +16,20 @@ The user downloads images and puts them in the folders below with **exactly thes
 
 | File name | Where | Size (px) | Search terms (Unsplash / Pexels) | Alt text |
 | --- | --- | --- | --- | --- |
-| `stock/hero-home.jpg` | Home hero | 2400×1350 | luxury kitchen interior, modern home interior warm light | Bright remodeled kitchen with a large island and warm wood cabinets |
-| `stock/service-interior.jpg` | Interior card + page hero | 1600×2000 (4:5) | white marble kitchen island, luxury kitchen | Modern kitchen with a marble island and pendant lights |
+| `stock/hero-home.jpg` ✅ | Home hero | 2400×1600 | luxury kitchen interior, modern home interior warm light | Bright remodeled kitchen with a large island and warm wood cabinets |
+| `stock/service-interior.jpg` ✅ | Interior bento tile + page hero | 2400×1590 (landscape, cropped by the tile) | white marble kitchen island, luxury kitchen | Modern kitchen with a marble island and pendant lights |
 | `stock/service-interior-bath.jpg` | Interior page, bathroom block | 1600×1200 | luxury bathroom walk-in shower, modern bathroom vanity | Remodeled bathroom with a walk-in glass shower and stone tile |
 | `stock/service-interior-living.jpg` | Interior page, living block | 1600×1200 | modern living room built-ins, open plan living room | Open living room with built-in shelving and wide-plank floors |
-| `stock/service-exterior.jpg` | Exterior card + page hero | 1600×2000 (4:5) | house balcony exterior, two story house exterior | Two-story home exterior with a second-floor balcony |
+| `stock/service-exterior.jpg` ✅ | Exterior bento tile + page hero | 2400×1589 (landscape) | house balcony exterior, two story house exterior | Two-story home exterior with a second-floor balcony |
 | `stock/service-exterior-patio.jpg` | Exterior page, patio block | 1600×1200 | backyard covered patio, outdoor living patio | Covered backyard patio with outdoor seating |
-| `stock/service-flipping.jpg` | Flipping card + page hero | 1600×2000 (4:5) | house renovation interior, home remodeling construction | Home interior under renovation with fresh drywall and new windows |
+| `stock/service-flipping.jpg` ✅ | Flipping page hero | 2400×1600 (landscape) | house renovation interior, home remodeling construction | Home interior under renovation with fresh drywall and new windows |
 | `stock/service-flipping-staged.jpg` | Flipping page, result block | 1600×1200 | modern living room staging, bright empty living room | Freshly remodeled, staged living room ready for sale |
-| `stock/process-plans.jpg` | Process / Why us | 1600×1200 | architect blueprints table, home design plans | Remodeling plans and material samples on a table |
+| `stock/process-plans.jpg` ✅ | Process / Why us | 2400×1615 | architect blueprints table, home design plans | Remodeling plans and material samples on a table |
 | `stock/about-craft.jpg` | About | 1600×1200 | craftsman woodwork detail, tile installation close up | Close-up of finished woodwork detail |
-| `stock/cta-band.jpg` | Closing CTA background | 2400×1000 | cozy modern living room evening, warm interior dusk | Warm living room in the evening |
+| `stock/cta-band.jpg` ✅ | Closing CTA background | 2400×1600 | cozy modern living room evening, warm interior dusk | Warm living room in the evening |
 | `brand/og-image.jpg` | Social share image (1200×630) | 1200×630 | made from hero image + wordmark | — |
 
-Look for: Texas/US suburban homes (brick, stone, wide lots), not European apartments.
+Look for: Texas/US suburban homes (brick, stone, wide lots), not European apartments. Cool/neutral light to fit the blue palette. ✅ = file in place (sources in `public/images/CREDITS.md`); the alt text actually used is in `src/content/images.ts`.
 
 ## Project image slots (company's own photos — pending from client)
 

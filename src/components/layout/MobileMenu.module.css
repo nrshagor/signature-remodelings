@@ -107,7 +107,7 @@
 
 .link:hover,
 .link[aria-current="page"] {
-  color: var(--color-accent-dark);
+  color: var(--color-accent);
 }
 
 .cta {

@@ -24,6 +24,3 @@ export function useMediaQuery(query: string): boolean {
     () => false,
   );
 }
-
-/** Where GSAP scroll motion runs: desktop width and no reduced-motion preference. */
-export const SCROLL_MOTION_QUERY = "(min-width: 900px) and (prefers-reduced-motion: no-preference)";

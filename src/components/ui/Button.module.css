@@ -38,8 +38,8 @@
 
 /* Light backgrounds */
 .primary {
-  border-color: var(--color-ink);
-  background-color: var(--color-ink);
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
   color: var(--color-white);
 }
 

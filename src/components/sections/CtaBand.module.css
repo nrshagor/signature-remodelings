@@ -4,7 +4,7 @@
   padding-top: var(--section-pad);
   padding-bottom: var(--section-pad);
   background-color: var(--color-ink);
-  color: #ece7e0;
+  color: var(--color-on-image);
 }
 
 .image {
@@ -17,7 +17,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(30, 28, 26, 0.72);
+  background-color: rgba(15, 30, 46, 0.72);
 }
 
 .content {

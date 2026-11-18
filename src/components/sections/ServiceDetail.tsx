@@ -29,7 +29,7 @@ export function ServiceDetail({
   const List = ordered ? "ol" : "ul";
   return (
     <>
-      <Section tone="stone" labelledBy="detail-heading">
+      <Section tone="mist" labelledBy="detail-heading">
         <Container className={styles.layout}>
           <div className={styles.text}>
             <Reveal>

@@ -20,7 +20,7 @@
 }
 
 [data-tone="ink"] .label {
-  color: #b9b1a7;
+  color: var(--color-on-ink-muted);
 }
 
 .copy {
@@ -36,7 +36,7 @@
   padding: var(--space-5);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
-  background-color: var(--color-stone);
+  background-color: var(--color-mist);
 }
 
 @media (min-width: 900px) {

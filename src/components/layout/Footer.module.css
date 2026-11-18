@@ -2,12 +2,12 @@
   padding-top: var(--space-8);
   padding-bottom: var(--space-6);
   background-color: var(--color-ink);
-  color: #c9c2b9;
+  color: var(--color-on-ink);
   font-size: 0.9375rem;
 }
 
 .footer a {
-  color: #e8e3dc;
+  color: var(--color-on-image);
   text-decoration: none;
 }
 

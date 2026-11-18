@@ -9,26 +9,26 @@ export const stockImages = {
   heroHome: {
     src: "/images/stock/hero-home.jpg",
     width: 2400,
-    height: 1350,
-    alt: "Bright remodeled kitchen with a large island and warm wood cabinets",
+    height: 1600,
+    alt: "Bright open kitchen with a marble waterfall island, white cabinets and pendant lights",
   },
   serviceInterior: {
     src: "/images/stock/service-interior.jpg",
-    width: 1600,
-    height: 2000,
-    alt: "Modern kitchen with a marble island and pendant lights",
+    width: 2400,
+    height: 1590,
+    alt: "White kitchen with an island, marble backsplash and globe pendant lights",
   },
   serviceExterior: {
     src: "/images/stock/service-exterior.jpg",
-    width: 1600,
-    height: 2000,
-    alt: "Two-story home exterior with a second-floor balcony",
+    width: 2400,
+    height: 1589,
+    alt: "Two-story grey suburban house with a stone accent and a wide front lawn",
   },
   serviceFlipping: {
     src: "/images/stock/service-flipping.jpg",
-    width: 1600,
-    height: 2000,
-    alt: "Home interior under renovation with fresh drywall and new windows",
+    width: 2400,
+    height: 1600,
+    alt: "Kitchen under renovation with cabinets and counters covered in protective plastic",
   },
   serviceInteriorBath: {
     src: "/images/stock/service-interior-bath.jpg",
@@ -56,15 +56,15 @@ export const stockImages = {
   },
   processPlans: {
     src: "/images/stock/process-plans.jpg",
-    width: 1600,
-    height: 1200,
-    alt: "Remodeling plans and material samples on a table",
+    width: 2400,
+    height: 1615,
+    alt: "Floor plan drawings with drafting pencils, a ruler and a plan tube",
   },
   ctaBand: {
     src: "/images/stock/cta-band.jpg",
     width: 2400,
-    height: 1000,
-    alt: "Warm living room in the evening",
+    height: 1600,
+    alt: "Bright living room with a coffered ceiling, built-in shelves and a marble fireplace",
   },
 } satisfies Record<string, ImageAsset>;
 

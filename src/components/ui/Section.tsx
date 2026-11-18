@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import styles from "./Section.module.css";
 
-export type Tone = "paper" | "stone" | "ink";
+export type Tone = "paper" | "mist" | "ink";
 
 interface SectionProps {
   children: ReactNode;

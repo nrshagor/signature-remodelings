@@ -11,13 +11,13 @@
   background-color: var(--color-paper);
 }
 
-.stone {
-  background-color: var(--color-stone);
+.mist {
+  background-color: var(--color-mist);
 }
 
 .ink {
   background-color: var(--color-ink);
-  color: #d9d3cb;
+  color: var(--color-on-ink);
 }
 
 .ink h1,

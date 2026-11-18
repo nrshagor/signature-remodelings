@@ -25,7 +25,7 @@ interface ProjectSectionsProps {
  */
 export function ProjectSections({ facts, blocks }: ProjectSectionsProps) {
   return (
-    <Section tone="stone">
+    <Section tone="mist">
       <Container>
         <Reveal as="dl" className={styles.facts}>
           {facts.map((fact) => (

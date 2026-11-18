@@ -4,25 +4,49 @@ Status: **proposal, revised 2026-11-18 after client feedback** ("as modern as po
 
 ## Feel
 
-Modern, warm and confident. Clean sans-serif type, generous white space, big full-bleed photography, softly rounded cards, restrained motion. Think a current high-end design-build studio, not a discount contractor (and not an old-fashioned serif brochure). Avoid: bright saturated colors, stock icons everywhere, busy gradients, heavy drop shadows, carousels.
+Modern, bright and confident. Clean sans-serif type, generous white space, big full-bleed photography, softly rounded cards, restrained motion. Think a current high-end design-build studio, not a discount contractor (and not an old-fashioned serif brochure). Avoid: bright saturated colors, stock icons everywhere, busy gradients, heavy drop shadows, carousels.
 
 ## Color tokens (`globals.css` `:root`)
 
-Hex/rgb only (older-browser safe).
+Modern light-blue palette (client feedback 2026-11-18; replaces the warm brass palette). Hex only (older-browser safe); translucent overlays use `rgba()` of the same navy.
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--color-ink` | `#1E1C1A` | Main text, dark sections |
-| `--color-ink-soft` | `#4A4642` | Body text on light |
-| `--color-muted` | `#7A746D` | Captions, meta |
-| `--color-paper` | `#FAF8F5` | Page background (warm white) |
-| `--color-stone` | `#EFEAE3` | Alternate section background |
-| `--color-line` | `#DDD6CC` | Borders, dividers |
-| `--color-accent` | `#9C7A4D` | Accent: links, small details, buttons on dark (muted brass) |
-| `--color-accent-dark` | `#7D6139` | Accent hover |
-| `--color-white` | `#FFFFFF` | Text on dark / images |
+| `--color-ink` | `#0F1E2E` | Main text, headings, dark (navy) sections |
+| `--color-ink-soft` | `#3B4B5C` | Body text on light |
+| `--color-muted` | `#56677A` | Captions, meta (blue-grey) |
+| `--color-paper` | `#F7FAFC` | Page background |
+| `--color-mist` | `#EAF3FB` | Alternate section background (was "stone") |
+| `--color-line` | `#D6E3EF` | Borders, dividers |
+| `--color-accent` | `#1F6FB2` | Buttons (white text), links, eyebrows, numerals, focus ring |
+| `--color-accent-dark` | `#185A91` | Button and link hover |
+| `--color-accent-soft` | `#BFE0F7` | Decor: chips, highlights, text selection (ink text on it) |
+| `--color-accent-light` | `#8CC8F2` | Accent text, links and buttons on navy (ink text on it) |
+| `--color-white` | `#FFFFFF` | Text on navy / images |
+| `--color-on-ink` | `#C9D6E3` | Body text on navy |
+| `--color-on-ink-muted` | `#A9B8C8` | Captions on navy |
+| `--color-on-image` | `#DCE6F0` | Supporting text over photos (with the navy overlay) |
+| `--color-overlay` | `rgba(15, 30, 46, 0.45)` | Navy shade over photos |
 
-Check contrast: body text ≥ 4.5:1, large text ≥ 3:1. If `--color-accent` on `--color-paper` fails for small text, use it only for large text, borders and icons.
+### Contrast check (WCAG 2.x, computed)
+
+| Text / element | Background | Ratio | AA |
+| --- | --- | --- | --- |
+| ink | paper / mist / white | 16.09 / 15.02 / 16.86 | pass |
+| ink-soft | paper / mist | 8.54 / 7.97 | pass |
+| muted | paper / mist | 5.54 / 5.17 | pass |
+| accent (links, eyebrows) | paper / mist | 5.04 / 4.71 | pass |
+| white | accent (button) / accent-dark (hover) | 5.28 / 7.22 | pass |
+| accent-dark (link hover) | paper | 6.88 | pass |
+| ink | accent-soft (chips) | 12.22 | pass |
+| accent-light | ink | 9.36 | pass |
+| ink | accent-light (button on navy) | 9.36 | pass |
+| white / on-ink / on-ink-muted | ink | 16.86 / 11.41 / 8.33 | pass |
+| on-image (no photo, worst case on navy) | ink | 13.34 | pass |
+| accent focus ring (non-text, ≥ 3:1) | paper | 5.04 | pass |
+| accent-light focus ring on navy | ink | 9.36 | pass |
+
+Over photos, white and on-image text always sit on the navy overlay or bottom gradient (≥ 0.72 navy behind the text), so contrast holds whatever the photo.
 
 ## Typography
 
@@ -77,7 +101,7 @@ Line height: display 1.02, headings 1.1–1.2, body 1.65. Max text width ~65ch.
 
 - Reveal: fade + 24px slide-up, 600 ms, `cubic-bezier(0.22, 1, 0.36, 1)`, stagger 80 ms in grids.
 - Hero: slow Ken Burns zoom on the image (CSS, 1.0 → 1.06 over 12 s), headline reveal on load.
-- Project story (GSAP): pinned section, before → after wipe tied to scroll, captions fade in per step. Desktop only; mobile shows the plain slider.
+- Before/after: the drag slider on every screen size (no pinned scroll story; removed 2026-11-18).
 - Process (GSAP): steps and connecting line draw in sequence on scroll.
 - Respect `prefers-reduced-motion` everywhere.
 

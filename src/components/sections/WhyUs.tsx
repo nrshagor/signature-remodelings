@@ -15,7 +15,7 @@ interface WhyUsProps {
 /** "Why Signature": four short promises beside an image (7/5 split on desktop). */
 export function WhyUs({ heading, items, image }: WhyUsProps) {
   return (
-    <Section tone="stone" labelledBy="why-heading">
+    <Section tone="mist" labelledBy="why-heading">
       <Container className={styles.layout}>
         <div className={styles.text}>
           <Reveal>

@@ -42,8 +42,8 @@
   left: 0;
   display: block;
   width: 2.5rem;
-  background-color: var(--color-stone);
-  color: var(--color-accent-dark);
+  background-color: var(--color-mist);
+  color: var(--color-accent);
   font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 600;

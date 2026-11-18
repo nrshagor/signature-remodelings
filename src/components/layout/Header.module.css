@@ -25,8 +25,8 @@
    background above. */
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .solid.scrolled {
-    border-bottom-color: rgba(221, 214, 204, 0.7);
-    background-color: rgba(250, 248, 245, 0.78);
+    border-bottom-color: rgba(214, 227, 239, 0.7);
+    background-color: rgba(247, 250, 252, 0.78);
     -webkit-backdrop-filter: saturate(1.6) blur(18px);
     backdrop-filter: saturate(1.6) blur(18px);
   }
@@ -35,7 +35,7 @@
 /* Over the hero: white text on a soft dark shade for legibility. */
 .transparent {
   background-color: transparent;
-  background-image: linear-gradient(to bottom, rgba(30, 28, 26, 0.45), rgba(30, 28, 26, 0));
+  background-image: linear-gradient(to bottom, rgba(15, 30, 46, 0.45), rgba(15, 30, 46, 0));
   color: var(--color-white);
 }
 

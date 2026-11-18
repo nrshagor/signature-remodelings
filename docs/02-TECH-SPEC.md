@@ -67,7 +67,7 @@ src/
     ui/       Button, Container, Section, Eyebrow, Heading, Card, ImageFrame
     sections/ Hero, ServiceBento, InvestorBand, WhyUs, FeaturedProjects, ProcessSteps, CtaBand, Faq
     project/  BeforeAfter, ProjectGallery, ProjectStory
-    motion/   Reveal (IntersectionObserver), ScrollStory (GSAP, client-only)
+    motion/   Reveal (IntersectionObserver), ProcessAnimator + ProcessMotion (GSAP, on demand)
     forms/    ContactForm
   content/
     site.ts       # brand, contact info, service area, nav, footer
@@ -103,7 +103,7 @@ public/
 2. **No-JS and old-browser safe:** content is visible by default. The hidden start state applies only when `html.js` is set and `IntersectionObserver` exists. Never put `opacity: 0` in plain CSS without that guard.
 3. **Reduced motion:** `@media (prefers-reduced-motion: reduce)` disables transforms and long transitions.
 4. **GSAP + ScrollTrigger** only in:
-   - project detail pages (`ScrollStory`: pinned before → after reveal, step captions)
+   - ~~project detail pages (pinned scroll story)~~ removed 2026-11-18 at the user's request: project pages use the drag slider on every screen size
    - the process section (steps reveal in sequence on scroll)
    Load GSAP with dynamic import inside client components so other pages don't ship it. Use `useGSAP` for cleanup and `gsap.matchMedia()` for reduced motion and mobile variants.
 5. **Page transitions:** only a light enter animation (fade/slide-up of main content). No exit animations, no router hacks, no View Transitions API.

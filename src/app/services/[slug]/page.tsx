@@ -56,7 +56,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
           heading={servicePage.featuredHeading}
           linkLabel={servicePage.featuredLinkLabel}
           items={[projectCardItem(featured)]}
-          tone="stone"
+          tone="mist"
         />
       )}
       <CtaBand cta={service.cta} image={available(stockImages.ctaBand)} />
