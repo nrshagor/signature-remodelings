@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 0 — Setup
-- Last completed task: T1.4 Footer
-- **Next task: T1.5 Reveal animation**
+- Last completed task: T1.5 Reveal animation
+- **Next task: T1.6 Root layout and metadata base**
 - Site state: Next.js 16.4.6 configured; folder structure, tokens, fonts, `html.js` flag in place; blank home page; lint + build pass. Git repo on `main` (local only, never pushed by Claude Code).
 
 ## Open questions
@@ -88,6 +88,11 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-18 — T1.5 Reveal animation
+- Done: `components/motion/Reveal.tsx` (client) uses one shared IntersectionObserver (threshold 0, bottom margin −12%, so tall blocks still trigger) and sets `data-revealed` once, then stops observing. Without IO it reveals at once. `group` mode staggers direct children 80 ms apart through CSS `nth-child` delays. Optional `delay`, `as` and `role` props. `HydratedFlag.tsx` sets `html[data-hydrated]`, which turns off the 3 s CSS failsafe; it's rendered in the root layout. globals.css reveal rules updated for groups and reduced motion.
+- Checks: lint + build pass. No content is hidden unless `html.js` is set, and the inline script sets it only when IO exists, so no-JS and old browsers see everything. Browser behaviour is checked on the Home page in T2.1, the first page that uses Reveal.
+- Files: src/components/motion/{Reveal,HydratedFlag}.tsx, src/styles/globals.css, src/app/layout.tsx
 
 ### 2026-11-18 — T1.4 Footer
 - Done: `Footer` (server component, ink background). Wordmark + one-line description; columns Services (3 links from `services.ts`), Company (`site.companyLinks`), and Contact (phone/email/address/hours/service-area line, only those that exist; the column is hidden if none do). Bottom row: `© {build year} {legalName ?? name}`, plus Privacy Policy only when `site.hasPrivacyPolicy`. Wired into `layout.tsx`.

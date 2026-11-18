@@ -230,13 +230,17 @@ a:hover {
   border: 0;
 }
 
-/* ---------- Reveal (see components/motion/Reveal, T1.5) ----------
+/* ---------- Reveal (components/motion/Reveal) ----------
  * Content is visible by default. The hidden start state applies only when html.js is
  * set, which the inline script in layout.tsx does only when IntersectionObserver exists.
- * Failsafe: if the app never hydrates (script error, very slow network), reveal targets
- * appear after 3 s; the Reveal component marks html[data-hydrated] on hydration. */
+ * [data-reveal]: the element itself fades/slides in.
+ * [data-reveal-group]: its direct children do, 80 ms apart (up to 8, then together).
+ * Reveal sets [data-revealed] once the element scrolls into view.
+ * Failsafe: until HydratedFlag sets html[data-hydrated], targets appear after 3 s, so
+ * a script error or a very slow network never leaves content hidden. */
 
-html.js [data-reveal] {
+html.js [data-reveal],
+html.js [data-reveal-group] > * {
   opacity: 0;
   transform: translateY(24px);
   transition:
@@ -244,9 +248,38 @@ html.js [data-reveal] {
     transform var(--dur-base) var(--ease-out);
 }
 
-html.js [data-reveal].is-visible {
+html.js [data-reveal][data-revealed],
+html.js [data-reveal-group][data-revealed] > * {
   opacity: 1;
   transform: none;
+}
+
+[data-reveal-group] > :nth-child(2) {
+  transition-delay: 80ms;
+}
+
+[data-reveal-group] > :nth-child(3) {
+  transition-delay: 160ms;
+}
+
+[data-reveal-group] > :nth-child(4) {
+  transition-delay: 240ms;
+}
+
+[data-reveal-group] > :nth-child(5) {
+  transition-delay: 320ms;
+}
+
+[data-reveal-group] > :nth-child(6) {
+  transition-delay: 400ms;
+}
+
+[data-reveal-group] > :nth-child(7) {
+  transition-delay: 480ms;
+}
+
+[data-reveal-group] > :nth-child(n + 8) {
+  transition-delay: 560ms;
 }
 
 @keyframes reveal-failsafe {
@@ -256,7 +289,8 @@ html.js [data-reveal].is-visible {
   }
 }
 
-html.js:not([data-hydrated]) [data-reveal] {
+html.js:not([data-hydrated]) [data-reveal],
+html.js:not([data-hydrated]) [data-reveal-group] > * {
   animation: reveal-failsafe 0.6s ease-out 3s forwards;
 }
 
@@ -276,7 +310,8 @@ html.js:not([data-hydrated]) [data-reveal] {
     scroll-behavior: auto !important;
   }
 
-  html.js [data-reveal] {
+  html.js [data-reveal],
+  html.js [data-reveal-group] > * {
     opacity: 1;
     transform: none;
   }

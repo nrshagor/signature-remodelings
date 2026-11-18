@@ -77,7 +77,8 @@ Result: ink footer; Contact column shows only existing fields (now just the serv
 Needs: T1.2
 Shows only fields that exist in `site.ts`. Privacy link only when the page exists.
 
-### [ ] T1.5 Reveal animation
+### [x] T1.5 Reveal animation
+Result: `Reveal` (single shared IO, once, `group` stagger) + `HydratedFlag`; CSS-only hidden state behind `html.js`. Browser behaviour verified on the Home page in T2.1.
 Needs: T0.4 · Read: 02-TECH-SPEC → Animation policy
 `Reveal` client component (IntersectionObserver, once, stagger support). Content visible without JS and in browsers without IO.
 Done when: works, and with JS disabled all content is visible.

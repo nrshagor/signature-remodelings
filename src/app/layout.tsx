@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
+import { HydratedFlag } from "@/components/motion/HydratedFlag";
 import "@/styles/globals.css";
 
 // Headings: serif, only the weight in use. Body/UI: Inter variable font (400–600).
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: jsFlagScript }} />
       </head>
       <body>
+        <HydratedFlag />
         <SkipLink />
         <Header />
         {children}
