@@ -6,7 +6,7 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 
 - Phase: 2 — Pages built (T2.9 contact delivery and T2.11 privacy policy BLOCKED)
 - Last completed task: client preview prep (Carrollton card, Contact redesign, FAQ move, robots.txt, sweep)
-- **Next task: client preview deploy (user pushes); then T3.1 Per-page metadata and OG** (SEO tasks deferred until after the preview)
+- **Next task: client preview deploy (user pushes, then the server chat follows `deploy/README.md` → "First-time server setup"); then T3.1 Per-page metadata and OG** (SEO tasks deferred until after the preview)
 - Site state: **ready for a preview deploy** (see the log entry "Ready for preview deploy"). Lint, build and CSS check pass. Git on `main`, local only (never pushed by Claude Code).
 
 ## Open questions
@@ -98,10 +98,12 @@ After adding files with these exact names, run a new build: pages are static and
 - [ ] Ports 3003 (dev), 3104 (staging) and 3204 (production) are free on the VPS. These are provisional.
 - [ ] Nginx adds none of the security headers the app sends (below).
 
+**Deploy kit (2026-11-19):** everything for the server is in `deploy/` — `deploy/README.md` → "First-time server setup" has the exact commands in order (deploy key + SSH alias `github-signature-remodelings`, clone to `/var/www/builders/signature-remodelings`, folders + `.env` for `signature-staging` / `signature-production`, first deploy, Nginx enable/test/reload, certbot for `signatureremodelings.com` + `www`, verify). Both builds `SITE_INDEXABLE=false`, `NEXT_PUBLIC_SITE_URL=https://signatureremodelings.com`; the domain proxies to production on 3204 with `X-Robots-Tag: noindex`. The updated shared `deploy-gate.sh` (adds `signature`) must also be copied into the hera, solum and qcsi repositories before it is installed on the server.
+
 **Notes:**
 - `output: 'standalone'`: run `node .next/standalone/server.js` (with `PORT` / `HOSTNAME=127.0.0.1`), like the other HBS sites' PM2 config. Copy `.next/static` and `public/` into the standalone folder at deploy time.
 - `SITE_INDEXABLE` and `NEXT_PUBLIC_SITE_URL` are read at **build time** (static pages). Build staging with `SITE_INDEXABLE=false` and production with `SITE_INDEXABLE=true` (only at launch), each with its own `NEXT_PUBLIC_SITE_URL`. Changing them needs a rebuild, not just a restart.
-- Contact form rate limit reads the visitor IP from `X-Forwarded-For`: the proxy must pass the real client IP in that header, otherwise every visitor shares one limit.
+- Contact form rate limit reads `X-Real-IP` first, then the last `X-Forwarded-For` entry (2026-11-19, was the first entry, which a visitor can fake). The Nginx file in `deploy/nginx/` sets both.
 - The app sends the security headers itself (X-Content-Type-Options, Referrer-Policy, X-Frame-Options, CSP frame-ancestors, Permissions-Policy). Nginx must not add them again.
 
 ## Log
@@ -113,6 +115,13 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-19 — Deploy kit ported from solum-constructions
+- Done: `deploy/` adapted from Solum's kit for one npm app at the repo root: `deploy.sh` (`signature <env> [<commit>]`, npm ci + npm run build, standalone release, atomic switch, health check, rollback, shared `/var/www/builders/.deploy.lock`; checks `NEXT_PUBLIC_SITE_URL`, `SITE_INDEXABLE` true/false and never true on staging), `ecosystem.config.cjs` (PM2 `signature-staging` 3104 / `signature-production` 3204), `deploy-gate.sh` (the shared gate with `signature` added), `ci/*.sh` (for a later Actions workflow; `needs-deploy.sh` skips docs-only changes), `nginx/signatureremodelings.com.conf` (preview: proxy to 3204, X-Robots-Tag noindex, X-Real-IP + X-Forwarded-For, `client_max_body_size 1m`, www → apex, no `default_server`, acme at `/var/www/certbot`, HTTP-only until certbot), `README.md` with "First-time server setup". Coming-soon page not ported (the domain goes straight to the preview). No staging Nginx file: staging is local-only on 3104 (SSH tunnel).
+- Also: the contact rate limit now reads `X-Real-IP`, then the last `X-Forwarded-For` entry (the first entry can be faked by a visitor). ESLint allows `require()` in `deploy/**/*.cjs`.
+- Checks: `bash -n` on every script; gate refusals tested locally (wrong app, wrong env, shell characters); `needs-deploy.sh` tested on real commits (code change → deploy, docs-only → skip); release assembly simulated on the local build (static, public and every tracked image present). Lint, build, CSS check pass. No server commands run.
+- Files: `deploy/**`, `src/app/contact/actions.ts`, `eslint.config.mjs`, `docs/PROGRESS.md`.
+- User action needed: push; copy the gate change into the other three repos; then the server chat runs the README steps.
 
 ### 2026-11-19 — Carrollton copy fix
 - The balcony is at the back of the home (renderings). New [DRAFT] summary in `src/content/projects.ts` and the same line on the Home "Recent work" card (`src/content/pages.ts`, it repeated the old claim); new SEO description in `src/content/seo.ts`. 03-CONTENT updated; Open question removed; decision logged.
