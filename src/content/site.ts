@@ -63,7 +63,7 @@ export const site: Site = {
     { label: "Home Flipping", href: "/services/home-flipping" },
     { label: "Projects", href: "/projects" },
     { label: "About", href: "/about" },
-    { label: "FAQ", href: "/faq" },
+    // FAQ lives in the footer and at the bottom of /contact (user, 2026-11-19).
   ],
   cta: { label: "Book a Consultation", href: "/contact" },
   companyLinks: [
