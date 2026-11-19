@@ -88,7 +88,7 @@ Remodeling first (client feedback 2026-11-18); home flipping moved to section 6.
 
 ### 4. Featured projects (2 cards) [DRAFT]
 - Heading: Recent work
-- **Balcony Addition — Carrollton, TX**: An existing home gains a new balcony, adding outdoor living space and a stronger front elevation. → View project
+- **Balcony Addition — Carrollton, TX** [DRAFT]: An existing Carrollton home gains a covered second-floor balcony and patio at the back, creating new outdoor living space. → View project
 - **Full Home Flip — Alba, TX**: A dated house remodeled inside and out, ready for today's buyers. → View project
 
 ### 5. Process (4 steps) [DRAFT]
@@ -165,7 +165,7 @@ Remodeling first (client feedback 2026-11-18); home flipping moved to section 6.
 
 ## Project: Balcony Addition — Carrollton, TX (`/projects/carrollton-balcony-addition`)
 - Type: Exterior addition · City: Carrollton, TX
-- Summary [DRAFT]: An existing home in Carrollton gains a new balcony, adding outdoor living space and a stronger front elevation.
+- Summary [DRAFT] (user, 2026-11-19; the balcony is at the back, per the renderings): An existing Carrollton home gains a covered second-floor balcony and patio at the back, creating new outdoor living space.
 - The goal [NEEDS CLIENT]: owner's reason (view, outdoor space, curb appeal).
 - Title [DRAFT]: Balcony Addition — Carrollton, TX
 - The work [DRAFT] (user, 2026-11-19): The design adds a covered second-floor balcony at the back of the home, reached by a spiral staircase, with a covered patio below for outdoor living. Brick, railing and roofline are matched to the existing house so the addition looks like it was always there.
@@ -269,7 +269,7 @@ Title ≤ 60 characters, description ≤ 160. "North Texas" changes when the ser
 | Exterior & Additions | Balconies, Patios & Room Additions — Signature | Add space with a balcony, patio or second-floor room designed to match your home. Talk to Signature Remodelings. |
 | Home Flipping | Home Flipping Remodels for Investors — Signature | We remodel dated houses into market-ready homes for real estate investors. See our Alba, TX flip and start your project. |
 | Projects | Remodeling Projects — Signature Remodelings | Before-and-after remodeling projects in Texas, from a Carrollton balcony addition to a full home flip in Alba. |
-| Carrollton project | Balcony Addition in Carrollton, TX — Signature | A new balcony added to an existing Carrollton home for more outdoor living space and a stronger front elevation. |
+| Carrollton project | Balcony Addition in Carrollton, TX — Signature | [DRAFT] A covered second-floor balcony and patio added to the back of an existing Carrollton, TX home for new outdoor living space. |
 | Alba project | Full Home Flip in Alba, TX — Signature Remodelings | A dated Alba, TX house remodeled inside and out into a move-in-ready home. |
 | About | About Signature Remodelings | A Texas remodeling company focused on careful planning, clear communication and detail-driven craftsmanship. |
 | FAQ | Remodeling FAQ — Signature Remodelings | Answers about consultations, timelines, additions and investor flips from Signature Remodelings. |

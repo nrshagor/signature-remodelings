@@ -63,7 +63,7 @@ export const home = {
     items: [
       {
         slug: "carrollton-balcony-addition",
-        text: "An existing home gains a new balcony, adding outdoor living space and a stronger front elevation.",
+        text: "An existing Carrollton home gains a covered second-floor balcony and patio at the back, creating new outdoor living space.", // [DRAFT] same as the project summary
       },
       {
         slug: "alba-home-flip",

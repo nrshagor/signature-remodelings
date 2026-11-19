@@ -41,7 +41,7 @@ export const projects: Project[] = [
     type: "Exterior addition",
     city: "Carrollton, TX",
     summary:
-      "An existing home in Carrollton gains a new balcony, adding outdoor living space and a stronger front elevation.",
+      "An existing Carrollton home gains a covered second-floor balcony and patio at the back, creating new outdoor living space.", // [DRAFT] (user, 2026-11-19)
     goal: undefined,
     // [DRAFT] (user, 2026-11-19).
     work: [

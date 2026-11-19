@@ -40,7 +40,7 @@ export const seo = {
   "carrollton-balcony-addition": {
     title: "Balcony Addition in Carrollton, TX — Signature",
     description:
-      "A new balcony added to an existing Carrollton home for more outdoor living space and a stronger front elevation.",
+      "A covered second-floor balcony and patio added to the back of an existing Carrollton, TX home for new outdoor living space.", // [DRAFT]
   },
   "alba-home-flip": {
     title: "Full Home Flip in Alba, TX — Signature Remodelings",

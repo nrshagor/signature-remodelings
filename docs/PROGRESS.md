@@ -33,7 +33,6 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 - [ ] Approval of tagline and all [DRAFT] copy before launch
 - [ ] Alba photos: higher-resolution originals (current files are 1024 px and 665 px wide)
 - [ ] Carrollton: a company-owned "before" photo of the house (no Google Maps / Street View / Zillow images)
-- [ ] Carrollton copy conflict: the summary and SEO description say "a stronger front elevation", but the new work text puts the balcony "at the back of the home". Which is right? (Summary left unchanged until answered.)
 - [ ] Privacy policy: company legal name and contact email
 
 ## Decisions
@@ -74,6 +73,7 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 | 2026-11-19 | Carrollton is **in progress** ("In progress" badge); no gallery or slider until the client's renderings arrive. Projects without a photo get a designed navy text card of the same size | User |
 | 2026-11-19 | FAQ removed from the main nav; still in the footer, and a compact FAQ sits at the bottom of /contact | User |
 | 2026-11-19 | Deferred until after the client preview: colour comparison, old-browser testing (T3.7), SEO tasks (T3.x, except the robots.txt needed for the preview) | User |
+| 2026-11-19 | Carrollton balcony is at the **back** of the home (per the renderings): summary, Home card line and SEO description rewritten [DRAFT]; "front elevation" removed everywhere | User |
 
 ## Missing images
 
@@ -113,6 +113,10 @@ After adding files with these exact names, run a new build: pages are static and
 - Notes / decisions:
 - User action needed:
 -->
+
+### 2026-11-19 — Carrollton copy fix
+- The balcony is at the back of the home (renderings). New [DRAFT] summary in `src/content/projects.ts` and the same line on the Home "Recent work" card (`src/content/pages.ts`, it repeated the old claim); new SEO description in `src/content/seo.ts`. 03-CONTENT updated; Open question removed; decision logged.
+- Checks: lint, build, CSS check pass; no "front elevation" left in `src` or the built pages.
 
 ### 2026-11-19 — Client preview prep, ready for preview deploy (updated)
 - **Carrollton:** in progress (badge on the page and the card), new "The work" text [DRAFT], no gallery or slider. Its card on Home and /projects is a navy text-only card (city/type labels, title, line, "In progress" chip, arrow) the same size as the photo cards. No map or Street View images anywhere.
