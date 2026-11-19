@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import { FaqList } from "@/components/faq/FaqList";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { PageHero } from "@/components/sections/PageHero";
+import { Reveal } from "@/components/motion/Reveal";
 import { Container } from "@/components/ui/Container";
+import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
+import { visibleFaqs } from "@/content/faq";
 import { contact } from "@/content/pages";
 import { seo } from "@/content/seo";
 import { site } from "@/content/site";
@@ -17,7 +20,7 @@ interface Detail {
   href?: string;
 }
 
-/** Only the contact details the client has confirmed; none yet, so the panel is hidden. */
+/** Only the contact details the client has confirmed; none yet, so none are shown. */
 function contactDetails(): Detail[] {
   const { phone, email, hours } = site.contact;
   const out: Detail[] = [];
@@ -30,20 +33,35 @@ function contactDetails(): Detail[] {
   return out;
 }
 
-/** Contact: the form, plus a side panel with whatever contact details exist. */
+/**
+ * Contact. Desktop: dark panel (h1, text, what happens next, confirmed contact details)
+ * beside the form in an elevated card. Mobile: stacked. A compact FAQ follows.
+ */
 export default function ContactPage() {
   const details = contactDetails();
+  const faqs = visibleFaqs();
   return (
     <>
-      <PageHero headline={contact.headline} intro={contact.text} />
-      <Section flushTop>
-        <Container className={details.length > 0 ? styles.split : undefined}>
-          <div className={styles.formCol}>
-            <ContactForm />
-          </div>
-          {details.length > 0 && (
-            <aside className={styles.panel} aria-label={contact.panel.label}>
-              <dl>
+      <section className={styles.top}>
+        <Container className={styles.layout}>
+          <div className={styles.panel}>
+            <h1 className={styles.headline}>{contact.headline}</h1>
+            <p className={styles.text}>{contact.text}</p>
+
+            <h2 className={styles.nextHeading}>{contact.next.heading}</h2>
+            <ol role="list" className={styles.steps}>
+              {contact.next.steps.map((step, i) => (
+                <li key={step} className={styles.step}>
+                  <span className={styles.number} aria-hidden="true">
+                    {i + 1}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+
+            {details.length > 0 && (
+              <dl className={styles.details} aria-label={contact.panel.label}>
                 {details.map((d) => (
                   <div key={d.label} className={styles.row}>
                     <dt>{d.label}</dt>
@@ -51,10 +69,27 @@ export default function ContactPage() {
                   </div>
                 ))}
               </dl>
-            </aside>
-          )}
+            )}
+          </div>
+
+          <div className={styles.card}>
+            <ContactForm />
+          </div>
         </Container>
-      </Section>
+      </section>
+
+      {faqs.length > 0 && (
+        <Section tone="mist" labelledBy="contact-faq-heading">
+          <Container>
+            <Reveal className={styles.faqHead}>
+              <Heading level={2} id="contact-faq-heading">
+                {contact.faqHeading}
+              </Heading>
+            </Reveal>
+            <FaqList items={faqs} />
+          </Container>
+        </Section>
+      )}
     </>
   );
 }

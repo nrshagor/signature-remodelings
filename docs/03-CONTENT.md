@@ -167,8 +167,10 @@ Remodeling first (client feedback 2026-11-18); home flipping moved to section 6.
 - Type: Exterior addition · City: Carrollton, TX
 - Summary [DRAFT]: An existing home in Carrollton gains a new balcony, adding outdoor living space and a stronger front elevation.
 - The goal [NEEDS CLIENT]: owner's reason (view, outdoor space, curb appeal).
-- The work [DRAFT + NEEDS CLIENT]: The new balcony ties into the existing structure and matches the home's materials and lines. Size, materials, railing type → from the drawing.
-- Status [NEEDS CLIENT]: completed or in progress. If in progress: show "In progress" label and the gallery title "Design rendering".
+- Title [DRAFT]: Balcony Addition — Carrollton, TX
+- The work [DRAFT] (user, 2026-11-19): The design adds a covered second-floor balcony at the back of the home, reached by a spiral staircase, with a covered patio below for outdoor living. Brick, railing and roofline are matched to the existing house so the addition looks like it was always there.
+- Status (user, 2026-11-19): **in progress** → "In progress" badge. No gallery and no slider until the client's renderings arrive (gallery title "Design rendering" then).
+- Card without a photo: designed text-only card (navy, city · type, title, "In progress" chip, arrow), same size as the photo cards.
 - Gallery: Before (company photo) · Design drawing · Rendering (captioned "Design rendering") · After (when finished).
 - **Do not** use Google Maps imagery or show the street address.
 
@@ -234,7 +236,10 @@ Show only questions whose answer is [DRAFT] or [CONFIRMED]. Questions with [NEED
 - Fields to fix [DRAFT, new] (banner above the form): "Please check the highlighted fields."
 - Field errors [DRAFT, new]: name "Please enter your full name." · phone "Please enter a phone number with at least 10 digits." · email "Please enter a valid email address." · city/ZIP "Please enter the city or ZIP code of the property." · project type "Please choose a project type." · budget "Please choose a budget range from the list." · timeline "Please choose a timeline from the list." · message "Please write between 20 and 2,000 characters."
 - Button while sending: "Sending…"
-- Side panel: phone, email, hours, service area — only fields that exist.
+- Layout (user, 2026-11-19): desktop two columns, dark panel left (headline, text, "What happens next", then any confirmed contact details) and the form in a white card right; mobile stacked. Project type and timeline are pill chips.
+- "What happens next" [DRAFT]: 1 We review your request · 2 We call to talk it through · 3 We visit and plan
+- Compact FAQ under the form, heading [DRAFT, new]: Common questions (same answered questions as /faq).
+- Contact details in the dark panel: phone, email, hours, service area — only fields that exist.
 
 ## Privacy Policy (`/privacy-policy`) [NEEDS CLIENT]
 Simple policy covering: what the contact form collects, why, who receives it, how long it's kept, no selling of data, contact for questions, effective date. Needs the company's legal name and contact email. This is not legal advice — the client should review it. Hidden from nav/footer until the page exists.

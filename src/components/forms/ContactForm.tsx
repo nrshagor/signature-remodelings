@@ -79,6 +79,39 @@ export function ContactForm() {
       </p>
     ) : null;
 
+  /**
+   * Choice as pill chips: real radio inputs (arrow keys move within the group, Space
+   * selects), visually hidden but focusable; the pill shows checked and focus states.
+   */
+  const pills = (name: LeadField, legend: string, options: string[], required: boolean) => (
+    <fieldset
+      className={`${styles.field} ${styles.full} ${styles.fieldset}`}
+      aria-describedby={errors[name] ? `contact-${name}-error` : undefined}
+    >
+      <legend className={styles.legend}>
+        {legend}
+        {!required && <span className={styles.optional}> ({L.optional})</span>}
+      </legend>
+      <div className={styles.pills}>
+        {options.map((option, i) => (
+          <label key={option} className={styles.pill}>
+            <input
+              type="radio"
+              name={name}
+              value={option}
+              required={required && i === 0 ? true : undefined}
+              defaultChecked={values[name] === option}
+              data-invalid={errors[name] ? "" : undefined}
+              className={styles.pillInput}
+            />
+            <span className={styles.pillText}>{option}</span>
+          </label>
+        ))}
+      </div>
+      {error(name)}
+    </fieldset>
+  );
+
   let banner: { tone: string; text?: string } | null = null;
   if (clientErrors) banner = { tone: styles.warn, text: contact.invalid };
   else if (state.status === "invalid") banner = { tone: styles.warn, text: state.message };
@@ -124,18 +157,7 @@ export function ContactForm() {
           {error("location")}
         </div>
 
-        <div className={styles.field}>
-          <label htmlFor="contact-projectType">{L.projectType}</label>
-          <select required {...field("projectType")}>
-            <option value="">{L.choose}</option>
-            {contact.projectTypes.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
-          {error("projectType")}
-        </div>
+        {pills("projectType", L.projectType, contact.projectTypes, true)}
 
         {contact.budgetRanges && (
           <div className={styles.field}>
@@ -154,20 +176,7 @@ export function ContactForm() {
           </div>
         )}
 
-        <div className={styles.field}>
-          <label htmlFor="contact-timeline">
-            {L.timeline} <span className={styles.optional}>({L.optional})</span>
-          </label>
-          <select {...field("timeline")}>
-            <option value="">{L.choose}</option>
-            {contact.timelines.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
-          {error("timeline")}
-        </div>
+        {pills("timeline", L.timeline, contact.timelines, false)}
 
         <div className={`${styles.field} ${styles.full}`}>
           <label htmlFor="contact-message">{L.message}</label>

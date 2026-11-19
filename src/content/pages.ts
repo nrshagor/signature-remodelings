@@ -205,6 +205,13 @@ export const contact = {
     message: "Please write between 20 and 2,000 characters.",
   },
   sendingLabel: "Sending…",
+  /** Dark panel on /contact. [DRAFT] (user, 2026-11-19) */
+  next: {
+    heading: "What happens next",
+    steps: ["We review your request", "We call to talk it through", "We visit and plan"],
+  },
+  /** Compact FAQ under the form. [DRAFT, new] */
+  faqHeading: "Common questions",
   /** Side panel labels; the panel shows only details the client has confirmed. */
   panel: {
     label: "Contact details",
