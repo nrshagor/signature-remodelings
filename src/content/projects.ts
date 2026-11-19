@@ -43,10 +43,12 @@ export const projects: Project[] = [
     summary:
       "An existing home in Carrollton gains a new balcony, adding outdoor living space and a stronger front elevation.",
     goal: undefined,
+    // [DRAFT] (user, 2026-11-19).
     work: [
-      "The new balcony ties into the existing structure and matches the home's materials and lines.",
+      "The design adds a covered second-floor balcony at the back of the home, reached by a spiral staircase, with a covered patio below for outdoor living. Brick, railing and roofline are matched to the existing house so the addition looks like it was always there.",
     ],
-    progress: undefined,
+    // User, 2026-11-19. No images yet: the client's renderings come later.
+    progress: "in-progress",
     gallery: [],
     pairs: [],
     status: "draft",

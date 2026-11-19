@@ -11,6 +11,8 @@ export interface FeaturedProjectItem {
   title: string;
   /** City and type, e.g. ["Carrollton, TX", "Exterior addition"]. City only, never an address. */
   labels: string[];
+  /** Status chip, e.g. "In progress". */
+  badge?: string;
   text: string;
   /** Company photo only. */
   image?: ImageAsset;
@@ -55,6 +57,7 @@ export function FeaturedProjects({
                 ratio="3/2"
                 sizes="(min-width: 900px) 50vw, 100vw"
                 labels={item.labels}
+                badge={item.badge}
                 text={item.text}
                 linkLabel={linkLabel}
               />

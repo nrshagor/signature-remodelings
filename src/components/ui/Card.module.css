@@ -150,3 +150,102 @@
     transform: translateX(6px);
   }
 }
+
+/* ---------- Card without a photo (navy, same size) ---------- */
+
+.dark {
+  border-color: var(--color-ink);
+  background-color: var(--color-ink);
+}
+
+/* Where the photo would be: a quiet blueprint grid. */
+.panel {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: #16283b;
+  isolation: isolate;
+}
+
+.pattern {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image:
+    linear-gradient(rgba(140, 200, 242, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 200, 242, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(140, 200, 242, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 200, 242, 0.05) 1px, transparent 1px);
+  background-size:
+    96px 96px,
+    96px 96px,
+    24px 24px,
+    24px 24px;
+  background-position: center;
+}
+
+/* Status chip: accent-light on navy (9.4:1). */
+.badge {
+  position: absolute;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border: 1px solid var(--color-accent-light);
+  border-radius: 999px;
+  color: var(--color-accent-light);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.badge::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin-right: var(--space-2);
+  border-radius: 50%;
+  background-color: var(--color-accent-light);
+}
+
+/* On a white card (photo present) the chip sits above the title. */
+.badgeInline {
+  position: static;
+  align-self: flex-start;
+  margin-bottom: var(--space-3);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.badgeInline::before {
+  background-color: var(--color-accent);
+}
+
+.dark .title,
+.dark .more {
+  color: var(--color-white);
+}
+
+.dark .text {
+  color: var(--color-on-ink);
+}
+
+.dark .circle {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--color-white);
+}
+
+.dark .circle::before {
+  background-color: var(--color-accent-light);
+}
+
+@media (hover: hover) {
+  .dark:hover .circle {
+    color: var(--color-ink);
+  }
+}
