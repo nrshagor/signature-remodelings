@@ -157,6 +157,7 @@ Title/description/canonical/OG for every route; OG image.
 ### [ ] T3.2 sitemap.ts and robots.ts
 Needs: T3.1
 Sitemap of all public routes; robots respects `SITE_INDEXABLE`. Verify both `true` and `false`.
+Partly done 2026-11-19 (for the client preview): `src/app/robots.ts` follows `SITE_INDEXABLE` (checked with `false`: `Disallow: /`). Still to do: `sitemap.ts`, sitemap line in robots, check with `true`.
 
 ### [ ] T3.3 Structured data
 Needs: T3.1

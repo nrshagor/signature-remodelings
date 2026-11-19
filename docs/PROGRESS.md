@@ -5,8 +5,8 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 ## Current status
 
 - Phase: 2 — Pages built (T2.9 contact delivery and T2.11 privacy policy BLOCKED)
-- Last completed task: T2.10 404 and error pages
-- **Next task: T3.1 Per-page metadata and OG** (paused: user tests the motion refresh and the new pages)
+- Last completed task: client preview prep (Carrollton card, Contact redesign, FAQ move, robots.txt, sweep)
+- **Next task: client preview deploy (user pushes); then T3.1 Per-page metadata and OG** (SEO tasks deferred until after the preview)
 - Site state: **ready for a preview deploy** (see the log entry "Ready for preview deploy"). Lint, build and CSS check pass. Git on `main`, local only (never pushed by Claude Code).
 
 ## Open questions
@@ -33,6 +33,7 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 - [ ] Approval of tagline and all [DRAFT] copy before launch
 - [ ] Alba photos: higher-resolution originals (current files are 1024 px and 665 px wide)
 - [ ] Carrollton: a company-owned "before" photo of the house (no Google Maps / Street View / Zillow images)
+- [ ] Carrollton copy conflict: the summary and SEO description say "a stronger front elevation", but the new work text puts the balcony "at the back of the home". Which is right? (Summary left unchanged until answered.)
 - [ ] Privacy policy: company legal name and contact email
 
 ## Decisions
@@ -70,6 +71,9 @@ Claude Code updates this file at the end of every task. Newest log entry on top.
 | 2026-11-18 | Before/after: drag slider on all screen sizes; pinned GSAP scroll story deleted. GSAP only for the process animation. No fake or AI "before" images | User |
 | 2026-11-18 | Stock photos downloaded by Claude Code at the user's request (overrides the 05-IMAGES "user downloads" note). Unsplash License checked on unsplash.com/license: free commercial use, no attribution required; not allowed: selling unmodified copies, compiling into a competing service. Sources in `public/images/CREDITS.md` | User + license check |
 | 2026-11-18 | Motion refresh: GSAP + ScrollTrigger + SplitText allowed site-wide (dynamic import, client only). Policy in 02-TECH-SPEC → Animation policy, table in 04-DESIGN → Motion. Hero headline words are split on the server and animated with CSS (not SplitText), so the headline never waits for JavaScript. The services marquee moves only after the first scroll/tap and while on screen (an always-running animation cost about 2 s of main-thread work in Lighthouse). The curtain link transition is kept: prefetch, back/forward, Ctrl/Cmd/middle-click and focus were tested and unchanged | User + test |
+| 2026-11-19 | Carrollton is **in progress** ("In progress" badge); no gallery or slider until the client's renderings arrive. Projects without a photo get a designed navy text card of the same size | User |
+| 2026-11-19 | FAQ removed from the main nav; still in the footer, and a compact FAQ sits at the bottom of /contact | User |
+| 2026-11-19 | Deferred until after the client preview: colour comparison, old-browser testing (T3.7), SEO tasks (T3.x, except the robots.txt needed for the preview) | User |
 
 ## Missing images
 
@@ -110,12 +114,27 @@ After adding files with these exact names, run a new build: pages are static and
 - User action needed:
 -->
 
-### 2026-11-19 — Ready for preview deploy
-- **Pages (all static, 200):** Home, /services, 3 service pages, /projects, 2 project pages, /about, /faq, /contact; unknown URLs → 404 page (noindex). Error boundary in place.
-- **Checks on the production build:** lint, build, CSS check pass. Sweep at 375 px: every route has one h1, no console errors, no horizontal scroll.
-- **Contact form:** validates and catches spam, but **sends nothing** until T2.9. Every submit shows "Online requests are opening soon. Your message was not sent yet." [DRAFT], so there is no silent failure. Fine for a preview, **not for launch**.
-- **Preview settings:** build with `SITE_INDEXABLE=false` (noindex + robots disallow) and the preview `NEXT_PUBLIC_SITE_URL`. Run from `output: 'standalone'` (see "For the server chat").
-- **Still open before launch:** T2.9 delivery decision, T2.11 privacy policy (legal name + email), client facts (Open questions), all [DRAFT] copy approval, Phase 3 (metadata/OG, sitemap/robots, JSON-LD, images, a11y, performance, cross-browser), and the bundle reductions above (waiting for the user's OK). Lighthouse mobile needs confirming on a faster machine or PageSpeed Insights after the preview deploy.
+### 2026-11-19 — Client preview prep, ready for preview deploy (updated)
+- **Carrollton:** in progress (badge on the page and the card), new "The work" text [DRAFT], no gallery or slider. Its card on Home and /projects is a navy text-only card (city/type labels, title, line, "In progress" chip, arrow) the same size as the photo cards. No map or Street View images anywhere.
+- **FAQ:** out of the main nav (footer link stays); compact FAQ ("Common questions" [DRAFT, new]) at the bottom of /contact.
+- **Contact redesign:** dark panel (h1, text, "What happens next" 1–3 [DRAFT]) beside the form in an elevated white card; stacked on phones. Project type and timeline are pill chips (real radio inputs: Tab into the group, arrows to change, visible focus ring). Validation, spam checks and the "opening soon" notice unchanged; all six form scenarios re-tested (valid, too fast, honeypot, bad phone, and with JavaScript off), and the choices are kept after every submit.
+- **robots.txt:** `src/app/robots.ts` follows `SITE_INDEXABLE` (`Disallow: /` for the preview).
+- **Sweep (production build with `SITE_INDEXABLE=false`):** crawled every link from Home: 11 pages, all 200, no internal 404s; every page has one h1, `noindex, nofollow` and no placeholder text (searched for lorem, TBD, TODO, [phone], [DRAFT], undefined, NaN, …); `robots.txt` = `User-Agent: * / Disallow: /`. Headless Edge at 375 px and 1440 px: no console errors, no sideways scroll. Lint, build and CSS check pass. (`/sitemap.xml` does not exist yet: T3.2, deferred.)
+- **Commits:** `feat: carrollton in progress with text-only project card`, `feat: move faq from main nav to footer`, `feat: contact page redesign with pill choices and faq block`, `feat: robots.txt follows the indexing switch`, plus this docs commit.
+
+**How to deploy the preview** (app side only; the server setup itself is for the server chat):
+- **Node:** 24.x (`.nvmrc`).
+- **Environment at build time** (pages are static, so these are baked in; changing them needs a rebuild):
+  - `NEXT_PUBLIC_SITE_URL` = the preview URL (canonical links and Open Graph URLs use it).
+  - `SITE_INDEXABLE=false` (noindex on every page + `robots.txt` disallow). Set `true` only for the live site at launch.
+  - `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`: leave empty until T2.9; the form shows "Online requests are opening soon."
+- **Install and build:** `npm ci`, then `npm run build` (also runs the CSS check).
+- **Standalone copy steps** (`output: 'standalone'`): copy `.next/static` to `.next/standalone/.next/static`, and `public` to `.next/standalone/public`.
+- **Start:** `node .next/standalone/server.js` with `PORT=3104` (staging, provisional) and `HOSTNAME=127.0.0.1`. Production later on `3204`. (`next start` prints a warning with standalone output; use the server.js file.)
+- **Real visitor IP:** the contact form rate limit (5 requests per 10 minutes per IP) reads `X-Forwarded-For`. The proxy in front of the app must pass the real client IP in that header, otherwise every visitor shares one limit.
+- **Security headers** are sent by the app (`next.config.ts`); the proxy must not add them again.
+
+**Not ready for launch (fine for a preview):** contact delivery (T2.9), privacy policy (T2.11), client facts and approval of all [DRAFT] copy, sitemap and other SEO tasks, old-browser testing, Lighthouse confirmation on a real device.
 
 ### 2026-11-19 — T2.10 404 and error pages
 - `src/app/not-found.tsx`: "404" label, heading and two buttons from 03-CONTENT, browser title [DRAFT, new], noindex. Checked: `/missing-page`, `/services/nope`, `/projects/nope` → 404.
